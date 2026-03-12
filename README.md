@@ -8,7 +8,7 @@ FSA Elite Performance is the official merchandise and branding store for the FSA
 
 | Layer | Choice | Reason |
 |---|---|---|
-| Framework | **Next.js 14 (App Router)** | React Server Components + ISR for fast, edge-cached pages |
+| Framework | **Next.js 15 (App Router)** | React Server Components + ISR for fast, edge-cached pages |
 | Language | **TypeScript** | Type safety across the full stack |
 | Styling | **Tailwind CSS** | Utility-first CSS with zero unused styles in production |
 | Payments | **Stripe Checkout** | Hosted, PCI-compliant checkout flow |
