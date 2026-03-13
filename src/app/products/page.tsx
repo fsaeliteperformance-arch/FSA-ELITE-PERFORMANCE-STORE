@@ -10,6 +10,7 @@ import { getProducts } from "@/lib/products";
 import ProductGrid from "@/components/ProductGrid";
 import ProductGridSkeleton from "@/components/ProductGridSkeleton";
 import CategoryFilter from "@/components/CategoryFilter";
+import Container from "@/components/Container";
 import type { Metadata } from "next";
 import type { Category } from "@/types";
 
@@ -41,7 +42,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
   const products = await getProducts(category);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <Container>
       <h1 className="text-3xl font-bold text-brand mb-8">All Products</h1>
 
       <CategoryFilter activeCategory={category} />
@@ -49,6 +50,6 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
       <Suspense fallback={<ProductGridSkeleton count={6} />}>
         <ProductGrid products={products} />
       </Suspense>
-    </div>
+    </Container>
   );
 }
