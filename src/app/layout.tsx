@@ -46,7 +46,14 @@ export default function RootLayout({
           <main className="flex-1">{children}</main>
           <footer className="bg-brand text-white text-center py-6 text-sm mt-12">
             © {new Date().getFullYear()} FSA Elite Performance. All rights
-            reserved.
+            reserved.{" "}
+            <a
+              href="https://store.fsaeliteperformance.com"
+              className="underline opacity-80 hover:opacity-100"
+              aria-label="Visit the FSA Elite Performance Store at store.fsaeliteperformance.com"
+            >
+              store.fsaeliteperformance.com
+            </a>
           </footer>
         </CartProvider>
       </body>
