@@ -33,10 +33,11 @@ interface ProductsPageProps {
 }
 
 export default async function ProductsPage({ searchParams }: ProductsPageProps) {
-  const { category: raw } = await searchParams;
-  const category = raw && VALID_CATEGORIES.has(raw as Category)
-    ? (raw as Category)
-    : undefined;
+  const { category: rawCategoryParam } = await searchParams;
+  const category =
+    rawCategoryParam && VALID_CATEGORIES.has(rawCategoryParam as Category)
+      ? (rawCategoryParam as Category)
+      : undefined;
 
   const products = await getProducts(category);
 

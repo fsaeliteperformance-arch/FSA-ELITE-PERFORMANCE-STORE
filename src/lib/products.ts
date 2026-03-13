@@ -105,7 +105,7 @@ export const PRODUCTS: Product[] = [
 // This makes getProductBySlug O(1) instead of O(n) for every static page.
 // ---------------------------------------------------------------------------
 const productBySlug = new Map<string, Product>(
-  PRODUCTS.map((p) => [p.slug, p]),
+  PRODUCTS.map((product) => [product.slug, product]),
 );
 
 /**
@@ -116,9 +116,9 @@ const productBySlug = new Map<string, Product>(
  */
 export async function getProducts(category?: string): Promise<Product[]> {
   // Simulate async data source
-  const all = PRODUCTS;
-  if (!category || category === "all") return all;
-  return all.filter((p) => p.category === category);
+  const allProducts = PRODUCTS;
+  if (!category || category === "all") return allProducts;
+  return allProducts.filter((product) => product.category === category);
 }
 
 /** O(1) slug lookup via pre-built Map. */
@@ -130,7 +130,7 @@ export async function getProductBySlug(
 
 /** Returns every slug so Next.js can statically generate all product pages. */
 export async function getAllProductSlugs(): Promise<string[]> {
-  return PRODUCTS.map((p) => p.slug);
+  return PRODUCTS.map((product) => product.slug);
 }
 
 /** Format a price stored in cents as a localised currency string. */

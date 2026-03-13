@@ -14,16 +14,16 @@ export const initialCartState: CartState = { items: [] };
 export function cartReducer(state: CartState, action: CartAction): CartState {
   switch (action.type) {
     case "ADD_ITEM": {
-      const existing = state.items.find(
-        (i) => i.product.id === action.product.id,
+      const existingCartItem = state.items.find(
+        (cartItem) => cartItem.product.id === action.product.id,
       );
-      if (existing) {
+      if (existingCartItem) {
         // Already in cart → increment quantity in-place
         return {
-          items: state.items.map((i) =>
-            i.product.id === action.product.id
-              ? { ...i, quantity: i.quantity + 1 }
-              : i,
+          items: state.items.map((cartItem) =>
+            cartItem.product.id === action.product.id
+              ? { ...cartItem, quantity: cartItem.quantity + 1 }
+              : cartItem,
           ),
         };
       }
@@ -34,27 +34,29 @@ export function cartReducer(state: CartState, action: CartAction): CartState {
 
     case "REMOVE_ITEM":
       return {
-        items: state.items.filter((i) => i.product.id !== action.productId),
+        items: state.items.filter(
+          (cartItem) => cartItem.product.id !== action.productId,
+        ),
       };
 
     case "INCREMENT":
       return {
-        items: state.items.map((i) =>
-          i.product.id === action.productId
-            ? { ...i, quantity: i.quantity + 1 }
-            : i,
+        items: state.items.map((cartItem) =>
+          cartItem.product.id === action.productId
+            ? { ...cartItem, quantity: cartItem.quantity + 1 }
+            : cartItem,
         ),
       };
 
     case "DECREMENT":
       return {
         items: state.items
-          .map((i) =>
-            i.product.id === action.productId
-              ? { ...i, quantity: i.quantity - 1 }
-              : i,
+          .map((cartItem) =>
+            cartItem.product.id === action.productId
+              ? { ...cartItem, quantity: cartItem.quantity - 1 }
+              : cartItem,
           )
-          .filter((i) => i.quantity > 0),
+          .filter((cartItem) => cartItem.quantity > 0),
       };
 
     case "CLEAR":
@@ -67,10 +69,17 @@ export function cartReducer(state: CartState, action: CartAction): CartState {
 
 /** Derive the total order value in cents from the current cart state. */
 export function cartTotal(items: CartItem[]): number {
-  return items.reduce((sum, i) => sum + i.product.price * i.quantity, 0);
+  return items.reduce(
+    (runningTotal, cartItem) =>
+      runningTotal + cartItem.product.price * cartItem.quantity,
+    0,
+  );
 }
 
 /** Derive the total item count from the current cart state. */
 export function cartCount(items: CartItem[]): number {
-  return items.reduce((sum, i) => sum + i.quantity, 0);
+  return items.reduce(
+    (runningTotal, cartItem) => runningTotal + cartItem.quantity,
+    0,
+  );
 }

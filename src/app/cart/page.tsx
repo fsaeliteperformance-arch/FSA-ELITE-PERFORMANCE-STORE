@@ -30,19 +30,19 @@ export default function CartPage() {
   const handleCheckout = useCallback(async () => {
     setIsCheckingOut(true);
     try {
-      const res = await fetch("/api/checkout", {
+      const checkoutApiResponse = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          items: state.items.map((i) => ({
-            stripePriceId: i.product.stripePriceId,
-            quantity: i.quantity,
+          items: state.items.map(({ product, quantity }) => ({
+            stripePriceId: product.stripePriceId,
+            quantity,
           })),
         }),
       });
-      const data = await res.json();
-      if (data.url) {
-        window.location.href = data.url;
+      const checkoutSessionData = await checkoutApiResponse.json();
+      if (checkoutSessionData.url) {
+        window.location.href = checkoutSessionData.url;
       }
     } finally {
       setIsCheckingOut(false);
