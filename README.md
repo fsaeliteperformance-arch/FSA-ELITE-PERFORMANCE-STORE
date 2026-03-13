@@ -59,6 +59,18 @@ Use `FSA ELITE PERFORMANCE` as the Stripe account statement descriptor for this 
 
 ---
 
+## Ionis Access Request
+
+If someone needs access to this store through Ionis, have them paste:
+
+```text
+https://store.fsaeliteperformance.com
+```
+
+when requesting access to the FSA Elite Performance Store.
+
+---
+
 ## Local Development
 
 ```bash
