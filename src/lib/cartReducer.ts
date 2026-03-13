@@ -11,6 +11,20 @@ import type { CartState, CartAction, CartItem } from "@/types";
 
 export const initialCartState: CartState = { items: [] };
 
+function updateCartItemQuantity(
+  items: CartItem[],
+  productId: string,
+  delta: number,
+): CartItem[] {
+  return items
+    .map((cartItem) =>
+      cartItem.product.id === productId
+        ? { ...cartItem, quantity: cartItem.quantity + delta }
+        : cartItem,
+    )
+    .filter((cartItem) => cartItem.quantity > 0);
+}
+
 export function cartReducer(state: CartState, action: CartAction): CartState {
   switch (action.type) {
     case "ADD_ITEM": {
@@ -20,11 +34,7 @@ export function cartReducer(state: CartState, action: CartAction): CartState {
       if (existingCartItem) {
         // Already in cart → increment quantity in-place
         return {
-          items: state.items.map((cartItem) =>
-            cartItem.product.id === action.product.id
-              ? { ...cartItem, quantity: cartItem.quantity + 1 }
-              : cartItem,
-          ),
+          items: updateCartItemQuantity(state.items, action.product.id, 1),
         };
       }
       return {
@@ -41,22 +51,12 @@ export function cartReducer(state: CartState, action: CartAction): CartState {
 
     case "INCREMENT":
       return {
-        items: state.items.map((cartItem) =>
-          cartItem.product.id === action.productId
-            ? { ...cartItem, quantity: cartItem.quantity + 1 }
-            : cartItem,
-        ),
+        items: updateCartItemQuantity(state.items, action.productId, 1),
       };
 
     case "DECREMENT":
       return {
-        items: state.items
-          .map((cartItem) =>
-            cartItem.product.id === action.productId
-              ? { ...cartItem, quantity: cartItem.quantity - 1 }
-              : cartItem,
-          )
-          .filter((cartItem) => cartItem.quantity > 0),
+        items: updateCartItemQuantity(state.items, action.productId, -1),
       };
 
     case "CLEAR":
