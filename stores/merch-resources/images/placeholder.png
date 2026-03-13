@@ -1,0 +1,15 @@
+# Placeholder Image
+
+This file is a path reference only. Replace with a real PNG image before launch.
+
+Recommended specs:
+- File name: `hero-merch.png` (hero) + individual product shots
+- Dimensions: 1200 × 1200 px (square, Shopify-ready)
+- Max file size: 500 KB (optimise with https://squoosh.app)
+- Alt text examples:
+  - "FSA Elite Performance Tee — Black"
+  - "FSA Elite Workbook and Playbook — spiral bound"
+  - "FSA Elite Starter Bundle — tee and workbook"
+
+Once you have real images, delete this file and add the PNGs, then update
+the `<img src="">` paths in `landing.html`.

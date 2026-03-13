@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO Meta -->
+  <title>FSA Elite Performance — Digital Sales Courses</title>
+  <meta name="description" content="Battle-tested sales training courses for SDRs, AEs, and sales leaders. Master objection handling, build your playbook, and get ongoing coaching — starting from $49/month." />
+  <meta name="keywords" content="sales training, SDR course, AE playbook, objection handling, B2B sales, sales coaching" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fsaeliteperformance.com/courses" />
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="FSA Elite Performance — Digital Sales Courses" />
+  <meta property="og:description" content="Stop winging it. Get the scripts, frameworks, and coaching that top AEs & SDRs use to crush quota." />
+  <meta property="og:image" content="images/placeholder.png" />
+  <meta property="og:url" content="https://fsaeliteperformance.com/courses" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="FSA Elite Sales Courses" />
+  <meta name="twitter:description" content="Handle every objection. Build your playbook. Get coached monthly." />
+  <meta name="twitter:image" content="images/placeholder.png" />
+
+  <!-- Analytics placeholder — replace GA_MEASUREMENT_ID with your real ID -->
+  <!-- Guidance: set window.GA_MEASUREMENT_ID via your hosting platform's env injection,
+       OR replace the string below with your literal GA4 ID (e.g., G-XXXXXXXXXX).
+       Never commit real measurement IDs to source if they are tied to billing. -->
+  <!--
+  <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'GA_MEASUREMENT_ID');
+  </script>
+  -->
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0a0a; color: #f5f5f5; line-height: 1.6; }
+    a { color: #f59e0b; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Header */
+    header { background: #111; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; }
+    header .logo { font-size: 1.25rem; font-weight: 700; color: #f59e0b; letter-spacing: 0.05em; }
+    header nav a { margin-left: 1.5rem; font-size: 0.9rem; color: #ccc; }
+
+    /* Hero */
+    .hero { text-align: center; padding: 5rem 2rem 4rem; background: linear-gradient(135deg, #111 0%, #1a1a2e 100%); }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; color: #fff; line-height: 1.2; margin-bottom: 1rem; }
+    .hero h1 span { color: #f59e0b; }
+    .hero p { font-size: 1.2rem; color: #bbb; max-width: 680px; margin: 0 auto 2.5rem; }
+    .btn { display: inline-block; background: #f59e0b; color: #000; font-weight: 700; font-size: 1.05rem; padding: 1rem 2.5rem; border-radius: 6px; transition: background 0.2s; }
+    .btn:hover { background: #d97706; text-decoration: none; }
+    .btn-secondary { background: transparent; color: #f59e0b; border: 2px solid #f59e0b; margin-left: 1rem; }
+    .btn-secondary:hover { background: #f59e0b22; }
+
+    /* Products */
+    .products { max-width: 1100px; margin: 4rem auto; padding: 0 2rem; }
+    .products h2 { font-size: 2rem; font-weight: 700; text-align: center; margin-bottom: 3rem; color: #fff; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+    .card { background: #161616; border: 1px solid #2a2a2a; border-radius: 12px; overflow: hidden; transition: transform 0.2s, border-color 0.2s; }
+    .card:hover { transform: translateY(-4px); border-color: #f59e0b55; }
+    .card img { width: 100%; height: 180px; object-fit: cover; background: #222; display: block; }
+    .card-body { padding: 1.5rem; }
+    .card-body h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; color: #fff; }
+    .card-body .price { font-size: 1.5rem; font-weight: 800; color: #f59e0b; margin-bottom: 0.75rem; }
+    .card-body p { color: #aaa; font-size: 0.95rem; margin-bottom: 1.25rem; }
+    .card-body .btn { padding: 0.75rem 1.5rem; font-size: 0.95rem; width: 100%; text-align: center; }
+
+    /* Social proof */
+    .proof { background: #111; padding: 4rem 2rem; text-align: center; }
+    .proof h2 { font-size: 1.75rem; font-weight: 700; margin-bottom: 2rem; color: #fff; }
+    .testimonials { display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center; max-width: 900px; margin: 0 auto; }
+    .testimonial { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 8px; padding: 1.5rem; max-width: 400px; text-align: left; }
+    .testimonial p { color: #ccc; font-style: italic; margin-bottom: 0.75rem; }
+    .testimonial .author { color: #f59e0b; font-weight: 600; font-size: 0.9rem; }
+
+    /* FAQ */
+    .faq { max-width: 700px; margin: 4rem auto; padding: 0 2rem; }
+    .faq h2 { font-size: 1.75rem; font-weight: 700; margin-bottom: 2rem; text-align: center; color: #fff; }
+    .faq-item { border-bottom: 1px solid #2a2a2a; padding: 1rem 0; }
+    .faq-item strong { color: #f59e0b; display: block; margin-bottom: 0.5rem; }
+    .faq-item p { color: #aaa; font-size: 0.95rem; }
+
+    /* Footer */
+    footer { background: #111; border-top: 1px solid #222; padding: 2rem; text-align: center; color: #555; font-size: 0.85rem; }
+    footer a { color: #777; }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header>
+    <span class="logo">FSA Elite Performance</span>
+    <nav>
+      <a href="#courses">Courses</a>
+      <a href="#testimonials">Results</a>
+      <a href="#faq">FAQ</a>
+      <a href="../../stores/merch-resources/landing.html">Merch</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>Close More Deals.<br /><span>Stop Losing on Objections.</span></h1>
+    <p>Self-paced courses built by quota-crushing AEs & SDRs — get the scripts, playbooks, and coaching that actually work in today's market.</p>
+    <a href="STRIPE_PAYMENT_LINK_COURSE_01" class="btn" rel="noopener">Start with Objection Masterclass — $197</a>
+    <a href="#courses" class="btn btn-secondary">View All Courses</a>
+  </section>
+
+  <!-- Products -->
+  <section class="products" id="courses">
+    <h2>Choose Your Course</h2>
+    <div class="cards">
+
+      <!-- Course 01 -->
+      <div class="card">
+        <img src="images/placeholder.png" alt="Objection Masterclass" loading="lazy" />
+        <div class="card-body">
+          <h3>Objection Masterclass</h3>
+          <div class="price">$197 <span style="font-size:0.85rem; font-weight:400; color:#888;">one-time</span></div>
+          <p>Handle the 12 most common B2B objections in 90 minutes. Scripts, frameworks, and live role-play recordings included.</p>
+          <!-- Replace STRIPE_PAYMENT_LINK_COURSE_01 with your real Stripe Payment Link URL -->
+          <a href="STRIPE_PAYMENT_LINK_COURSE_01" class="btn" rel="noopener">Enrol Now</a>
+        </div>
+      </div>
+
+      <!-- Course 02 -->
+      <div class="card">
+        <img src="images/placeholder.png" alt="Sales Playbook Starter" loading="lazy" />
+        <div class="card-body">
+          <h3>Sales Playbook Starter</h3>
+          <div class="price">$147 <span style="font-size:0.85rem; font-weight:400; color:#888;">one-time</span></div>
+          <p>Your complete 30-60-90-day sales playbook template. Cold call scripts, discovery flows, and pipeline definitions — done for you.</p>
+          <!-- Replace STRIPE_PAYMENT_LINK_COURSE_02 with your real Stripe Payment Link URL -->
+          <a href="STRIPE_PAYMENT_LINK_COURSE_02" class="btn" rel="noopener">Get the Playbook</a>
+        </div>
+      </div>
+
+      <!-- Course 03 -->
+      <div class="card">
+        <img src="images/placeholder.png" alt="Micro-Coaching Subscription" loading="lazy" />
+        <div class="card-body">
+          <h3>Micro-Coaching Subscription</h3>
+          <div class="price">$49<span style="font-size:0.85rem; font-weight:400; color:#888;">/month</span></div>
+          <p>Monthly live coaching calls, a growing video library, and a private peer community. Cancel anytime.</p>
+          <!-- Replace STRIPE_PAYMENT_LINK_COURSE_03 with your real Stripe Payment Link URL -->
+          <a href="STRIPE_PAYMENT_LINK_COURSE_03" class="btn" rel="noopener">Join the Community</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Social Proof -->
+  <section class="proof" id="testimonials">
+    <h2>What Sales Pros Are Saying</h2>
+    <div class="testimonials">
+      <div class="testimonial">
+        <p>"The Objection Masterclass paid for itself on the first call I used the FEEL-FELT-FOUND framework. Closed a $28K deal I would have lost."</p>
+        <span class="author">— J.R., Senior AE, SaaS</span>
+      </div>
+      <div class="testimonial">
+        <p>"Finally a playbook template that doesn't feel generic. Our new SDR ramp time dropped from 90 days to 45."</p>
+        <span class="author">— M.T., Head of Sales, FinTech</span>
+      </div>
+      <div class="testimonial">
+        <p>"$49 a month for a real coaching call and a community of AEs who actually share what's working? Best ROI in my stack."</p>
+        <span class="author">— A.P., AE, Enterprise Tech</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <strong>Do I get lifetime access?</strong>
+      <p>Yes. One-time purchases include lifetime access and all future updates to that course.</p>
+    </div>
+    <div class="faq-item">
+      <strong>What's the refund policy?</strong>
+      <p>30-day money-back guarantee, no questions asked. Email us at support@fsaeliteperformance.com.</p>
+    </div>
+    <div class="faq-item">
+      <strong>Is this for SDRs or AEs?</strong>
+      <p>Both. Every course includes separate script tracks for SDRs, AEs, and Heads of Sales.</p>
+    </div>
+    <div class="faq-item">
+      <strong>How do I access the content after purchase?</strong>
+      <p>You'll receive an email from Stripe with your receipt and a link to the private member portal within 5 minutes of purchase.</p>
+    </div>
+    <div class="faq-item">
+      <strong>Can my whole team enrol?</strong>
+      <p>Yes — team licences (5+ seats) are available at a discount. Email sales@fsaeliteperformance.com.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 FSA Elite Performance. All rights reserved.</p>
+    <p><a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms of Service</a> · <a href="mailto:support@fsaeliteperformance.com">Support</a></p>
+  </footer>
+
+</body>
+</html>
