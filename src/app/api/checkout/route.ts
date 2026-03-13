@@ -18,17 +18,17 @@ import { createCheckoutSession } from "@/lib/stripe";
 import type { CheckoutLineItem } from "@/lib/stripe";
 
 export async function POST(req: NextRequest) {
-  let body: unknown;
+  let requestBody: unknown;
   try {
-    body = await req.json();
+    requestBody = await req.json();
   } catch {
     return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
   }
 
   if (
-    !body ||
-    typeof body !== "object" ||
-    !Array.isArray((body as { items?: unknown }).items)
+    !requestBody ||
+    typeof requestBody !== "object" ||
+    !Array.isArray((requestBody as { items?: unknown }).items)
   ) {
     return NextResponse.json(
       { error: "Request body must contain an items array" },
@@ -36,18 +36,19 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const items = (body as { items: unknown[] }).items;
+  const requestLineItems = (requestBody as { items: unknown[] }).items;
 
   // Validate each line item before sending to Stripe.
   const lineItems: CheckoutLineItem[] = [];
-  for (const item of items) {
+  for (const rawLineItem of requestLineItems) {
     if (
-      !item ||
-      typeof item !== "object" ||
-      typeof (item as { stripePriceId?: unknown }).stripePriceId !== "string" ||
-      !(item as { stripePriceId: string }).stripePriceId.trim() ||
-      typeof (item as { quantity?: unknown }).quantity !== "number" ||
-      (item as { quantity: number }).quantity < 1
+      !rawLineItem ||
+      typeof rawLineItem !== "object" ||
+      typeof (rawLineItem as { stripePriceId?: unknown }).stripePriceId !==
+        "string" ||
+      !(rawLineItem as { stripePriceId: string }).stripePriceId.trim() ||
+      typeof (rawLineItem as { quantity?: unknown }).quantity !== "number" ||
+      (rawLineItem as { quantity: number }).quantity < 1
     ) {
       return NextResponse.json(
         { error: "Each item must have a valid stripePriceId and quantity >= 1" },
@@ -55,8 +56,10 @@ export async function POST(req: NextRequest) {
       );
     }
     lineItems.push({
-      stripePriceId: (item as { stripePriceId: string }).stripePriceId.trim(),
-      quantity: Math.floor((item as { quantity: number }).quantity),
+      stripePriceId: (
+        rawLineItem as { stripePriceId: string }
+      ).stripePriceId.trim(),
+      quantity: Math.floor((rawLineItem as { quantity: number }).quantity),
     });
   }
 
@@ -72,8 +75,8 @@ export async function POST(req: NextRequest) {
 
     const session = await createCheckoutSession(lineItems, origin);
     return NextResponse.json({ url: session.url });
-  } catch (err) {
-    console.error("Stripe checkout error:", err);
+  } catch (stripeError) {
+    console.error("Stripe checkout error:", stripeError);
     return NextResponse.json(
       { error: "Failed to create checkout session" },
       { status: 500 },
