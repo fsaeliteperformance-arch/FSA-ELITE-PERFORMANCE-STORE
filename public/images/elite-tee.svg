@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
+  <rect width="600" height="600" fill="#1a1a2e"/>
+  <!-- T-shirt shape -->
+  <path d="M180 160 L120 220 L180 240 L180 440 L420 440 L420 240 L480 220 L420 160 L360 200 Q300 180 240 200 Z" fill="#e94560" stroke="#ffffff" stroke-width="4"/>
+  <!-- Collar -->
+  <path d="M240 200 Q300 230 360 200" fill="none" stroke="#ffffff" stroke-width="4"/>
+  <!-- Logo text -->
+  <text x="300" y="340" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#ffffff" text-anchor="middle">FSA ELITE</text>
+  <text x="300" y="375" font-family="Arial, sans-serif" font-size="16" fill="#e94560" text-anchor="middle">PERFORMANCE</text>
+  <!-- Label at bottom -->
+  <rect x="0" y="530" width="600" height="70" fill="#0d0d1a"/>
+  <text x="300" y="572" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#ffffff" text-anchor="middle">Elite Performance Tee</text>
+</svg>
