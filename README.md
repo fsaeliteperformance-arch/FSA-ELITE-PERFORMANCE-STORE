@@ -53,6 +53,17 @@ The Stripe secret key and checkout session creation happen exclusively in a Rout
 
 ---
 
+## Domains
+
+| Domain | Purpose |
+|---|---|
+| `store.fsaeliteperformance.com` | Live storefront — the public URL customers visit |
+| `cdn.fsaeliteperformance.com` | Image CDN — product photos and other static assets |
+
+Set `NEXT_PUBLIC_SITE_URL=https://store.fsaeliteperformance.com` in your production environment to make open-graph tags and canonical URLs point at the correct origin.
+
+---
+
 ## Stripe Statement Descriptor
 
 Use `FSA ELITE PERFORMANCE` as the Stripe account statement descriptor for this store.
