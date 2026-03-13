@@ -12,6 +12,8 @@
  *   but fast for a catalogue this size.  A Map keyed by slug is used in
  *   `getProductBySlug` to achieve O(1) lookup when calling during static
  *   generation of many pages.
+ * • `formatPrice` reuses a module-level `Intl.NumberFormat` singleton instead
+ *   of constructing a new formatter on every call — construction is expensive.
  */
 
 import type { Product } from "@/types";
@@ -133,10 +135,15 @@ export async function getAllProductSlugs(): Promise<string[]> {
   return PRODUCTS.map((p) => p.slug);
 }
 
+// Created once at module load — Intl.NumberFormat construction carries
+// meaningful overhead; reusing a single instance avoids that cost on every
+// product card, cart row, and price label render.
+const priceFormatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+});
+
 /** Format a price stored in cents as a localised currency string. */
 export function formatPrice(cents: number): string {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-  }).format(cents / 100);
+  return priceFormatter.format(cents / 100);
 }

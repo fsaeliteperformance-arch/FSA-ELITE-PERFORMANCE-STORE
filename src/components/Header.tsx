@@ -1,17 +1,18 @@
 /**
  * Header — Client Component
  *
- * Uses useCart to read the live item count from the CartContext.
- * The count badge only re-renders when the count value changes because
- * CartContext memoises it with useMemo.
+ * Uses useCartState to read the live item count from CartStateContext.
+ * The component subscribes only to the reactive state slice so it never
+ * re-renders due to action-only changes (dispatch, addItem, etc.).
+ * The count badge only re-renders when the count value itself changes.
  */
 "use client";
 
 import Link from "next/link";
-import { useCart } from "@/context/CartContext";
+import { useCartState } from "@/context/CartContext";
 
 export default function Header() {
-  const { count } = useCart();
+  const { count } = useCartState();
 
   return (
     <header className="bg-brand text-white sticky top-0 z-50 shadow-md">

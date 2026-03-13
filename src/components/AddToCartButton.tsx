@@ -1,16 +1,20 @@
 /**
  * AddToCartButton — Client Component
  *
- * This is intentionally a thin wrapper around useCart so that the heavier
- * CartContext logic doesn't inflate every product card's bundle.
+ * This is intentionally a thin wrapper around useCartActions so that the
+ * heavier CartContext logic doesn't inflate every product card's bundle.
+ *
+ * By subscribing only to CartActionsContext (via useCartActions), this
+ * component is never re-rendered by cart state changes — it only re-renders
+ * when its own local `added` state changes.
  *
  * The `compact` prop renders a small icon button suitable for use inside a
  * ProductCard; the full variant is used on the product detail page.
  */
 "use client";
 
-import { useCallback, useState } from "react";
-import { useCart } from "@/context/CartContext";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useCartActions } from "@/context/CartContext";
 import type { Product } from "@/types";
 
 interface Props {
@@ -19,14 +23,26 @@ interface Props {
 }
 
 export default function AddToCartButton({ product, compact = false }: Props) {
-  const { addItem } = useCart();
+  const { addItem } = useCartActions();
   const [added, setAdded] = useState(false);
+
+  // Keep a ref to the pending timer so we can cancel it on unmount or on a
+  // rapid second click, preventing a state update on an unmounted component.
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (timerRef.current !== null) clearTimeout(timerRef.current);
+    };
+  }, []);
 
   const handleAdd = useCallback(() => {
     addItem(product);
     setAdded(true);
+    // Cancel any in-flight timer before starting a new one.
+    if (timerRef.current !== null) clearTimeout(timerRef.current);
     // Reset the visual feedback after 1.5 s
-    setTimeout(() => setAdded(false), 1500);
+    timerRef.current = setTimeout(() => setAdded(false), 1500);
   }, [addItem, product]);
 
   if (compact) {

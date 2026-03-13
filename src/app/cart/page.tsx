@@ -1,21 +1,27 @@
 /**
  * /cart — Cart page
  *
- * This is a Client Component because it reads from the CartContext which
+ * This is a Client Component because it reads from CartContext which
  * manages ephemeral client-side state.  The checkout action is sent to a
  * Route Handler (Server-side) so the Stripe secret key is never exposed.
+ *
+ * Performance: subscribes to both CartStateContext and CartActionsContext via
+ * the granular hooks; the component still re-renders on cart changes (which
+ * is required to display the live list), but that re-render path is explicit.
  */
 "use client";
 
 import Link from "next/link";
 import Image from "next/image";
 import { useCallback, useMemo, useState } from "react";
-import { useCart } from "@/context/CartContext";
+import { useCartState, useCartActions } from "@/context/CartContext";
 import { formatPrice } from "@/lib/products";
 
 export default function CartPage() {
-  const { state, total, count, removeItem, dispatch } = useCart();
+  const { state, total, count } = useCartState();
+  const { removeItem, dispatch } = useCartActions();
   const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const [checkoutError, setCheckoutError] = useState<string | null>(null);
 
   // Derive shipping estimate only when total changes — avoids re-running on
   // every unrelated render.
@@ -29,6 +35,7 @@ export default function CartPage() {
 
   const handleCheckout = useCallback(async () => {
     setIsCheckingOut(true);
+    setCheckoutError(null);
     try {
       const res = await fetch("/api/checkout", {
         method: "POST",
@@ -41,9 +48,18 @@ export default function CartPage() {
         }),
       });
       const data = await res.json();
+      if (!res.ok) {
+        setCheckoutError(
+          (data as { error?: string }).error ?? "Checkout failed. Please try again.",
+        );
+        return;
+      }
       if (data.url) {
         window.location.href = data.url;
       }
+    } catch (err) {
+      console.error("Checkout error:", err);
+      setCheckoutError("Network error. Please check your connection and try again.");
     } finally {
       setIsCheckingOut(false);
     }
@@ -138,6 +154,11 @@ export default function CartPage() {
             >
               {isCheckingOut ? "Redirecting…" : "Checkout with Stripe"}
             </button>
+            {checkoutError && (
+              <p role="alert" className="mt-3 text-sm text-red-600 text-center">
+                {checkoutError}
+              </p>
+            )}
           </div>
         </aside>
       </div>
