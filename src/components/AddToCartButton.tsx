@@ -9,7 +9,7 @@
  */
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useCart } from "@/context/CartContext";
 import type { Product } from "@/types";
 
@@ -21,12 +21,26 @@ interface Props {
 export default function AddToCartButton({ product, compact = false }: Props) {
   const { addItem } = useCart();
   const [added, setAdded] = useState(false);
+  // Keep the timer ID in a ref so it can be cancelled on unmount or on a
+  // rapid second click, preventing stale state updates.
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Clear any pending timer when the component unmounts.
+  useEffect(() => {
+    return () => {
+      if (timerRef.current !== null) clearTimeout(timerRef.current);
+    };
+  }, []);
 
   const handleAdd = useCallback(() => {
     addItem(product);
     setAdded(true);
-    // Reset the visual feedback after 1.5 s
-    setTimeout(() => setAdded(false), 1500);
+    // Cancel any in-flight reset before scheduling a new one.
+    if (timerRef.current !== null) clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => {
+      setAdded(false);
+      timerRef.current = null;
+    }, 1500);
   }, [addItem, product]);
 
   if (compact) {
