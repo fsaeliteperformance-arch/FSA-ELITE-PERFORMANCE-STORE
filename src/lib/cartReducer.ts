@@ -16,13 +16,11 @@ function updateCartItemQuantity(
   productId: string,
   delta: number,
 ): CartItem[] {
-  return items
-    .map((cartItem) =>
-      cartItem.product.id === productId
-        ? { ...cartItem, quantity: cartItem.quantity + delta }
-        : cartItem,
-    )
-    .filter((cartItem) => cartItem.quantity > 0);
+  return items.map((cartItem) =>
+    cartItem.product.id === productId
+      ? { ...cartItem, quantity: cartItem.quantity + delta }
+      : cartItem,
+  );
 }
 
 export function cartReducer(state: CartState, action: CartAction): CartState {
@@ -56,7 +54,9 @@ export function cartReducer(state: CartState, action: CartAction): CartState {
 
     case "DECREMENT":
       return {
-        items: updateCartItemQuantity(state.items, action.productId, -1),
+        items: updateCartItemQuantity(state.items, action.productId, -1).filter(
+          (cartItem) => cartItem.quantity > 0,
+        ),
       };
 
     case "CLEAR":
