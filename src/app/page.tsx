@@ -10,6 +10,7 @@ import { Suspense } from "react";
 import { getProducts } from "@/lib/products";
 import ProductGrid from "@/components/ProductGrid";
 import ProductGridSkeleton from "@/components/ProductGridSkeleton";
+import { DEFAULT_SITE_URL } from "@/lib/site";
 
 // Revalidate this page at most once every hour (ISR).
 // Set to 0 to opt into dynamic rendering, or `false` to never revalidate.
@@ -30,13 +31,13 @@ export default async function HomePage() {
           brand and close more deals.
         </p>
         <div className="mt-6 mx-auto max-w-2xl rounded-lg border border-brand/15 bg-brand/5 px-4 py-3 text-left text-sm text-gray-700">
-          <p className="font-semibold text-brand">Need access through Ionis?</p>
+          <p className="font-semibold text-brand">Need access through IONOS?</p>
           <p className="mt-1">
             Paste{" "}
             <span className="font-mono text-xs sm:text-sm">
-              https://store.fsaeliteperformance.com
+              {process.env.NEXT_PUBLIC_SITE_URL ?? DEFAULT_SITE_URL}
             </span>{" "}
-            into Ionis when requesting access to the FSA Elite Performance
+            into IONOS when requesting access to the FSA Elite Performance
             Store.
           </p>
         </div>

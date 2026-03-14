@@ -14,6 +14,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
 import Header from "@/components/Header";
+import { DEFAULT_SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: {
@@ -23,9 +24,7 @@ export const metadata: Metadata = {
   description:
     "Official merchandise and branding store for the FSA Elite sales community. " +
     "Branded apparel, sales tools, and professional gear for salespeople.",
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://store.fsaeliteperformance.com",
-  ),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? DEFAULT_SITE_URL),
   openGraph: {
     siteName: "FSA Elite Performance Store",
     type: "website",
