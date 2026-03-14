@@ -1,11 +1,3 @@
-/**
- * CartContext
- *
- * Provides cart state to the component tree.  The context value is stable
- * across renders because dispatch (from useReducer) never changes identity,
- * and the derived totals are computed with useMemo so child components that
- * only consume totals don't re-render when an unrelated cart field changes.
- */
 "use client";
 
 import React, {
@@ -14,6 +6,7 @@ import React, {
   useReducer,
   useMemo,
   useCallback,
+  useEffect,
 } from "react";
 import {
   cartReducer,
@@ -35,8 +28,49 @@ interface CartContextValue {
 
 const CartContext = createContext<CartContextValue | null>(null);
 
+/** localStorage key used to persist cart state across page loads. */
+const CART_STORAGE_KEY = "fsa-elite-cart";
+
+/**
+ * Read the initial cart state from localStorage (SSR-safe).
+ * Falls back to an empty cart if storage is unavailable, the data is
+ * corrupted, or the stored shape no longer matches CartState — we never want
+ * a storage error to crash the app.
+ */
+function loadInitialState(): CartState {
+  if (typeof window === "undefined") return initialCartState;
+  try {
+    const stored = localStorage.getItem(CART_STORAGE_KEY);
+    if (!stored) return initialCartState;
+    const parsed: unknown = JSON.parse(stored);
+    // Basic structural validation — discard data that doesn't match CartState.
+    if (
+      parsed !== null &&
+      typeof parsed === "object" &&
+      "items" in parsed &&
+      Array.isArray((parsed as { items: unknown }).items)
+    ) {
+      return parsed as CartState;
+    }
+    return initialCartState;
+  } catch {
+    return initialCartState;
+  }
+}
+
 export function CartProvider({ children }: { children: React.ReactNode }) {
-  const [state, dispatch] = useReducer(cartReducer, initialCartState);
+  const [state, dispatch] = useReducer(cartReducer, undefined, loadInitialState);
+
+  // Persist cart to localStorage whenever items change.
+  // Using a separate useEffect keeps the reducer pure and avoids side-effects
+  // inside dispatch.
+  useEffect(() => {
+    try {
+      localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(state));
+    } catch {
+      // Storage unavailable (private browsing, quota exceeded, etc.) — ignore.
+    }
+  }, [state]);
 
   // Derived values re-computed only when state.items reference changes.
   const total = useMemo(() => cartTotal(state.items), [state.items]);
