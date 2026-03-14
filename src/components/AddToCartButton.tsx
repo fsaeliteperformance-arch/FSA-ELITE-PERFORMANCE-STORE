@@ -20,33 +20,33 @@ interface Props {
 
 export default function AddToCartButton({ product, compact = false }: Props) {
   const { addItem } = useCart();
-  const [added, setAdded] = useState(false);
+  const [wasRecentlyAdded, setWasRecentlyAdded] = useState(false);
 
-  const handleAdd = useCallback(() => {
+  const handleAddToCart = useCallback(() => {
     addItem(product);
-    setAdded(true);
+    setWasRecentlyAdded(true);
     // Reset the visual feedback after 1.5 s
-    setTimeout(() => setAdded(false), 1500);
+    setTimeout(() => setWasRecentlyAdded(false), 1500);
   }, [addItem, product]);
 
   if (compact) {
     return (
       <button
-        onClick={handleAdd}
+        onClick={handleAddToCart}
         aria-label={`Add ${product.name} to cart`}
         className="p-2 rounded-full bg-brand text-white hover:bg-brand-accent transition-colors"
       >
-        {added ? "✓" : "+"}
+        {wasRecentlyAdded ? "✓" : "+"}
       </button>
     );
   }
 
   return (
     <button
-      onClick={handleAdd}
+      onClick={handleAddToCart}
       className="w-full bg-brand text-white font-bold py-3 px-6 rounded-full hover:bg-brand-accent transition-colors disabled:opacity-50"
     >
-      {added ? "Added to Cart ✓" : "Add to Cart"}
+      {wasRecentlyAdded ? "Added to Cart ✓" : "Add to Cart"}
     </button>
   );
 }
