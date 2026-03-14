@@ -59,15 +59,25 @@ Use `FSA ELITE PERFORMANCE` as the Stripe account statement descriptor for this 
 
 ---
 
-## Ionis Access Request
+## IONOS Access Request
 
-If someone needs access to this store through Ionis, have them paste:
+If someone needs access to this store through IONOS, have them paste:
 
 ```text
 https://store.fsaeliteperformance.com
 ```
 
 when requesting access to the FSA Elite Performance Store.
+
+---
+
+## IONOS SPF Record
+
+Use the following SPF TXT record value for the store domain:
+
+```text
+v=spf1 include:_spf-us.ionos.com ~all
+```
 
 ---
 
