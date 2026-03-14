@@ -14,7 +14,7 @@
  *   generation of many pages.
  */
 
-import type { Product } from "@/types";
+import type { Category, Product } from "@/types";
 
 // ---------------------------------------------------------------------------
 // Catalogue (in production this would be fetched from a CMS / database)
@@ -108,17 +108,34 @@ const productBySlug = new Map<string, Product>(
   PRODUCTS.map((product) => [product.slug, product]),
 );
 
+const productSlugs = PRODUCTS.map((product) => product.slug);
+
+const productsByCategory = new Map<Category, Product[]>(
+  Array.from(new Set(PRODUCTS.map((product) => product.category))).map(
+    (category) => [
+      category,
+      PRODUCTS.filter((product) => product.category === category),
+    ],
+  ),
+);
+
+const priceFormatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+});
+
 /**
  * Return all products.
  *
  * In production, replace the array reference with a `fetch()` call to your
  * CMS or database, using `{ next: { revalidate: 3600 } }` to enable ISR.
  */
-export async function getProducts(category?: string): Promise<Product[]> {
+export async function getProducts(
+  category?: Category | "all",
+): Promise<Product[]> {
   // Simulate async data source
-  const allProducts = PRODUCTS;
-  if (!category || category === "all") return allProducts;
-  return allProducts.filter((product) => product.category === category);
+  if (!category || category === "all") return PRODUCTS;
+  return productsByCategory.get(category) ?? [];
 }
 
 /** O(1) slug lookup via pre-built Map. */
@@ -130,13 +147,10 @@ export async function getProductBySlug(
 
 /** Returns every slug so Next.js can statically generate all product pages. */
 export async function getAllProductSlugs(): Promise<string[]> {
-  return PRODUCTS.map((product) => product.slug);
+  return productSlugs;
 }
 
 /** Format a price stored in cents as a localised currency string. */
 export function formatPrice(cents: number): string {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-  }).format(cents / 100);
+  return priceFormatter.format(cents / 100);
 }
