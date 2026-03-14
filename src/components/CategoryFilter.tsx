@@ -9,15 +9,7 @@
 "use client";
 
 import Link from "next/link";
-import type { Category } from "@/types";
-
-const CATEGORIES: { label: string; value: Category | "all" }[] = [
-  { label: "All", value: "all" },
-  { label: "Apparel", value: "apparel" },
-  { label: "Accessories", value: "accessories" },
-  { label: "Sales Tools", value: "sales-tools" },
-  { label: "Digital", value: "digital" },
-];
+import { CATEGORY_FILTER_OPTIONS, type Category } from "@/types";
 
 interface Props {
   activeCategory?: Category;
@@ -31,7 +23,7 @@ export default function CategoryFilter({ activeCategory }: Props) {
       aria-label="Filter by category"
       className="flex flex-wrap gap-2 mb-8"
     >
-      {CATEGORIES.map(({ label, value }) => {
+      {CATEGORY_FILTER_OPTIONS.map(({ label, value }) => {
         const href =
           value === "all" ? "/products" : `/products?category=${value}`;
         const isActive = value === active;
