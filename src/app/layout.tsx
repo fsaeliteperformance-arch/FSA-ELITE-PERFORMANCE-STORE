@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   },
   description:
     "Official merchandise and branding store for the FSA Elite sales community. " +
-    "Branded apparel, sales tools, and professional gear for salespeople.",
+    "Branded apparel, sales tools, and professional gear inspired by classic and modern sales leaders.",
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL ?? "https://store.fsaeliteperformance.com",
   ),
