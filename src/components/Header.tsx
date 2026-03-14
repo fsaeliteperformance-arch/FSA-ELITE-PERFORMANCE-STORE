@@ -21,10 +21,9 @@ export default function Header() {
           <Image
             src="/logo.png"
             alt="FSA Elite Performance"
-            width={330}
-            height={150}
+            width={132}
+            height={60}
             priority
-            className="h-12 w-auto"
           />
         </Link>
 
