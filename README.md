@@ -64,7 +64,7 @@ Use `FSA ELITE PERFORMANCE` as the Stripe account statement descriptor for this 
 If someone needs access to this store through Ionis, have them paste:
 
 ```text
-https://fsaelitetraing.com
+https://fsaelitetraining.com
 ```
 
 when requesting access to the FSA Elite Performance Store.
@@ -93,4 +93,4 @@ npm run dev
 |---|---|---|
 | `STRIPE_SECRET_KEY` | ✅ | Stripe secret key (server-only) |
 | `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | ✅ | Stripe publishable key (client-safe) |
-| `NEXT_PUBLIC_SITE_URL` | ✅ | Full origin URL, e.g. `https://fsaelitetraing.com` |
+| `NEXT_PUBLIC_SITE_URL` | ✅ | Full origin URL, e.g. `https://fsaelitetraining.com` |

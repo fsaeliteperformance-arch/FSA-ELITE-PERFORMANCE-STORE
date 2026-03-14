@@ -34,7 +34,7 @@ export default async function HomePage() {
           <p className="mt-1">
             Paste{" "}
             <span className="font-mono text-xs sm:text-sm">
-              https://fsaelitetraing.com
+              https://fsaelitetraining.com
             </span>{" "}
             into Ionis when requesting access to the FSA Elite Performance
             Store.
