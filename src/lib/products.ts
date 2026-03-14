@@ -110,14 +110,15 @@ const productBySlug = new Map<string, Product>(
 
 const productSlugs = PRODUCTS.map((product) => product.slug);
 
-const productsByCategory = new Map<Category, Product[]>(
-  Array.from(new Set(PRODUCTS.map((product) => product.category))).map(
-    (category) => [
-      category,
-      PRODUCTS.filter((product) => product.category === category),
-    ],
-  ),
-);
+const productsByCategory = PRODUCTS.reduce((categoryMap, product) => {
+  const productsInCategory = categoryMap.get(product.category);
+  if (productsInCategory) {
+    productsInCategory.push(product);
+  } else {
+    categoryMap.set(product.category, [product]);
+  }
+  return categoryMap;
+}, new Map<Category, Product[]>());
 
 const priceFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
