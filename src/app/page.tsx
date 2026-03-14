@@ -58,8 +58,8 @@ export default async function HomePage() {
           </p>
           <p className="mt-4 text-base leading-7 text-gray-700">
             That includes lessons inspired by Jeremy Miner, Brez, Grant
-            Cardone, Andy Elliott and The Elliott Group, major salesman movies
-            and shows, and Fontenot&apos;s Sales Association so our community keeps
+            Cardone, Andy Elliott and The Elliott Group, major sales movies
+            and shows, plus Fontenot&apos;s Sales Association so our community keeps
             sharpening both conviction and technique.
           </p>
         </div>
