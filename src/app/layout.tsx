@@ -29,6 +29,7 @@ export const metadata: Metadata = {
   openGraph: {
     siteName: "FSA Elite Performance Store",
     type: "website",
+    images: [{ url: "/opengraph-image" }],
   },
 };
 
