@@ -33,8 +33,9 @@ const GROWTH_LOOP_STEPS = [
     description: "Create accountability, shared wins, and feedback loops that keep members engaged.",
   },
   {
-    title: "Repeat Acknowledged",
-    description: "Turn momentum into repeat buying, repeat learning, and repeat participation.",
+    title: "Repeat",
+    description:
+      "Acknowledge the repeat loop by turning momentum into repeat buying, repeat learning, and repeat participation.",
   },
 ] as const;
 
