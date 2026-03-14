@@ -61,13 +61,14 @@ Use `FSA ELITE PERFORMANCE` as the Stripe account statement descriptor for this 
 
 ## Ionis Access Request
 
-If someone needs access to this store through Ionis, have them paste:
+When a team member needs access to this store through Ionis, they should enter the following information in their Ionis access request:
 
-```text
-https://store.fsaeliteperformance.com
-```
+| Field | Value |
+|---|---|
+| **Website / URL** | `https://store.fsaeliteperformance.com` |
+| **Store name** | `FSA Elite Performance Store` |
 
-when requesting access to the FSA Elite Performance Store.
+Once the request is submitted, the Ionis administrator approves it and the user gains access to place orders.
 
 ---
 

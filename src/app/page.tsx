@@ -29,15 +29,30 @@ export default async function HomePage() {
           Premium branded gear for the elite salesperson. Build your personal
           brand and close more deals.
         </p>
-        <div className="mt-6 mx-auto max-w-2xl rounded-lg border border-brand/15 bg-brand/5 px-4 py-3 text-left text-sm text-gray-700">
+        <div className="mt-6 mx-auto max-w-2xl rounded-lg border border-brand/15 bg-brand/5 px-4 py-4 text-left text-sm text-gray-700">
           <p className="font-semibold text-brand">Need access through Ionis?</p>
           <p className="mt-1">
-            Paste{" "}
-            <span className="font-mono text-xs sm:text-sm">
-              https://store.fsaeliteperformance.com
-            </span>{" "}
-            into Ionis when requesting access to the FSA Elite Performance
-            Store.
+            When requesting access to the FSA Elite Performance Store in your
+            Ionis account, enter the following details:
+          </p>
+          <ol className="mt-3 list-decimal list-inside space-y-2">
+            <li>
+              <span className="font-medium">Store URL</span> — paste this into
+              the <em>Website / URL</em> field:{" "}
+              <span className="font-mono text-xs sm:text-sm break-all">
+                https://store.fsaeliteperformance.com
+              </span>
+            </li>
+            <li>
+              <span className="font-medium">Store name</span> — enter{" "}
+              <span className="font-mono text-xs sm:text-sm">
+                FSA Elite Performance Store
+              </span>
+            </li>
+          </ol>
+          <p className="mt-3 text-gray-500 text-xs">
+            Once submitted, your Ionis administrator will approve your request
+            and you will gain access to place orders.
           </p>
         </div>
       </section>
