@@ -109,16 +109,34 @@ const productBySlug = new Map<string, Product>(
 );
 
 /**
- * Return all products.
+ * Return all products, optionally filtered by category and/or a text query.
+ *
+ * `query` is matched case-insensitively against product name and description.
  *
  * In production, replace the array reference with a `fetch()` call to your
  * CMS or database, using `{ next: { revalidate: 3600 } }` to enable ISR.
  */
-export async function getProducts(category?: string): Promise<Product[]> {
+export async function getProducts(
+  category?: string,
+  query?: string,
+): Promise<Product[]> {
   // Simulate async data source
-  const allProducts = PRODUCTS;
-  if (!category || category === "all") return allProducts;
-  return allProducts.filter((product) => product.category === category);
+  let products = PRODUCTS;
+
+  if (category && category !== "all") {
+    products = products.filter((product) => product.category === category);
+  }
+
+  if (query) {
+    const needle = query.toLowerCase();
+    products = products.filter(
+      (product) =>
+        product.name.toLowerCase().includes(needle) ||
+        product.description.toLowerCase().includes(needle),
+    );
+  }
+
+  return products;
 }
 
 /** O(1) slug lookup via pre-built Map. */
