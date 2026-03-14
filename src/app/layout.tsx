@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     "Official merchandise and branding store for the FSA Elite sales community. " +
     "Branded apparel, sales tools, and professional gear for salespeople.",
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://store.fsaeliteperformance.com",
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://fsaelitetraing.com",
   ),
   openGraph: {
     siteName: "FSA Elite Performance Store",
