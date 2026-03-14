@@ -64,10 +64,25 @@ Use `FSA ELITE PERFORMANCE` as the Stripe account statement descriptor for this 
 If someone needs access to this store through Ionis, have them paste:
 
 ```text
-https://store.fsaeliteperformance.com
+https://fsaeliteperformance.com
 ```
 
 when requesting access to the FSA Elite Performance Store.
+
+---
+
+## DNS Records
+
+Use the following IONOS DNS records for the store domain:
+
+| Type | Host name | Value | Service |
+|---|---|---|---|
+| TXT | `@` | `v=spf1 include:_spf-us.ionos.com ~all` | SPF |
+| A | `@` | `34.111.179.208` | - |
+| TXT | `@` | `replit-verify=8ed83cc6-b427-46b1-86cd-5c84937ec0c0` | - |
+| A | `www` | `34.111.179.208` | - |
+
+The apex domain (`https://fsaeliteperformance.com`) is the primary store URL, and `www.fsaeliteperformance.com` should resolve to the same storefront.
 
 ---
 
@@ -93,4 +108,4 @@ npm run dev
 |---|---|---|
 | `STRIPE_SECRET_KEY` | ✅ | Stripe secret key (server-only) |
 | `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | ✅ | Stripe publishable key (client-safe) |
-| `NEXT_PUBLIC_SITE_URL` | ✅ | Full origin URL, e.g. `https://store.fsaeliteperformance.com` |
+| `NEXT_PUBLIC_SITE_URL` | ✅ | Full origin URL, e.g. `https://fsaeliteperformance.com` |
