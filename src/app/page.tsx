@@ -8,6 +8,7 @@
 
 import { Suspense } from "react";
 import { getProducts } from "@/lib/products";
+import ExperienceLoop from "@/components/ExperienceLoop";
 import ProductGrid from "@/components/ProductGrid";
 import ProductGridSkeleton from "@/components/ProductGridSkeleton";
 
@@ -42,8 +43,10 @@ export default async function HomePage() {
         </div>
       </section>
 
+      <ExperienceLoop currentStep="Store" />
+
       {/* Product catalogue */}
-      <section aria-label="Products">
+      <section aria-label="Products" className="mt-16">
         <h2 className="text-2xl font-bold text-brand mb-8">Shop All</h2>
         {/*
          * Suspense boundary: React streams the shell immediately and fills in
