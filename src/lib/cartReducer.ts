@@ -14,21 +14,20 @@ export const initialCartState: CartState = { items: [] };
 export function cartReducer(state: CartState, action: CartAction): CartState {
   switch (action.type) {
     case "ADD_ITEM": {
-      const existingCartItem = state.items.find(
-        (cartItem) => cartItem.product.id === action.product.id,
-      );
-      if (existingCartItem) {
-        // Already in cart → increment quantity in-place
-        return {
-          items: state.items.map((cartItem) =>
-            cartItem.product.id === action.product.id
-              ? { ...cartItem, quantity: cartItem.quantity + 1 }
-              : cartItem,
-          ),
-        };
-      }
+      // Single-pass: map the array once, tracking whether the item was found.
+      // This avoids the prior find() + map() double-scan (O(2n) → O(n)).
+      let found = false;
+      const updatedItems = state.items.map((cartItem) => {
+        if (cartItem.product.id === action.product.id) {
+          found = true;
+          return { ...cartItem, quantity: cartItem.quantity + 1 };
+        }
+        return cartItem;
+      });
       return {
-        items: [...state.items, { product: action.product, quantity: 1 }],
+        items: found
+          ? updatedItems
+          : [...state.items, { product: action.product, quantity: 1 }],
       };
     }
 
