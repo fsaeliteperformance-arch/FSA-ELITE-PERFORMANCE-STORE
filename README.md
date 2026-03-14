@@ -79,10 +79,12 @@ Use the following IONOS DNS records for the store domain:
 |---|---|---|---|
 | TXT | `@` | `v=spf1 include:_spf-us.ionos.com ~all` | SPF |
 | A | `@` | `34.111.179.208` | - |
-| TXT | `@` | `replit-verify=8ed83cc6-b427-46b1-86cd-5c84937ec0c0` | - |
+| TXT | `@` | `replit-verify={CURRENT_REPLIT_VERIFICATION_TOKEN}` | - |
 | A | `www` | `34.111.179.208` | - |
 
 The apex domain (`https://fsaeliteperformance.com`) is the primary store URL, and `www.fsaeliteperformance.com` should resolve to the same storefront.
+Keep the SPF record in place when the domain's email services route through IONOS; the storefront itself does not consume that record directly.
+Fetch the current Replit verification token from the deployment provider when configuring DNS instead of committing the live token to version control.
 
 ---
 
