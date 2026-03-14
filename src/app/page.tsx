@@ -33,9 +33,10 @@ export default async function HomePage() {
           <p className="font-semibold text-brand">Need access through Ionis?</p>
           <p className="mt-1">
             Paste{" "}
-            <span className="font-mono text-xs sm:text-sm">
-              https://store.fsaeliteperformance.com
-            </span>{" "}
+              <span className="font-mono text-xs sm:text-sm">
+                {process.env.NEXT_PUBLIC_SITE_URL ??
+                  "https://s1085937527.onlinehome.us"}
+              </span>{" "}
             into Ionis when requesting access to the FSA Elite Performance
             Store.
           </p>
