@@ -74,7 +74,7 @@ export default function OpenGraphImage() {
             fontSize: 26,
           }}
         >
-          <span aria-hidden="true">🚀</span>
+          <span>🚀</span>
           <span>Fast shipping. Built for closers.</span>
         </div>
       </div>
