@@ -7,6 +7,7 @@
 
 import type { Metadata } from "next";
 import Link from "next/link";
+import { STORE_URL } from "@/lib/domains";
 
 export const metadata: Metadata = {
   title: "Sales Training Programs",
@@ -57,9 +58,6 @@ const PROGRAMS = [
 ];
 
 export default function TrainingHomePage() {
-  const storeUrl =
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://store.fsaeliteperformance.com";
-
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       {/* Hero */}
@@ -82,7 +80,7 @@ export default function TrainingHomePage() {
             Explore Programs
           </a>
           <a
-            href={storeUrl}
+            href={STORE_URL}
             className="inline-block bg-white text-brand border-2 border-brand font-semibold px-8 py-3 rounded-full hover:bg-brand/5 transition-colors"
           >
             Visit the Store
@@ -123,7 +121,7 @@ export default function TrainingHomePage() {
           sales tools, and professional gear — all in one place.
         </p>
         <a
-          href={storeUrl}
+          href={STORE_URL}
           className="inline-block bg-brand-accent text-white font-bold px-8 py-3 rounded-full hover:opacity-90 transition-opacity"
         >
           Shop the FSA Elite Store →

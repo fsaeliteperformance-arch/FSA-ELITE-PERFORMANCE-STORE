@@ -9,6 +9,7 @@
 import type { Metadata } from "next";
 import { CartProvider } from "@/context/CartContext";
 import Header from "@/components/Header";
+import { TRAINING_URL, STORE_URL } from "@/lib/domains";
 
 export const metadata: Metadata = {
   title: {
@@ -18,9 +19,7 @@ export const metadata: Metadata = {
   description:
     "Official merchandise and branding store for the FSA Elite sales community. " +
     "Branded apparel, sales tools, and professional gear for salespeople.",
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://store.fsaeliteperformance.com",
-  ),
+  metadataBase: new URL(STORE_URL),
   openGraph: {
     siteName: "FSA Elite Performance Store",
     type: "website",
@@ -42,10 +41,7 @@ export default function StoreLayout({
       <footer className="bg-brand text-white text-center py-6 text-sm mt-12">
         © {CURRENT_YEAR} FSA Elite Performance. All rights reserved.{" "}
         <a
-          href={
-            process.env.NEXT_PUBLIC_TRAINING_URL ??
-            "https://training.fsaeliteperformance.com"
-          }
+          href={TRAINING_URL}
           className="underline hover:text-brand-accent transition-colors ml-2"
         >
           Training Portal →

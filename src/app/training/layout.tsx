@@ -9,6 +9,7 @@
 
 import type { Metadata } from "next";
 import Link from "next/link";
+import { STORE_URL, TRAINING_URL } from "@/lib/domains";
 
 export const metadata: Metadata = {
   title: {
@@ -17,10 +18,7 @@ export const metadata: Metadata = {
   },
   description:
     "Elite sales training programs, coaching, and resources for FSA Elite Performance members.",
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_TRAINING_URL ??
-      "https://training.fsaeliteperformance.com",
-  ),
+  metadataBase: new URL(TRAINING_URL),
   openGraph: {
     siteName: "FSA Elite Performance Training",
     type: "website",
@@ -39,16 +37,13 @@ export default function TrainingLayout({
       {/* Training header — no cart; links to the store domain instead */}
       <header className="bg-brand text-white sticky top-0 z-50 shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <Link href="/training" className="font-extrabold text-xl tracking-tight">
+          <Link href="/" className="font-extrabold text-xl tracking-tight">
             FSA Elite Training
           </Link>
 
           <nav className="flex items-center gap-6 text-sm font-medium">
             <a
-              href={
-                process.env.NEXT_PUBLIC_SITE_URL ??
-                "https://store.fsaeliteperformance.com"
-              }
+              href={STORE_URL}
               className="hover:text-brand-accent transition-colors"
             >
               Store →
@@ -62,10 +57,7 @@ export default function TrainingLayout({
       <footer className="bg-brand text-white text-center py-6 text-sm mt-12">
         © {CURRENT_YEAR} FSA Elite Performance. All rights reserved.{" "}
         <a
-          href={
-            process.env.NEXT_PUBLIC_SITE_URL ??
-            "https://store.fsaeliteperformance.com"
-          }
+          href={STORE_URL}
           className="underline hover:text-brand-accent transition-colors ml-2"
         >
           Visit the Store →
