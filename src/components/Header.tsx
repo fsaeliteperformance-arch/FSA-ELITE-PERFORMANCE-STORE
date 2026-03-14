@@ -31,7 +31,7 @@ export default function Header() {
             <span className="text-lg font-extrabold uppercase tracking-[0.18em] sm:text-xl">
               Elite
             </span>
-            <span className="mt-1 text-[0.65rem] font-medium uppercase tracking-[0.3em] text-white/75 sm:text-xs">
+            <span className="mt-1 text-xs font-medium uppercase tracking-[0.3em] text-white/75">
               Performance Store
             </span>
           </span>
