@@ -37,7 +37,7 @@ export default async function HomePage() {
           <p className="mt-2 text-sm leading-7 text-gray-700">
             FSA Elite sales training is top tier because it is built around the
             user while staying true to the foundation the brand was built on.
-            The plan shifts with each person&apos;s pace, goals, and progress, so
+            The plan shifts with each person’s pace, goals, and progress, so
             the experience keeps getting better without becoming repetitive.
           </p>
         </div>
