@@ -7,6 +7,7 @@
  */
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 
@@ -16,8 +17,14 @@ export default function Header() {
   return (
     <header className="bg-brand text-white sticky top-0 z-50 shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <Link href="/" className="font-extrabold text-xl tracking-tight">
-          FSA Elite
+        <Link href="/" className="flex items-center gap-3">
+          <Image
+            src="/logo.png"
+            alt="FSA Elite Performance"
+            width={132}
+            height={60}
+            priority
+          />
         </Link>
 
         <nav className="flex items-center gap-6 text-sm font-medium">
