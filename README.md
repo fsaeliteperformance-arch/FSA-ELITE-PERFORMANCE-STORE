@@ -71,6 +71,16 @@ when requesting access to the FSA Elite Performance Store.
 
 ---
 
+## DNS SPF Record
+
+For the apex domain `fsaelite.org`, configure the following SPF TXT record in IONOS:
+
+| Type | Host name | Value | TTL |
+|---|---|---|---|
+| `TXT` | `@` | `v=spf1 include:_spf-us.ionos.com ~all` | `1 hour` |
+
+---
+
 ## Local Development
 
 ```bash
