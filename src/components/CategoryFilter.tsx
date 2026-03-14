@@ -24,7 +24,7 @@ interface Props {
 }
 
 export default function CategoryFilter({ activeCategory }: Props) {
-  const active = activeCategory ?? "all";
+  const selectedCategory = activeCategory ?? "all";
 
   return (
     <nav
@@ -34,18 +34,18 @@ export default function CategoryFilter({ activeCategory }: Props) {
       {CATEGORIES.map(({ label, value }) => {
         const href =
           value === "all" ? "/products" : `/products?category=${value}`;
-        const isActive = value === active;
+        const isCategorySelected = value === selectedCategory;
         return (
           <Link
             key={value}
             href={href}
             className={[
               "px-4 py-2 rounded-full text-sm font-semibold transition-colors",
-              isActive
+              isCategorySelected
                 ? "bg-brand text-white"
                 : "bg-gray-100 text-gray-700 hover:bg-gray-200",
             ].join(" ")}
-            aria-current={isActive ? "page" : undefined}
+            aria-current={isCategorySelected ? "page" : undefined}
           >
             {label}
           </Link>
