@@ -17,6 +17,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { createCheckoutSession } from "@/lib/stripe";
 import type { CheckoutLineItem } from "@/lib/stripe";
 
+const DEFAULT_ORIGIN = "http://localhost:3000";
+
 export async function POST(req: NextRequest) {
   let requestBody: unknown;
   try {
@@ -71,12 +73,12 @@ export async function POST(req: NextRequest) {
     // Use a trusted origin for Stripe redirect URLs to avoid open-redirect
     // abuse via a spoofed Origin header. Fall back to localhost for local dev.
     const configuredOrigin =
-      process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+      process.env.NEXT_PUBLIC_SITE_URL ?? DEFAULT_ORIGIN;
     let origin: string;
     try {
       origin = new URL(configuredOrigin).origin;
     } catch {
-      origin = "http://localhost:3000";
+      origin = DEFAULT_ORIGIN;
     }
 
     const session = await createCheckoutSession(lineItems, origin);
