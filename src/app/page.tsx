@@ -42,6 +42,29 @@ export default async function HomePage() {
         </div>
       </section>
 
+      <section className="mb-16 rounded-2xl border border-brand/10 bg-slate-50 px-6 py-8 shadow-sm">
+        <div className="max-w-4xl">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand">
+            Training inspiration
+          </p>
+          <h2 className="mt-3 text-3xl font-bold text-brand">
+            Built on classic sales wisdom and today&apos;s top educators
+          </h2>
+          <p className="mt-4 text-base leading-7 text-gray-700">
+            FSA Elite Performance training pulls from the timeless mindset of
+            Zig Ziglar, the quotable fundamentals shared across classic sales
+            media, and the modern frameworks taught every day on YouTube and
+            social platforms by sales leaders.
+          </p>
+          <p className="mt-4 text-base leading-7 text-gray-700">
+            That includes lessons inspired by Jeremy Miner, Brez, Grant
+            Cardone, Andy Elliott and The Elliott Group, major salesman movies
+            and shows, and Fontenot&apos;s Sales Association so our community keeps
+            sharpening both conviction and technique.
+          </p>
+        </div>
+      </section>
+
       {/* Product catalogue */}
       <section aria-label="Products">
         <h2 className="text-2xl font-bold text-brand mb-8">Shop All</h2>

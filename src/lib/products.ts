@@ -64,7 +64,7 @@ export const PRODUCTS: Product[] = [
     slug: "fsa-elite-sales-playbook",
     name: "FSA Elite Sales Playbook (Digital)",
     description:
-      "A comprehensive digital playbook covering proven objection-handling scripts, follow-up cadences, and closing strategies for the modern salesperson.",
+      "A comprehensive digital playbook covering proven objection-handling scripts, follow-up cadences, and closing strategies inspired by Zig Ziglar, Jeremy Miner, Brez, Grant Cardone, Andy Elliott, The Elliott Group, classic sales media, and Fontenot's Sales Association.",
     price: 4999, // $49.99
     category: "digital",
     imageUrl: "https://placehold.co/600x600/e94560/ffffff?text=Playbook",
