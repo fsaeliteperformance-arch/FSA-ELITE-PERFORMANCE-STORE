@@ -63,7 +63,7 @@ export default function CartPage() {
 
   const handleDecrement = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {
-      const { productId } = event.currentTarget.dataset;
+      const productId = event.currentTarget.getAttribute("data-product-id");
       if (productId) {
         dispatch({ type: "DECREMENT", productId });
       }
@@ -73,7 +73,7 @@ export default function CartPage() {
 
   const handleIncrement = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {
-      const { productId } = event.currentTarget.dataset;
+      const productId = event.currentTarget.getAttribute("data-product-id");
       if (productId) {
         dispatch({ type: "INCREMENT", productId });
       }
@@ -83,7 +83,7 @@ export default function CartPage() {
 
   const handleRemove = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {
-      const { productId } = event.currentTarget.dataset;
+      const productId = event.currentTarget.getAttribute("data-product-id");
       if (productId) {
         removeItem(productId);
       }
