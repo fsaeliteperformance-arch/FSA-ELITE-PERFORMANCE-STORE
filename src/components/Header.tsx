@@ -15,14 +15,30 @@ export default function Header() {
 
   return (
     <header className="bg-brand text-white sticky top-0 z-50 shadow-md">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-16 py-3 flex items-center justify-between gap-4">
         <Link href="/" className="font-extrabold text-xl tracking-tight">
           FSA Elite
         </Link>
 
-        <nav className="flex items-center gap-6 text-sm font-medium">
+        <nav className="flex items-center gap-3 sm:gap-5 text-xs sm:text-sm font-medium">
+          <Link href="/content" className="hover:text-brand-accent transition-colors">
+            Content
+          </Link>
+          <Link
+            href="/training-app"
+            className="hover:text-brand-accent transition-colors"
+          >
+            <span className="sm:hidden">Training</span>
+            <span className="hidden sm:inline">Training App</span>
+          </Link>
           <Link href="/products" className="hover:text-brand-accent transition-colors">
             Shop
+          </Link>
+          <Link
+            href="/community"
+            className="hover:text-brand-accent transition-colors"
+          >
+            Community
           </Link>
           <Link
             href="/cart"
