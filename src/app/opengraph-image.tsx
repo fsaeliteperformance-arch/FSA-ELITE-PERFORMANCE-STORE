@@ -62,20 +62,19 @@ export default function OpenGraphImage() {
           your personal brand.
         </p>
         <div
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 12,
-            padding: "14px 22px",
+        style={{
+          display: "inline-flex",
+          alignItems: "center",
+          gap: 12,
+          padding: "14px 22px",
             borderRadius: 9999,
             backgroundColor: "rgba(233, 69, 96, 0.16)",
-            color: "#f76b86",
-            fontWeight: 700,
-            fontSize: 26,
-          }}
+          color: "#f76b86",
+          fontWeight: 700,
+          fontSize: 26,
+        }}
         >
-          <span>🚀</span>
-          <span>Fast shipping. Built for closers.</span>
+          <span>🚀 Fast shipping. Built for closers.</span>
         </div>
       </div>
     ),
