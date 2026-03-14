@@ -68,10 +68,16 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const origin =
-      req.headers.get("origin") ??
-      process.env.NEXT_PUBLIC_SITE_URL ??
-      "http://localhost:3000";
+    // Use a trusted origin for Stripe redirect URLs to avoid open-redirect
+    // abuse via a spoofed Origin header. Fall back to localhost for local dev.
+    const configuredOrigin =
+      process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+    let origin: string;
+    try {
+      origin = new URL(configuredOrigin).origin;
+    } catch {
+      origin = "http://localhost:3000";
+    }
 
     const session = await createCheckoutSession(lineItems, origin);
     return NextResponse.json({ url: session.url });
