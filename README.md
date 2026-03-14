@@ -77,11 +77,14 @@ when requesting access to the FSA Elite Performance Store.
 # 1. Install dependencies
 npm install
 
-# 2. Set environment variables
+# 2. Install the GitHub Copilot CLI (optional, for local Copilot workflows)
+curl -fsSL https://gh.io/copilot-install | bash
+
+# 3. Set environment variables
 cp .env.example .env.local
 # Fill in STRIPE_SECRET_KEY, NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY, NEXT_PUBLIC_SITE_URL
 
-# 3. Start the dev server
+# 4. Start the dev server
 npm run dev
 ```
 
