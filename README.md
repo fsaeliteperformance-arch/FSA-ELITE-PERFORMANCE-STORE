@@ -78,6 +78,9 @@ when requesting access to the FSA Elite Performance Store.
 npm install
 
 # 2. Install the GitHub Copilot CLI (optional, for local Copilot workflows)
+# Review the install script before running it in your environment.
+# Prefer the manual and OS-specific instructions at:
+# https://docs.github.com/copilot/how-tos/set-up/install-copilot-cli
 curl -fsSL https://gh.io/copilot-install | bash
 
 # 3. Set environment variables
