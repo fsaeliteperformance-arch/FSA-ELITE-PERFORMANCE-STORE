@@ -44,9 +44,16 @@ export default function RootLayout({
         <CartProvider>
           <Header />
           <main className="flex-1">{children}</main>
-          <footer className="bg-brand text-white text-center py-6 text-sm mt-12">
-            © {new Date().getFullYear()} FSA Elite Performance. All rights
-            reserved.
+          <footer className="bg-brand text-white py-6 text-sm mt-12">
+            <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 text-center sm:px-6 lg:px-8">
+              <p className="font-semibold uppercase tracking-[0.2em] text-white/80">
+                Content → Training App → Store → Community → Repeat
+              </p>
+              <p>
+                © {new Date().getFullYear()} FSA Elite Performance. All rights
+                reserved.
+              </p>
+            </div>
           </footer>
         </CartProvider>
       </body>

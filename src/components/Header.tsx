@@ -20,9 +20,27 @@ export default function Header() {
           FSA Elite
         </Link>
 
-        <nav className="flex items-center gap-6 text-sm font-medium">
+        <nav className="flex items-center gap-3 text-xs font-medium sm:gap-6 sm:text-sm">
+          <Link
+            href="/#content"
+            className="hover:text-brand-accent transition-colors"
+          >
+            Content
+          </Link>
+          <Link
+            href="/#training-app"
+            className="hover:text-brand-accent transition-colors"
+          >
+            Training App
+          </Link>
           <Link href="/products" className="hover:text-brand-accent transition-colors">
             Shop
+          </Link>
+          <Link
+            href="/#community"
+            className="hover:text-brand-accent transition-colors"
+          >
+            Community
           </Link>
           <Link
             href="/cart"
