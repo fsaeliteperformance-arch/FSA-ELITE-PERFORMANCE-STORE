@@ -133,10 +133,15 @@ export async function getAllProductSlugs(): Promise<string[]> {
   return PRODUCTS.map((product) => product.slug);
 }
 
+// Module-level singleton: creating an Intl.NumberFormat instance is expensive
+// (locale parsing, collation setup) so we pay that cost once at module load
+// time and reuse the same formatter on every formatPrice call.
+const priceFormatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+});
+
 /** Format a price stored in cents as a localised currency string. */
 export function formatPrice(cents: number): string {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-  }).format(cents / 100);
+  return priceFormatter.format(cents / 100);
 }

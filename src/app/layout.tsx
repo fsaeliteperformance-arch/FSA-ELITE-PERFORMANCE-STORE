@@ -32,6 +32,10 @@ export const metadata: Metadata = {
   },
 };
 
+// Evaluated once at module load time (build time for static pages / ISR)
+// so the footer year is never re-computed on every server render.
+const CURRENT_YEAR = new Date().getFullYear();
+
 export default function RootLayout({
   children,
 }: {
@@ -45,8 +49,7 @@ export default function RootLayout({
           <Header />
           <main className="flex-1">{children}</main>
           <footer className="bg-brand text-white text-center py-6 text-sm mt-12">
-            © {new Date().getFullYear()} FSA Elite Performance. All rights
-            reserved.
+            © {CURRENT_YEAR} FSA Elite Performance. All rights reserved.
           </footer>
         </CartProvider>
       </body>
