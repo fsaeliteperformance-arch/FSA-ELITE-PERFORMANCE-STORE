@@ -24,6 +24,9 @@ export default function Header() {
           <Link href="/products" className="hover:text-brand-accent transition-colors">
             Shop
           </Link>
+          <Link href="/training" className="hover:text-brand-accent transition-colors">
+            Training
+          </Link>
           <Link
             href="/cart"
             className="relative hover:text-brand-accent transition-colors"
