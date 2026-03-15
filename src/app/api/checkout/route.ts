@@ -54,15 +54,23 @@ export async function POST(req: NextRequest) {
   // Validate each line item before sending to Stripe.
   const lineItems: CheckoutLineItem[] = [];
   for (const rawLineItem of requestLineItems) {
+    const stripePriceId =
+      rawLineItem && typeof rawLineItem === "object"
+        ? (rawLineItem as { stripePriceId?: unknown }).stripePriceId
+        : undefined;
+    const quantity =
+      rawLineItem && typeof rawLineItem === "object"
+        ? (rawLineItem as { quantity?: unknown }).quantity
+        : undefined;
+
     if (
       !rawLineItem ||
       typeof rawLineItem !== "object" ||
-      typeof (rawLineItem as { stripePriceId?: unknown }).stripePriceId !==
-        "string" ||
-      !(rawLineItem as { stripePriceId: string }).stripePriceId.trim() ||
-      typeof (rawLineItem as { quantity?: unknown }).quantity !== "number" ||
-      !Number.isInteger((rawLineItem as { quantity: number }).quantity) ||
-      (rawLineItem as { quantity: number }).quantity < 1
+      typeof stripePriceId !== "string" ||
+      !stripePriceId.trim() ||
+      typeof quantity !== "number" ||
+      !Number.isInteger(quantity) ||
+      quantity < 1
     ) {
       return NextResponse.json(
         { error: "Each item must have a valid stripePriceId and quantity >= 1" },
@@ -70,10 +78,8 @@ export async function POST(req: NextRequest) {
       );
     }
     lineItems.push({
-      stripePriceId: (
-        rawLineItem as { stripePriceId: string }
-      ).stripePriceId.trim(),
-      quantity: Math.floor((rawLineItem as { quantity: number }).quantity),
+      stripePriceId: stripePriceId.trim(),
+      quantity,
     });
   }
 
