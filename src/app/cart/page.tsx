@@ -7,11 +7,13 @@
  */
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
 import { useCallback, useMemo, useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { formatPrice } from "@/lib/products";
+import Container from "@/components/Container";
+import LinkButton from "@/components/LinkButton";
+import QuantitySelector from "@/components/QuantitySelector";
 
 export default function CartPage() {
   const { state, total, count, removeItem, dispatch } = useCart();
@@ -51,23 +53,18 @@ export default function CartPage() {
 
   if (count === 0) {
     return (
-      <div className="max-w-2xl mx-auto px-4 py-24 text-center">
+      <Container maxWidth="2xl" paddingY="py-24" className="text-center">
         <h1 className="text-3xl font-bold text-brand mb-4">Your cart is empty</h1>
         <p className="text-gray-500 mb-8">
           Time to gear up — browse the store and add some items.
         </p>
-        <Link
-          href="/products"
-          className="inline-block bg-brand text-white font-semibold px-8 py-3 rounded-full hover:opacity-90 transition-opacity"
-        >
-          Shop Now
-        </Link>
-      </div>
+        <LinkButton href="/products">Shop Now</LinkButton>
+      </Container>
     );
   }
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <Container maxWidth="5xl">
       <h1 className="text-3xl font-bold text-brand mb-10">Your Cart</h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
@@ -88,25 +85,15 @@ export default function CartPage() {
                 <p className="font-semibold text-brand truncate">{product.name}</p>
                 <p className="text-gray-500 text-sm">{formatPrice(product.price)}</p>
                 <div className="flex items-center gap-3 mt-2">
-                  <button
-                    onClick={() =>
+                  <QuantitySelector
+                    quantity={quantity}
+                    onDecrement={() =>
                       dispatch({ type: "DECREMENT", productId: product.id })
                     }
-                    className="w-7 h-7 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition-colors"
-                    aria-label="Decrease quantity"
-                  >
-                    −
-                  </button>
-                  <span className="font-medium">{quantity}</span>
-                  <button
-                    onClick={() =>
+                    onIncrement={() =>
                       dispatch({ type: "INCREMENT", productId: product.id })
                     }
-                    className="w-7 h-7 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition-colors"
-                    aria-label="Increase quantity"
-                  >
-                    +
-                  </button>
+                  />
                   <button
                     onClick={() => removeItem(product.id)}
                     className="ml-auto text-sm text-red-500 hover:underline"
@@ -141,6 +128,6 @@ export default function CartPage() {
           </div>
         </aside>
       </div>
-    </div>
+    </Container>
   );
 }
