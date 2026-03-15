@@ -41,18 +41,17 @@ export async function POST(req: NextRequest) {
   // Validate each line item before sending to Stripe.
   const lineItems: CheckoutLineItem[] = [];
   for (const rawLineItem of requestLineItems) {
-    const stripePriceId =
+    const parsedLineItem =
       rawLineItem && typeof rawLineItem === "object"
-        ? (rawLineItem as { stripePriceId?: unknown }).stripePriceId
-        : undefined;
-    const quantity =
-      rawLineItem && typeof rawLineItem === "object"
-        ? (rawLineItem as { quantity?: unknown }).quantity
-        : undefined;
+        ? (rawLineItem as {
+            stripePriceId?: unknown;
+            quantity?: unknown;
+          })
+        : null;
+    const { stripePriceId, quantity } = parsedLineItem ?? {};
 
     if (
-      !rawLineItem ||
-      typeof rawLineItem !== "object" ||
+      !parsedLineItem ||
       typeof stripePriceId !== "string" ||
       !stripePriceId.trim() ||
       typeof quantity !== "number" ||
