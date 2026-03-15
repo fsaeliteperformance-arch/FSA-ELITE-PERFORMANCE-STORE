@@ -82,3 +82,18 @@ export function cartCount(items: CartItem[]): number {
     0,
   );
 }
+
+/**
+ * Derive the total order value and item count in a single pass.
+ *
+ * This keeps CartContext from iterating the same array twice whenever the cart
+ * changes.
+ */
+export function cartSummary(items: CartItem[]): { total: number; count: number } {
+  const summary = { total: 0, count: 0 };
+  for (const cartItem of items) {
+    summary.total += cartItem.product.price * cartItem.quantity;
+    summary.count += cartItem.quantity;
+  }
+  return summary;
+}

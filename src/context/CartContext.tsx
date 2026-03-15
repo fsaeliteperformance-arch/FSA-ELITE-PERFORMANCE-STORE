@@ -18,8 +18,7 @@ import React, {
 import {
   cartReducer,
   initialCartState,
-  cartTotal,
-  cartCount,
+  cartSummary,
 } from "@/lib/cartReducer";
 import type { CartState, CartAction, Product } from "@/types";
 
@@ -38,9 +37,9 @@ const CartContext = createContext<CartContextValue | null>(null);
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(cartReducer, initialCartState);
 
-  // Derived values re-computed only when state.items reference changes.
-  const total = useMemo(() => cartTotal(state.items), [state.items]);
-  const count = useMemo(() => cartCount(state.items), [state.items]);
+  // Derived values re-computed only when state.items reference changes, and in
+  // a single pass over the cart items.
+  const { total, count } = useMemo(() => cartSummary(state.items), [state.items]);
 
   // Stable callbacks prevent unnecessary re-renders in consumer components.
   const addItem = useCallback(
