@@ -46,8 +46,8 @@ export interface CheckoutLineItem {
  * Create a Stripe Checkout Session for the provided line items.
  *
  * @param lineItems  Array of Stripe price IDs + quantities from the cart.
- * @param origin     The request origin (e.g. https://store.example.com) used
- *                   to build the success/cancel redirect URLs.
+ * @param origin     The configured site origin (e.g. https://store.example.com)
+ *                   used to build the success/cancel redirect URLs.
  * @returns          The full Stripe Checkout Session object.
  */
 export async function createCheckoutSession(
