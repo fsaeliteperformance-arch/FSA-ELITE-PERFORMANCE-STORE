@@ -73,7 +73,10 @@ export async function POST(req: NextRequest) {
       quantity < 1
     ) {
       return NextResponse.json(
-        { error: "Each item must have a valid stripePriceId and quantity >= 1" },
+        {
+          error:
+            "Each item must have a valid stripePriceId and a positive integer quantity",
+        },
         { status: 400 },
       );
     }
