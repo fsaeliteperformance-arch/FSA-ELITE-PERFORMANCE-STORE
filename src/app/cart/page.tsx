@@ -11,6 +11,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { useCallback, useMemo, useState } from "react";
 import { useCart } from "@/context/CartContext";
+import {
+  accentButtonStyles,
+  primaryCtaLinkStyles,
+} from "@/lib/buttonStyles";
 import { formatPrice } from "@/lib/products";
 
 export default function CartPage() {
@@ -58,7 +62,7 @@ export default function CartPage() {
         </p>
         <Link
           href="/products"
-          className="inline-block bg-brand text-white font-semibold px-8 py-3 rounded-full hover:opacity-90 transition-opacity"
+          className={primaryCtaLinkStyles}
         >
           Shop Now
         </Link>
@@ -134,7 +138,7 @@ export default function CartPage() {
             <button
               onClick={handleCheckout}
               disabled={isCheckingOut}
-              className="w-full bg-brand-accent text-white font-bold py-3 rounded-full hover:opacity-90 transition-opacity disabled:opacity-50"
+              className={accentButtonStyles}
             >
               {isCheckingOut ? "Redirecting…" : "Checkout with Stripe"}
             </button>
