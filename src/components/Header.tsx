@@ -16,8 +16,32 @@ export default function Header() {
   return (
     <header className="bg-brand text-white sticky top-0 z-50 shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <Link href="/" className="font-extrabold text-xl tracking-tight">
-          FSA Elite
+        <Link
+          href="/"
+          className="flex items-center gap-3 font-extrabold text-xl tracking-tight"
+        >
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 20 20"
+            className="h-8 w-8 flex-shrink-0 text-brand-logo"
+            fill="none"
+          >
+            {[
+              [0, 0],
+              [16, 0],
+              [4, 4],
+              [12, 4],
+              [8, 8],
+              [4, 12],
+              [12, 12],
+              [4, 16],
+              [8, 16],
+              [12, 16],
+            ].map(([x, y]) => (
+              <rect key={`${x}-${y}`} x={x} y={y} width="4" height="4" fill="currentColor" />
+            ))}
+          </svg>
+          <span>FSA Elite</span>
         </Link>
 
         <nav className="flex items-center gap-6 text-sm font-medium">
