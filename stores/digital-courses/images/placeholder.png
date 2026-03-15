@@ -1,0 +1,12 @@
+# Placeholder Image
+
+This file is a path reference only. Replace with a real PNG image before launch.
+
+Recommended specs:
+- File name: `hero-digital-courses.png`
+- Dimensions: 1200 × 630 px (16:9 ratio)
+- Max file size: 300 KB (optimise with https://squoosh.app)
+- Alt text: "FSA Elite Performance — Digital Sales Courses"
+
+Once you have the real image, delete this file and add the PNG with the same filename
+or update the `<img src="">` paths in `landing.html`.
