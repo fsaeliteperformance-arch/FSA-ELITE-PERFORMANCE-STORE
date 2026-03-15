@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 56">
+  <!-- Businessman silhouette -->
+  <!-- Head -->
+  <circle cx="20" cy="9" r="6" fill="white"/>
+  <!-- Body / jacket -->
+  <path d="M11 22 Q11 17 17 17 L20 21 L23 17 Q29 17 29 22 L29 40 Q29 44 25 44 L15 44 Q11 44 11 40 Z" fill="white"/>
+  <!-- Left arm down -->
+  <path d="M11 24 Q7 28 7 35" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Right arm raised, holding bag -->
+  <path d="M29 24 Q33 20 37 22" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Dollar bag circle -->
+  <circle cx="40" cy="21" r="6" fill="white"/>
+  <!-- Dollar sign in bag -->
+  <text x="37.5" y="25" font-family="Arial, sans-serif" font-size="8" font-weight="900" fill="#1a1a2e">$</text>
+  <!-- Left leg -->
+  <line x1="16" y1="44" x2="13" y2="55" stroke="white" stroke-width="3" stroke-linecap="round"/>
+  <!-- Right leg -->
+  <line x1="24" y1="44" x2="27" y2="55" stroke="white" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Vertical divider -->
+  <line x1="55" y1="6" x2="55" y2="50" stroke="white" stroke-width="1.5" opacity="0.65"/>
+
+  <!-- "FSA ELITE" -->
+  <text x="66" y="29" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" letter-spacing="2" fill="white">FSA ELITE</text>
+  <!-- "Performance" -->
+  <text x="67" y="46" font-family="Inter, Arial, sans-serif" font-size="12.5" font-weight="400" letter-spacing="1.5" fill="rgba(255,255,255,0.82)">Performance</text>
+</svg>
