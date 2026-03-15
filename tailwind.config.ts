@@ -13,6 +13,7 @@ const config: Config = {
           DEFAULT: "#1a1a2e",
           accent: "#e94560",
           light: "#f5f5f5",
+          logo: "#8b63d8",
         },
       },
       fontFamily: {

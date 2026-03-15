@@ -23,7 +23,7 @@ export default function Header() {
           <svg
             aria-hidden="true"
             viewBox="0 0 20 20"
-            className="h-8 w-8 flex-shrink-0 text-[#8b63d8]"
+            className="h-8 w-8 flex-shrink-0 text-brand-logo"
             fill="none"
           >
             {[
