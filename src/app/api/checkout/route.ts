@@ -17,6 +17,19 @@ import { NextRequest, NextResponse } from "next/server";
 import { createCheckoutSession } from "@/lib/stripe";
 import type { CheckoutLineItem } from "@/lib/stripe";
 
+const FALLBACK_SITE_URL = "http://localhost:3000";
+
+function getCheckoutOrigin() {
+  const configuredSiteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL ?? FALLBACK_SITE_URL;
+
+  try {
+    return new URL(configuredSiteUrl).origin;
+  } catch {
+    return FALLBACK_SITE_URL;
+  }
+}
+
 export async function POST(req: NextRequest) {
   let requestBody: unknown;
   try {
@@ -48,6 +61,8 @@ export async function POST(req: NextRequest) {
         "string" ||
       !(rawLineItem as { stripePriceId: string }).stripePriceId.trim() ||
       typeof (rawLineItem as { quantity?: unknown }).quantity !== "number" ||
+      !Number.isInteger((rawLineItem as { quantity: number }).quantity) ||
+      !Number.isFinite((rawLineItem as { quantity: number }).quantity) ||
       (rawLineItem as { quantity: number }).quantity < 1
     ) {
       return NextResponse.json(
@@ -68,12 +83,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const origin =
-      req.headers.get("origin") ??
-      process.env.NEXT_PUBLIC_SITE_URL ??
-      "http://localhost:3000";
-
-    const session = await createCheckoutSession(lineItems, origin);
+    const session = await createCheckoutSession(lineItems, getCheckoutOrigin());
     return NextResponse.json({ url: session.url });
   } catch (stripeError) {
     console.error("Stripe checkout error:", stripeError);
