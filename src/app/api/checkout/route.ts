@@ -62,7 +62,6 @@ export async function POST(req: NextRequest) {
       !(rawLineItem as { stripePriceId: string }).stripePriceId.trim() ||
       typeof (rawLineItem as { quantity?: unknown }).quantity !== "number" ||
       !Number.isInteger((rawLineItem as { quantity: number }).quantity) ||
-      !Number.isFinite((rawLineItem as { quantity: number }).quantity) ||
       (rawLineItem as { quantity: number }).quantity < 1
     ) {
       return NextResponse.json(
