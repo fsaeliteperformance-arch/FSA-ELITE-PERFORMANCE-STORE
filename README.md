@@ -11,7 +11,7 @@ FSA Elite Performance is the official merchandise and branding store for the FSA
 | Framework | **Next.js 15 (App Router)** | React Server Components + ISR for fast, edge-cached pages |
 | Language | **TypeScript** | Type safety across the full stack |
 | Styling | **Tailwind CSS** | Utility-first CSS with zero unused styles in production |
-| Payments | **Stripe Checkout** | Hosted, PCI-compliant checkout flow |
+| Payments | **Stripe Checkout** | Checkout Sessions supports hosted and embedded payment UIs; this store currently uses the hosted flow |
 
 ---
 
@@ -56,6 +56,17 @@ The Stripe secret key and checkout session creation happen exclusively in a Rout
 ## Stripe Statement Descriptor
 
 Use `FSA ELITE PERFORMANCE` as the Stripe account statement descriptor for this store.
+
+---
+
+## Payment UI Options
+
+Stripe Checkout Sessions supports two low-code payment UIs:
+
+1. **Hosted checkout form** — Stripe hosts the payment page and sends the customer back to your site after payment completion.
+2. **Embedded Checkout form** — Stripe renders the payment form directly on your site without a redirect.
+
+Both options use the Checkout Sessions API and support customization, collecting additional customer information, taxes, dynamic checkout updates, and saved or recurring payment flows. The current implementation in this repository uses the **Stripe-hosted checkout page**.
 
 ---
 
