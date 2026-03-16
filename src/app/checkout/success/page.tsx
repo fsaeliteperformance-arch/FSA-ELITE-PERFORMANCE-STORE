@@ -1,11 +1,40 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import Stripe from "stripe";
+import { retrieveCheckoutSession } from "@/lib/stripe";
 
 export const metadata: Metadata = {
   title: "Order Confirmed",
 };
 
-export default function CheckoutSuccessPage() {
+interface CheckoutSuccessPageProps {
+  searchParams: Promise<{ session_id?: string }>;
+}
+
+export default async function CheckoutSuccessPage({
+  searchParams,
+}: CheckoutSuccessPageProps) {
+  const { session_id: sessionId } = await searchParams;
+
+  let customerEmail: string | null = null;
+
+  if (sessionId) {
+    try {
+      const session = await retrieveCheckoutSession(sessionId);
+      customerEmail =
+        session.customer_details?.email ??
+        (session.customer && typeof session.customer !== "string"
+          ? "deleted" in session.customer
+            ? null
+            : session.customer.email ?? null
+          : null);
+    } catch (error) {
+      if (!(error instanceof Stripe.errors.StripeError)) {
+        throw error;
+      }
+    }
+  }
+
   return (
     <div className="max-w-lg mx-auto px-4 py-24 text-center">
       <div className="text-6xl mb-6">🎉</div>
@@ -13,7 +42,10 @@ export default function CheckoutSuccessPage() {
         Order Confirmed!
       </h1>
       <p className="text-gray-600 mb-8">
-        Thanks for your order. You&apos;ll receive a confirmation email shortly.
+        Thanks for your order.
+        {customerEmail
+          ? ` A confirmation email will be sent to ${customerEmail}.`
+          : " You'll receive a confirmation email shortly."}
       </p>
       <Link
         href="/products"

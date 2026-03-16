@@ -8,12 +8,14 @@
  * Security notes
  * --------------
  * • The Stripe secret key is only read from process.env on the server.
- * • We validate that every requested stripePriceId is non-empty and every
- *   quantity is a positive integer before forwarding to Stripe.
+ * • We validate that every requested productId exists in the server-side
+ *   catalogue and every quantity is a positive integer before creating the
+ *   Checkout Session.
  * • The request body size is implicitly bounded by Next.js defaults (1 MB).
  */
 
 import { NextRequest, NextResponse } from "next/server";
+import { getProductById } from "@/lib/products";
 import { createCheckoutSession } from "@/lib/stripe";
 import type { CheckoutLineItem } from "@/lib/stripe";
 
@@ -38,22 +40,23 @@ export async function POST(req: NextRequest) {
 
   const requestLineItems = (requestBody as { items: unknown[] }).items;
 
-  // Validate each line item before sending to Stripe.
+  // Validate each line item against the server-side catalogue before sending
+  // any data to Stripe.
   const lineItems: CheckoutLineItem[] = [];
   for (const rawLineItem of requestLineItems) {
     const parsedLineItem =
       rawLineItem && typeof rawLineItem === "object"
         ? (rawLineItem as {
-            stripePriceId?: unknown;
+            productId?: unknown;
             quantity?: unknown;
           })
         : null;
-    const { stripePriceId, quantity } = parsedLineItem ?? {};
+    const { productId, quantity } = parsedLineItem ?? {};
 
     if (
       !parsedLineItem ||
-      typeof stripePriceId !== "string" ||
-      !stripePriceId.trim() ||
+      typeof productId !== "string" ||
+      !productId.trim() ||
       typeof quantity !== "number" ||
       !Number.isInteger(quantity) ||
       quantity < 1
@@ -61,13 +64,25 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         {
           error:
-            "Each item must have a valid stripePriceId and a positive integer quantity",
+            "Each item must have a valid productId and a positive integer quantity",
         },
         { status: 400 },
       );
     }
+
+    const product = await getProductById(productId.trim());
+    if (!product || !product.inStock) {
+      return NextResponse.json(
+        { error: "Each item must reference an in-stock product" },
+        { status: 400 },
+      );
+    }
+
     lineItems.push({
-      stripePriceId: stripePriceId.trim(),
+      name: product.name,
+      description: product.description,
+      imageUrl: product.imageUrl,
+      unitAmount: product.price,
       quantity,
     });
   }
