@@ -17,6 +17,26 @@ import { NextRequest, NextResponse } from "next/server";
 import { createCheckoutSession } from "@/lib/stripe";
 import type { CheckoutLineItem } from "@/lib/stripe";
 
+function getRawLineItems(requestBody: unknown): unknown[] | null {
+  if (!requestBody || typeof requestBody !== "object") return null;
+
+  const parsed = requestBody as {
+    items?: unknown;
+    lineItems?: unknown;
+    line_items?: unknown;
+    checkout_session?: { line_items?: unknown };
+  };
+
+  if (Array.isArray(parsed.items)) return parsed.items;
+  if (Array.isArray(parsed.lineItems)) return parsed.lineItems;
+  if (Array.isArray(parsed.line_items)) return parsed.line_items;
+  if (Array.isArray(parsed.checkout_session?.line_items)) {
+    return parsed.checkout_session.line_items;
+  }
+
+  return null;
+}
+
 export async function POST(req: NextRequest) {
   let requestBody: unknown;
   try {
@@ -25,18 +45,16 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
   }
 
-  if (
-    !requestBody ||
-    typeof requestBody !== "object" ||
-    !Array.isArray((requestBody as { items?: unknown }).items)
-  ) {
+  const requestLineItems = getRawLineItems(requestBody);
+  if (!requestLineItems) {
     return NextResponse.json(
-      { error: "Request body must contain an items array" },
+      {
+        error:
+          "Request body must contain items, lineItems, line_items, or checkout_session.line_items array",
+      },
       { status: 400 },
     );
   }
-
-  const requestLineItems = (requestBody as { items: unknown[] }).items;
 
   // Validate each line item before sending to Stripe.
   const lineItems: CheckoutLineItem[] = [];
@@ -45,10 +63,16 @@ export async function POST(req: NextRequest) {
       rawLineItem && typeof rawLineItem === "object"
         ? (rawLineItem as {
             stripePriceId?: unknown;
+            stripe_price_id?: unknown;
+            price?: unknown;
             quantity?: unknown;
           })
         : null;
-    const { stripePriceId, quantity } = parsedLineItem ?? {};
+    const stripePriceId =
+      parsedLineItem?.stripePriceId ??
+      parsedLineItem?.stripe_price_id ??
+      parsedLineItem?.price;
+    const { quantity } = parsedLineItem ?? {};
 
     if (
       !parsedLineItem ||
@@ -82,7 +106,13 @@ export async function POST(req: NextRequest) {
     const origin = new URL(configuredSiteUrl).origin;
 
     const session = await createCheckoutSession(lineItems, origin);
-    return NextResponse.json({ url: session.url });
+    return NextResponse.json({
+      url: session.url,
+      checkout_session: {
+        id: session.id,
+        url: session.url,
+      },
+    });
   } catch (stripeError) {
     console.error("Stripe checkout error:", stripeError);
     return NextResponse.json(
