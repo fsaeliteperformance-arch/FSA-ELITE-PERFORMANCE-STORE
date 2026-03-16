@@ -47,7 +47,7 @@ export default async function HomePage() {
         className="mb-16 rounded-xl border border-gray-200 bg-gray-50 p-6"
       >
         <h2 className="text-2xl font-bold text-brand">
-          FSA Elite Performance — Product &amp; Go-to-Market Strategy (summary)
+          FSA Elite Performance — Product & Go-to-Market Strategy (summary)
         </h2>
         <p className="mt-3 text-gray-700">
           Olive + FSA is building the go-to sales training and execution stack
