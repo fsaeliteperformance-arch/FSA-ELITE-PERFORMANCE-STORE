@@ -16,6 +16,7 @@ import { formatPrice } from "@/lib/products";
 export default function CartPage() {
   const { state, total, count, removeItem, dispatch } = useCart();
   const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const [checkoutError, setCheckoutError] = useState<string | null>(null);
 
   // Derive shipping estimate only when total changes — avoids re-running on
   // every unrelated render.
@@ -29,6 +30,7 @@ export default function CartPage() {
 
   const handleCheckout = useCallback(async () => {
     setIsCheckingOut(true);
+    setCheckoutError(null);
     try {
       const checkoutApiResponse = await fetch("/api/checkout", {
         method: "POST",
@@ -41,9 +43,27 @@ export default function CartPage() {
         }),
       });
       const checkoutSessionData = await checkoutApiResponse.json();
-      if (checkoutSessionData.url) {
-        window.location.href = checkoutSessionData.url;
+      if (!checkoutApiResponse.ok) {
+        setCheckoutError(
+          typeof checkoutSessionData?.error === "string"
+            ? checkoutSessionData.error
+            : "Checkout is unavailable right now. No charge was created. Please try again.",
+        );
+        return;
       }
+
+      if (typeof checkoutSessionData?.url === "string") {
+        window.location.href = checkoutSessionData.url;
+        return;
+      }
+
+      setCheckoutError(
+        "Stripe did not return a checkout link. No charge was created. Please try again.",
+      );
+    } catch {
+      setCheckoutError(
+        "Your connection dropped before Stripe checkout opened. No charge was created. Please try again.",
+      );
     } finally {
       setIsCheckingOut(false);
     }
@@ -131,16 +151,24 @@ export default function CartPage() {
               <span>Total</span>
               <span>{formatPrice(total)}</span>
             </div>
-            <button
-              onClick={handleCheckout}
-              disabled={isCheckingOut}
-              className="w-full bg-brand-accent text-white font-bold py-3 rounded-full hover:opacity-90 transition-opacity disabled:opacity-50"
-            >
-              {isCheckingOut ? "Redirecting…" : "Checkout with Stripe"}
-            </button>
-          </div>
-        </aside>
-      </div>
-    </div>
+             <button
+               onClick={handleCheckout}
+               disabled={isCheckingOut}
+               className="w-full bg-brand-accent text-white font-bold py-3 rounded-full hover:opacity-90 transition-opacity disabled:opacity-50"
+             >
+               {isCheckingOut ? "Redirecting…" : "Checkout with Stripe"}
+             </button>
+             <p className="text-xs text-gray-500 mt-3">
+               We only send you to Stripe when the secure checkout session is ready.
+             </p>
+             {checkoutError ? (
+               <p className="mt-3 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                 {checkoutError}
+               </p>
+             ) : null}
+           </div>
+         </aside>
+       </div>
+     </div>
   );
 }
