@@ -21,7 +21,7 @@ import type { Product } from "@/types";
 // ---------------------------------------------------------------------------
 export const PRODUCTS: Product[] = [
   {
-    id: "prod_000",
+    id: "prod_007",
     slug: "olive-lite",
     name: "Olive Lite",
     description:
@@ -30,8 +30,8 @@ export const PRODUCTS: Product[] = [
     category: "subscriptions",
     imageUrl: "https://placehold.co/600x600/1a1a2e/ffffff?text=Olive+Lite",
     inStock: true,
-    stripeProductId: "prod_placeholder_000",
-    stripePriceId: "price_placeholder_000",
+    stripeProductId: "prod_placeholder_007",
+    stripePriceId: "price_placeholder_007",
   },
   {
     id: "prod_001",
