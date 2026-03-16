@@ -17,6 +17,19 @@ import { NextRequest, NextResponse } from "next/server";
 import { createCheckoutSession } from "@/lib/stripe";
 import type { CheckoutLineItem } from "@/lib/stripe";
 
+const FALLBACK_SITE_URL = "http://localhost:3000";
+
+function getCheckoutOrigin() {
+  const configuredSiteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL ?? FALLBACK_SITE_URL;
+
+  try {
+    return new URL(configuredSiteUrl).origin;
+  } catch {
+    return FALLBACK_SITE_URL;
+  }
+}
+
 export async function POST(req: NextRequest) {
   let requestBody: unknown;
   try {
