@@ -74,6 +74,16 @@ value instead.
 
 ---
 
+## Click and Build DNS Setup
+
+To point the root domain at this store in Click and Build, select:
+
+```text
+A @ 74.208.236.147
+```
+
+---
+
 ## Local Development
 
 ```bash
