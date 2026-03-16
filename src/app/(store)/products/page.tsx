@@ -12,7 +12,7 @@ import ProductGridSkeleton from "@/components/ProductGridSkeleton";
 import CategoryFilter from "@/components/CategoryFilter";
 import SearchBar from "@/components/SearchBar";
 import type { Metadata } from "next";
-import type { Category } from "@/types";
+import { isCategory, type Category } from "@/types";
 
 export const metadata: Metadata = {
   title: "All Products",
@@ -22,13 +22,6 @@ export const metadata: Metadata = {
 // ISR: revalidate every hour
 export const revalidate = 3600;
 
-const VALID_CATEGORIES = new Set<Category>([
-  "apparel",
-  "accessories",
-  "sales-tools",
-  "digital",
-]);
-
 interface ProductsPageProps {
   searchParams: Promise<{ category?: string; query?: string }>;
 }
@@ -36,8 +29,8 @@ interface ProductsPageProps {
 export default async function ProductsPage({ searchParams }: ProductsPageProps) {
   const { category: rawCategoryParam, query: rawQuery } = await searchParams;
   const category =
-    rawCategoryParam && VALID_CATEGORIES.has(rawCategoryParam as Category)
-      ? (rawCategoryParam as Category)
+    rawCategoryParam && isCategory(rawCategoryParam)
+      ? rawCategoryParam
       : undefined;
 
   // Sanitize the query: trim whitespace, limit length to prevent abuse.
