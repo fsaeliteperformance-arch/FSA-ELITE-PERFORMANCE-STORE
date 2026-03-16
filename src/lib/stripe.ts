@@ -41,7 +41,7 @@ export interface CheckoutLineItem {
   name: string;
   description?: string;
   imageUrl?: string;
-  unitAmount: number;
+  unitAmountCents: number;
   quantity: number;
 }
 
@@ -61,7 +61,7 @@ export async function createCheckoutSession(
     mode: "payment",
     customer_creation: "always",
     line_items: lineItems.map(
-      ({ name, description, imageUrl, unitAmount, quantity }) => ({
+      ({ name, description, imageUrl, unitAmountCents, quantity }) => ({
         price_data: {
           currency: "usd",
           product_data: {
@@ -69,7 +69,7 @@ export async function createCheckoutSession(
             description,
             images: imageUrl ? [imageUrl] : undefined,
           },
-          unit_amount: unitAmount,
+          unit_amount: unitAmountCents,
         },
         quantity,
       }),

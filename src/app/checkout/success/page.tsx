@@ -11,6 +11,18 @@ interface CheckoutSuccessPageProps {
   searchParams: Promise<{ session_id?: string }>;
 }
 
+function getCustomerEmail(session: Stripe.Checkout.Session): string | null {
+  if (session.customer_details?.email) {
+    return session.customer_details.email;
+  }
+
+  if (!session.customer || typeof session.customer === "string") {
+    return null;
+  }
+
+  return "deleted" in session.customer ? null : session.customer.email ?? null;
+}
+
 export default async function CheckoutSuccessPage({
   searchParams,
 }: CheckoutSuccessPageProps) {
@@ -21,17 +33,12 @@ export default async function CheckoutSuccessPage({
   if (sessionId) {
     try {
       const session = await retrieveCheckoutSession(sessionId);
-      customerEmail =
-        session.customer_details?.email ??
-        (session.customer && typeof session.customer !== "string"
-          ? "deleted" in session.customer
-            ? null
-            : session.customer.email ?? null
-          : null);
+      customerEmail = getCustomerEmail(session);
     } catch (error) {
       if (!(error instanceof Stripe.errors.StripeError)) {
         throw error;
       }
+      console.error("Unable to retrieve checkout session:", error);
     }
   }
 

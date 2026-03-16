@@ -71,7 +71,14 @@ export async function POST(req: NextRequest) {
     }
 
     const product = await getProductById(productId.trim());
-    if (!product || !product.inStock) {
+    if (!product) {
+      return NextResponse.json(
+        { error: "Each item must reference an existing product" },
+        { status: 400 },
+      );
+    }
+
+    if (!product.inStock) {
       return NextResponse.json(
         { error: "Each item must reference an in-stock product" },
         { status: 400 },
@@ -82,7 +89,7 @@ export async function POST(req: NextRequest) {
       name: product.name,
       description: product.description,
       imageUrl: product.imageUrl,
-      unitAmount: product.price,
+      unitAmountCents: product.price,
       quantity,
     });
   }
