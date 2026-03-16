@@ -136,3 +136,9 @@ If you ever want to use the root domain (for example `fsaeliteperformance.com`) 
 ### Important note about GitHub
 
 GitHub is only the source-code host for this project. DNS and SSL do **not** terminate at GitHub unless you are specifically using GitHub Pages, and this app is not set up for GitHub Pages because it depends on a real Next.js server/runtime.
+
+---
+
+## Stripe statement descriptor
+
+Use `FSA ELITE PERFORMANCE` as the Stripe account statement descriptor for this store. This descriptor matches the brand name and stays within Stripe's statement descriptor requirements for card charges.
