@@ -16,6 +16,7 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import { getAllProductSlugs, getProductBySlug, formatPrice } from "@/lib/products";
 import AddToCartButton from "@/components/AddToCartButton";
+import type { Product } from "@/types";
 
 // ISR — regenerate the page at most once per hour after the first visit post-build.
 export const revalidate = 3600;
@@ -49,6 +50,28 @@ export async function generateMetadata({
   };
 }
 
+/** Builds a Schema.org Product JSON-LD object for a given product. */
+function buildProductJsonLd(product: Product) {
+  const baseUrl =
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://store.fsaeliteperformance.com";
+  return {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: product.description,
+    image: product.imageUrl,
+    offers: {
+      "@type": "Offer",
+      price: (product.price / 100).toFixed(2),
+      priceCurrency: "USD",
+      availability: product.inStock
+        ? "https://schema.org/InStock"
+        : "https://schema.org/OutOfStock",
+      url: `${baseUrl}/products/${product.slug}`,
+    },
+  };
+}
+
 export default async function ProductPage({ params }: { params: Promise<Params> }) {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
@@ -58,6 +81,13 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      {/* JSON-LD structured data for AI agents and search engines */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(buildProductJsonLd(product)),
+        }}
+      />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
         {/* Product image */}
         <div className="relative aspect-square rounded-2xl overflow-hidden bg-gray-100">
