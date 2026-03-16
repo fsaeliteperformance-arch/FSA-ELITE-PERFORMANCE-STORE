@@ -21,6 +21,9 @@ export default function Header() {
         </Link>
 
         <nav className="flex items-center gap-6 text-sm font-medium">
+          <Link href="/strategy" className="hover:text-brand-accent transition-colors">
+            Strategy
+          </Link>
           <Link href="/products" className="hover:text-brand-accent transition-colors">
             Shop
           </Link>
