@@ -2,20 +2,20 @@
 
 ## Supported Versions
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
-
-| Version | Supported          |
-| ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+| Version/Branch | Supported          |
+| -------------- | ------------------ |
+| `main`         | :white_check_mark: |
+| other branches | :x:                |
 
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
+- Please **do not open a public issue** for security matters.
+- Submit a private report via [GitHub Security Advisories](https://github.com/fsaeliteperformance-arch/FSA-ELITE-PERFORMANCE-STORE/security/advisories/new).
+- Include reproduction steps, affected endpoints/routes, and potential impact.
+- We aim to acknowledge reports within **2 business days** and provide status updates at least weekly until resolution.
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+## Handling Secrets
+
+- Never commit API keys, tokens, or credentials. Use `.env.local` (already gitignored) for local development.
+- Server-only secrets such as `STRIPE_SECRET_KEY` must stay on the server or CI secrets store and are never exposed to the browser.
+- Rotate any credential suspected of exposure and re-run secret scanning before deployment.
