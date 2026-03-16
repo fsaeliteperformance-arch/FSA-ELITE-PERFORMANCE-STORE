@@ -25,7 +25,7 @@ export default function CartPage() {
 
   // Derive shipping estimate only when total changes — avoids re-running on
   // every unrelated render.
-  const shippingNote = useMemo(
+  const shippingThresholdMessage = useMemo(
     () =>
       total >= 7500
         ? "Free shipping on this order 🎉"
@@ -192,7 +192,7 @@ export default function CartPage() {
         <aside className="lg:col-span-1">
           <div className="bg-gray-50 rounded-2xl p-6 sticky top-6">
             <h2 className="text-xl font-bold text-brand mb-6">Order Summary</h2>
-            <p className="text-sm text-gray-500 mb-4">{shippingNote}</p>
+            <p className="text-sm text-gray-500 mb-4">{shippingThresholdMessage}</p>
             <div className="flex justify-between font-bold text-lg mb-6">
               <span>Total</span>
               <span>{formatPrice(total)}</span>

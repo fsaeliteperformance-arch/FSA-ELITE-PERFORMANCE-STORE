@@ -36,7 +36,7 @@ export default function AddToCartButton({ product, compact = false }: Props) {
     };
   }, []);
 
-  const handleAdd = useCallback(() => {
+  const handleAddToCart = useCallback(() => {
     addItem(product);
     setAdded(true);
     // Clear any existing timer before starting a new one so rapid clicks don't
@@ -51,11 +51,11 @@ export default function AddToCartButton({ product, compact = false }: Props) {
   if (compact) {
     return (
       <button
-        onClick={handleAdd}
+        onClick={handleAddToCart}
         aria-label={`Add ${product.name} to cart`}
         className={compactPrimaryButtonStyles}
       >
-        {added ? "✓" : "+"}
+        {wasRecentlyAdded ? "✓" : "+"}
       </button>
     );
   }
@@ -65,7 +65,7 @@ export default function AddToCartButton({ product, compact = false }: Props) {
       onClick={handleAdd}
       className={primaryButtonStyles}
     >
-      {added ? "Added to Cart ✓" : "Add to Cart"}
+      {wasRecentlyAdded ? "Added to Cart ✓" : "Add to Cart"}
     </button>
   );
 }

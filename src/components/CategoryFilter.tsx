@@ -16,7 +16,7 @@ interface Props {
 }
 
 export default function CategoryFilter({ activeCategory }: Props) {
-  const active = activeCategory ?? "all";
+  const selectedCategory = activeCategory ?? "all";
 
   return (
     <nav
@@ -26,7 +26,7 @@ export default function CategoryFilter({ activeCategory }: Props) {
       {CATEGORY_FILTER_OPTIONS.map(({ label, value }) => {
         const href =
           value === "all" ? "/products" : `/products?category=${value}`;
-        const isActive = value === active;
+        const isCategorySelected = value === selectedCategory;
         return (
           <Link
             key={value}

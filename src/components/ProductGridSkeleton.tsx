@@ -7,14 +7,14 @@
  */
 
 interface Props {
-  count: number;
+  skeletonCount: number;
 }
 
-export default function ProductGridSkeleton({ count }: Props) {
+export default function ProductGridSkeleton({ skeletonCount }: Props) {
   return (
     <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" role="list">
-      {Array.from({ length: count }).map((_, i) => (
-        <li key={i} className="rounded-2xl border border-gray-100 overflow-hidden animate-pulse">
+      {Array.from({ length: skeletonCount }).map((_, skeletonIndex) => (
+        <li key={skeletonIndex} className="rounded-2xl border border-gray-100 overflow-hidden animate-pulse">
           <div className="aspect-square bg-gray-200" />
           <div className="p-4 space-y-2">
             <div className="h-3 bg-gray-200 rounded w-1/4" />

@@ -87,7 +87,7 @@ export default async function HomePage() {
          * the product grid once the async data is ready.  Falls back to a
          * skeleton so users see content straight away instead of a blank page.
          */}
-        <Suspense fallback={<ProductGridSkeleton count={6} />}>
+        <Suspense fallback={<ProductGridSkeleton skeletonCount={6} />}>
           <ProductGrid products={products} />
         </Suspense>
       </section>
