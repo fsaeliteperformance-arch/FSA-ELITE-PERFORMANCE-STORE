@@ -13,6 +13,7 @@ export interface Product {
 }
 
 export type Category =
+  | "subscriptions"
   | "apparel"
   | "accessories"
   | "sales-tools"

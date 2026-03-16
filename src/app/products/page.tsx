@@ -22,6 +22,7 @@ export const metadata: Metadata = {
 export const revalidate = 3600;
 
 const VALID_CATEGORIES = new Set<Category>([
+  "subscriptions",
   "apparel",
   "accessories",
   "sales-tools",

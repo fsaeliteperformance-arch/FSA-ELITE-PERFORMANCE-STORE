@@ -21,6 +21,19 @@ import type { Product } from "@/types";
 // ---------------------------------------------------------------------------
 export const PRODUCTS: Product[] = [
   {
+    id: "prod_000",
+    slug: "olive-lite",
+    name: "Olive Lite",
+    description:
+      "Free core subscription for lead generation and onboarding. Includes chat with Olive, 3 templates, 1 industry cheat-sheet, and email capture.",
+    price: 0, // Free
+    category: "subscriptions",
+    imageUrl: "https://placehold.co/600x600/1a1a2e/ffffff?text=Olive+Lite",
+    inStock: true,
+    stripeProductId: "prod_placeholder_000",
+    stripePriceId: "price_placeholder_000",
+  },
+  {
     id: "prod_001",
     slug: "fsa-elite-performance-tee",
     name: "FSA Elite Performance Tee",
@@ -143,5 +156,6 @@ const priceFormatter = new Intl.NumberFormat("en-US", {
 
 /** Format a price stored in cents as a localised currency string. */
 export function formatPrice(cents: number): string {
+  if (cents === 0) return "Free";
   return priceFormatter.format(cents / 100);
 }
