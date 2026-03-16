@@ -44,10 +44,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-white text-gray-900 min-h-screen flex flex-col font-sans">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:text-brand focus:shadow-md"
+        >
+          Skip to main content
+        </a>
         {/* CartProvider wraps everything so any component can read cart state */}
         <CartProvider>
           <Header />
-          <main className="flex-1">{children}</main>
+          <main id="main-content" className="flex-1">
+            {children}
+          </main>
           <footer className="bg-brand text-white text-center py-6 text-sm mt-12">
             © {CURRENT_YEAR} FSA Elite Performance. All rights reserved.
           </footer>
