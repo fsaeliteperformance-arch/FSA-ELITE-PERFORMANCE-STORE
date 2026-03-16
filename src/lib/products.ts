@@ -108,15 +108,20 @@ const productBySlug = new Map<string, Product>(
   PRODUCTS.map((product) => [product.slug, product]),
 );
 
+export type SortOrder = "name-asc" | "name-desc" | "price-asc" | "price-desc";
+
 export interface GetProductsOptions {
   /** Filter to a specific category; omit or pass "all" for all categories. */
   category?: string;
   /** Case-insensitive substring search across product name and description. */
   query?: string;
+  /** Sort order for results. */
+  sort?: SortOrder;
 }
 
 /**
- * Return all products, optionally filtered by category and/or a text query.
+ * Return all products, optionally filtered by category / search query and
+ * sorted by name or price.
  *
  * In production, replace the array reference with a `fetch()` call to your
  * CMS or database, using `{ next: { revalidate: 3600 } }` to enable ISR.
@@ -125,10 +130,10 @@ export async function getProducts(
   options: GetProductsOptions | string = {},
 ): Promise<Product[]> {
   // Accept a bare category string for backward-compatibility.
-  const { category, query } =
-    typeof options === "string" ? { category: options, query: undefined } : options;
+  const { category, query, sort } =
+    typeof options === "string" ? { category: options, query: undefined, sort: undefined } : options;
 
-  let results = PRODUCTS;
+  let results = PRODUCTS as Product[];
 
   if (category && category !== "all") {
     results = results.filter((product) => product.category === category);
@@ -142,6 +147,24 @@ export async function getProducts(
         product.description.toLowerCase().includes(needle),
     );
   }
+
+  if (sort) {
+    results = [...results].sort((a, b) => {
+      switch (sort) {
+        case "name-asc":
+          return a.name.localeCompare(b.name);
+        case "name-desc":
+          return b.name.localeCompare(a.name);
+        case "price-asc":
+          return a.price - b.price;
+        case "price-desc":
+          return b.price - a.price;
+        default:
+          return 0;
+      }
+    });
+  }
+
 
   return results;
 }
