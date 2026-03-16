@@ -10,6 +10,7 @@ import { Suspense } from "react";
 import { getProducts } from "@/lib/products";
 import ProductGrid from "@/components/ProductGrid";
 import ProductGridSkeleton from "@/components/ProductGridSkeleton";
+import { DEFAULT_SITE_URL } from "@/lib/site";
 
 // Revalidate this page at most once every hour (ISR).
 // Set to 0 to opt into dynamic rendering, or `false` to never revalidate.
@@ -30,15 +31,51 @@ export default async function HomePage() {
           brand and close more deals.
         </p>
         <div className="mt-6 mx-auto max-w-2xl rounded-lg border border-brand/15 bg-brand/5 px-4 py-3 text-left text-sm text-gray-700">
-          <p className="font-semibold text-brand">Need access through Ionis?</p>
+<p className="font-semibold text-brand">Need access through IONOS or Click and Build?</p>
           <p className="mt-1">
             Paste{" "}
             <span className="font-mono text-xs sm:text-sm">
-              https://store.fsaeliteperformance.com
+              {process.env.NEXT_PUBLIC_SITE_URL ?? DEFAULT_SITE_URL}
             </span>{" "}
-            into Ionis when requesting access to the FSA Elite Performance
+            into IONOS when requesting access to the FSA Elite Performance
             Store.
           </p>
+          <p className="mt-2">
+            In Click and Build, select{" "}
+            <span className="font-semibold">A</span> for{" "}
+            <span className="font-mono text-xs sm:text-sm">@</span> and point it
+            to{" "}
+            <span className="font-mono text-xs sm:text-sm">74.208.236.147</span>
+            .
+          </p>
+
+          {process.env.DNSSEC_KEY_TAG && (
+            <div className="mt-3 border-t border-brand/10 pt-3">
+              <p className="font-semibold text-brand mb-2">
+                DNSSEC DS Record for Ionos
+              </p>
+              <p className="text-xs text-gray-500 mb-2">
+                Enter these values in the Ionos control panel under{" "}
+                <span className="font-medium">
+                  Domains &amp; SSL → DNS → DNSSEC
+                </span>
+                .
+              </p>
+              <dl className="grid grid-cols-[max-content_1fr] gap-x-4 gap-y-1 text-xs">
+                <dt className="text-gray-500">Key Tag</dt>
+                <dd className="font-mono">{process.env.DNSSEC_KEY_TAG}</dd>
+                <dt className="text-gray-500">Algorithm</dt>
+                <dd className="font-mono">{process.env.DNSSEC_ALGORITHM}</dd>
+                <dt className="text-gray-500">Digest Type</dt>
+                <dd className="font-mono">{process.env.DNSSEC_DIGEST_TYPE}</dd>
+                <dt className="text-gray-500 self-start">Digest</dt>
+                <dd className="font-mono break-all">
+                  {process.env.DNSSEC_DIGEST}
+                </dd>
+              </dl>
+            </div>
+          )}
+
         </div>
       </section>
 
@@ -50,7 +87,7 @@ export default async function HomePage() {
          * the product grid once the async data is ready.  Falls back to a
          * skeleton so users see content straight away instead of a blank page.
          */}
-        <Suspense fallback={<ProductGridSkeleton count={6} />}>
+        <Suspense fallback={<ProductGridSkeleton skeletonCount={6} />}>
           <ProductGrid products={products} />
         </Suspense>
       </section>

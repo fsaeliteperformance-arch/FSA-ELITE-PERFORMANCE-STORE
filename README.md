@@ -59,15 +59,28 @@ Use `FSA ELITE PERFORMANCE` as the Stripe account statement descriptor for this 
 
 ---
 
-## Ionis Access Request
+## IONOS Access Request
 
-If someone needs access to this store through Ionis, have them paste:
+If someone needs access to this store through IONOS, have them paste:
 
 ```text
-https://store.fsaeliteperformance.com
+https://s1085937527.onlinehome.us
 ```
 
 when requesting access to the FSA Elite Performance Store.
+
+If the deployment URL changes later, use the current `NEXT_PUBLIC_SITE_URL`
+value instead.
+
+---
+
+## Click and Build DNS Setup
+
+To point the root domain at this store in Click and Build, select:
+
+```text
+A @ 74.208.236.147
+```
 
 ---
 
@@ -94,3 +107,51 @@ npm run dev
 | `STRIPE_SECRET_KEY` | ✅ | Stripe secret key (server-only) |
 | `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | ✅ | Stripe publishable key (client-safe) |
 | `NEXT_PUBLIC_SITE_URL` | ✅ | Full origin URL, e.g. `https://store.fsaeliteperformance.com` |
+
+---
+
+## Custom Domain, DNS, and SSL Setup
+
+This repository is a **Next.js app with a server-side Stripe route**. That means the code can live in GitHub, but the live site itself should be deployed to a Next.js-capable host. Do **not** point your domain at GitHub Pages for this project.
+
+### Production hostnames currently referenced by the app
+
+- `store.fsaeliteperformance.com` — primary storefront URL
+- `cdn.fsaeliteperformance.com` — image/CDN hostname allowed by `next.config.ts`
+
+### DNS records you need
+
+The exact record values come from **your hosting provider**, not from GitHub. Use the provider's assigned target when creating records.
+
+| Hostname | Type | Value |
+|---|---|---|
+| `store.fsaeliteperformance.com` | `CNAME` | Your hosting provider's custom-domain target |
+| `cdn.fsaeliteperformance.com` | `CNAME` | Your CDN or asset host target |
+
+If you ever want to use the root domain (for example `fsaeliteperformance.com`) as the storefront, use the **A / ALIAS / ANAME** records required by your hosting provider and then update `NEXT_PUBLIC_SITE_URL` to that HTTPS origin.
+
+### SSL / HTTPS requirements
+
+- Enable SSL/TLS for every hostname that serves this app (`store`, and `cdn` if used).
+- Let DNS finish propagating before requesting or verifying certificates.
+- Turn on automatic HTTP → HTTPS redirects at the hosting layer.
+- Make sure the certificate covers the exact hostname visitors use.
+
+### App configuration checklist
+
+1. Deploy the app to your Next.js hosting provider.
+2. Add `store.fsaeliteperformance.com` as a custom domain in that hosting provider.
+3. Create the DNS `CNAME` record for `store` using the value provided by that host.
+4. If you are serving images from `cdn.fsaeliteperformance.com`, create that DNS record and provision SSL for it too.
+5. Set `NEXT_PUBLIC_SITE_URL=https://store.fsaeliteperformance.com` in production.
+6. Redeploy after the environment variable and domain are configured.
+
+### Important note about GitHub
+
+GitHub is only the source-code host for this project. DNS and SSL do **not** terminate at GitHub unless you are specifically using GitHub Pages, and this app is not set up for GitHub Pages because it depends on a real Next.js server/runtime.
+
+---
+
+## Stripe statement descriptor
+
+Use `FSA ELITE PERFORMANCE` as the Stripe account statement descriptor for this store. This descriptor matches the brand name and stays within Stripe's statement descriptor requirements for card charges.

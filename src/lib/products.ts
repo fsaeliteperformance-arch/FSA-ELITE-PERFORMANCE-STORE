@@ -94,7 +94,7 @@ export const PRODUCTS: Product[] = [
     price: 2499, // $24.99
     category: "accessories",
     imageUrl: "https://placehold.co/600x600/1a1a2e/ffffff?text=Mug",
-    inStock: false,
+    inStock: true,
     stripeProductId: "prod_placeholder_006",
     stripePriceId: "price_placeholder_006",
   },
@@ -108,17 +108,63 @@ const productBySlug = new Map<string, Product>(
   PRODUCTS.map((product) => [product.slug, product]),
 );
 
+export type SortOrder = "name-asc" | "name-desc" | "price-asc" | "price-desc";
+
+export interface GetProductsOptions {
+  /** Filter to a specific category; omit or pass "all" for all categories. */
+  category?: string;
+  /** Case-insensitive substring search across product name and description. */
+  query?: string;
+  /** Sort order for results. */
+  sort?: SortOrder;
+}
+
 /**
- * Return all products.
+ * Return all products, optionally filtered by category / search query and
+ * sorted by name or price.
  *
  * In production, replace the array reference with a `fetch()` call to your
  * CMS or database, using `{ next: { revalidate: 3600 } }` to enable ISR.
  */
-export async function getProducts(category?: string): Promise<Product[]> {
-  // Simulate async data source
-  const allProducts = PRODUCTS;
-  if (!category || category === "all") return allProducts;
-  return allProducts.filter((product) => product.category === category);
+export async function getProducts(
+  options: GetProductsOptions | string = {},
+): Promise<Product[]> {
+  // Accept a bare category string for backward-compatibility.
+  const { category, query, sort } =
+    typeof options === "string" ? { category: options, query: undefined, sort: undefined } : options;
+
+  let results = PRODUCTS as Product[];
+
+  if (category && category !== "all") {
+    results = results.filter((product) => product.category === category);
+  }
+
+  if (query && query.trim() !== "") {
+    const needle = query.trim().toLowerCase();
+    results = results.filter(
+      (product) =>
+        product.name.toLowerCase().includes(needle) ||
+        product.description.toLowerCase().includes(needle),
+    );
+  }
+
+  if (sort) {
+    results = [...results].sort((a, b) => {
+      switch (sort) {
+        case "name-asc":
+          return a.name.localeCompare(b.name);
+        case "name-desc":
+          return b.name.localeCompare(a.name);
+        case "price-asc":
+          return a.price - b.price;
+        case "price-desc":
+          return b.price - a.price;
+        default:
+          return 0;
+      }
+    });
+  }
+  return results;
 }
 
 /** O(1) slug lookup via pre-built Map. */

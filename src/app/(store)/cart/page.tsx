@@ -10,16 +10,22 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useCallback, useMemo, useState } from "react";
+import type { MouseEvent } from "react";
 import { useCart } from "@/context/CartContext";
+import {
+  accentButtonStyles,
+  primaryCtaLinkStyles,
+} from "@/lib/buttonStyles";
 import { formatPrice } from "@/lib/products";
 
 export default function CartPage() {
   const { state, total, count, removeItem, dispatch } = useCart();
   const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const [checkoutError, setCheckoutError] = useState<string | null>(null);
 
   // Derive shipping estimate only when total changes — avoids re-running on
   // every unrelated render.
-  const shippingNote = useMemo(
+  const shippingThresholdMessage = useMemo(
     () =>
       total >= 7500
         ? "Free shipping on this order 🎉"
@@ -29,6 +35,7 @@ export default function CartPage() {
 
   const handleCheckout = useCallback(async () => {
     setIsCheckingOut(true);
+    setCheckoutError(null);
     try {
       const checkoutApiResponse = await fetch("/api/checkout", {
         method: "POST",
@@ -40,14 +47,76 @@ export default function CartPage() {
           })),
         }),
       });
-      const checkoutSessionData = await checkoutApiResponse.json();
-      if (checkoutSessionData.url) {
-        window.location.href = checkoutSessionData.url;
+      const checkoutSessionData: unknown = await checkoutApiResponse.json();
+      const sessionUrl =
+        checkoutSessionData !== null &&
+        typeof checkoutSessionData === "object" &&
+        "url" in checkoutSessionData &&
+        typeof (checkoutSessionData as { url: unknown }).url === "string"
+          ? (checkoutSessionData as { url: string }).url
+          : null;
+      if (!checkoutApiResponse.ok || !sessionUrl) {
+        const apiError =
+          checkoutSessionData !== null &&
+          typeof checkoutSessionData === "object" &&
+          "error" in checkoutSessionData &&
+          typeof (checkoutSessionData as { error: unknown }).error === "string"
+            ? (checkoutSessionData as { error: string }).error
+            : "Unable to start checkout. Please try again.";
+        throw new Error(apiError);
       }
+      window.location.href = sessionUrl;
+    } catch (err) {
+      setCheckoutError(
+        err instanceof Error
+          ? err.message
+          : "Unable to start checkout. Please try again.",
+      );
     } finally {
       setIsCheckingOut(false);
     }
   }, [state.items]);
+
+  const lineItems = useMemo(
+    () =>
+      state.items.map(({ product, quantity }) => ({
+        product,
+        quantity,
+        unitPrice: formatPrice(product.price),
+        lineTotal: formatPrice(product.price * quantity),
+      })),
+    [state.items],
+  );
+
+  const handleDecrement = useCallback(
+    (event: MouseEvent<HTMLButtonElement>) => {
+      const productId = event.currentTarget.getAttribute("data-product-id");
+      if (productId) {
+        dispatch({ type: "DECREMENT", productId });
+      }
+    },
+    [dispatch],
+  );
+
+  const handleIncrement = useCallback(
+    (event: MouseEvent<HTMLButtonElement>) => {
+      const productId = event.currentTarget.getAttribute("data-product-id");
+      if (productId) {
+        dispatch({ type: "INCREMENT", productId });
+      }
+    },
+    [dispatch],
+  );
+
+  const handleRemove = useCallback(
+    (event: MouseEvent<HTMLButtonElement>) => {
+      const productId = event.currentTarget.getAttribute("data-product-id");
+      if (productId) {
+        removeItem(productId);
+      }
+    },
+    [removeItem],
+  );
 
   if (count === 0) {
     return (
@@ -58,7 +127,7 @@ export default function CartPage() {
         </p>
         <Link
           href="/products"
-          className="inline-block bg-brand text-white font-semibold px-8 py-3 rounded-full hover:opacity-90 transition-opacity"
+          className={primaryCtaLinkStyles}
         >
           Shop Now
         </Link>
@@ -73,7 +142,7 @@ export default function CartPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
         {/* Line items */}
         <ul className="lg:col-span-2 divide-y divide-gray-100 space-y-4">
-          {state.items.map(({ product, quantity }) => (
+          {lineItems.map(({ product, quantity, unitPrice, lineTotal }) => (
             <li key={product.id} className="flex gap-4 py-4">
               <div className="relative w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 bg-gray-100">
                 <Image
@@ -86,12 +155,11 @@ export default function CartPage() {
               </div>
               <div className="flex-1 min-w-0">
                 <p className="font-semibold text-brand truncate">{product.name}</p>
-                <p className="text-gray-500 text-sm">{formatPrice(product.price)}</p>
+                <p className="text-gray-500 text-sm">{unitPrice}</p>
                 <div className="flex items-center gap-3 mt-2">
                   <button
-                    onClick={() =>
-                      dispatch({ type: "DECREMENT", productId: product.id })
-                    }
+                    onClick={handleDecrement}
+                    data-product-id={product.id}
                     className="w-7 h-7 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition-colors"
                     aria-label="Decrease quantity"
                   >
@@ -99,25 +167,23 @@ export default function CartPage() {
                   </button>
                   <span className="font-medium">{quantity}</span>
                   <button
-                    onClick={() =>
-                      dispatch({ type: "INCREMENT", productId: product.id })
-                    }
+                    onClick={handleIncrement}
+                    data-product-id={product.id}
                     className="w-7 h-7 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition-colors"
                     aria-label="Increase quantity"
                   >
                     +
                   </button>
                   <button
-                    onClick={() => removeItem(product.id)}
+                    onClick={handleRemove}
+                    data-product-id={product.id}
                     className="ml-auto text-sm text-red-500 hover:underline"
                   >
                     Remove
                   </button>
                 </div>
               </div>
-              <p className="font-bold text-brand self-center">
-                {formatPrice(product.price * quantity)}
-              </p>
+              <p className="font-bold text-brand self-center">{lineTotal}</p>
             </li>
           ))}
         </ul>
@@ -126,7 +192,7 @@ export default function CartPage() {
         <aside className="lg:col-span-1">
           <div className="bg-gray-50 rounded-2xl p-6 sticky top-6">
             <h2 className="text-xl font-bold text-brand mb-6">Order Summary</h2>
-            <p className="text-sm text-gray-500 mb-4">{shippingNote}</p>
+            <p className="text-sm text-gray-500 mb-4">{shippingThresholdMessage}</p>
             <div className="flex justify-between font-bold text-lg mb-6">
               <span>Total</span>
               <span>{formatPrice(total)}</span>
@@ -134,10 +200,15 @@ export default function CartPage() {
             <button
               onClick={handleCheckout}
               disabled={isCheckingOut}
-              className="w-full bg-brand-accent text-white font-bold py-3 rounded-full hover:opacity-90 transition-opacity disabled:opacity-50"
+              className={accentButtonStyles}
             >
               {isCheckingOut ? "Redirecting…" : "Checkout with Stripe"}
             </button>
+            {checkoutError && (
+              <p role="alert" className="mt-3 text-sm text-red-600 text-center">
+                {checkoutError}
+              </p>
+            )}
           </div>
         </aside>
       </div>

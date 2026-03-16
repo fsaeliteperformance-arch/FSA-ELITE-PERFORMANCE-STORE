@@ -9,43 +9,34 @@
 "use client";
 
 import Link from "next/link";
-import type { Category } from "@/types";
-
-const CATEGORIES: { label: string; value: Category | "all" }[] = [
-  { label: "All", value: "all" },
-  { label: "Apparel", value: "apparel" },
-  { label: "Accessories", value: "accessories" },
-  { label: "Sales Tools", value: "sales-tools" },
-  { label: "Digital", value: "digital" },
-];
+import { CATEGORY_FILTER_OPTIONS, type Category } from "@/types";
 
 interface Props {
   activeCategory?: Category;
 }
 
 export default function CategoryFilter({ activeCategory }: Props) {
-  const active = activeCategory ?? "all";
+  const selectedCategory = activeCategory ?? "all";
 
   return (
     <nav
       aria-label="Filter by category"
       className="flex flex-wrap gap-2 mb-8"
     >
-      {CATEGORIES.map(({ label, value }) => {
+      {CATEGORY_FILTER_OPTIONS.map(({ label, value }) => {
         const href =
           value === "all" ? "/products" : `/products?category=${value}`;
-        const isActive = value === active;
+        const isCategorySelected = value === selectedCategory;
         return (
           <Link
             key={value}
             href={href}
-            className={[
-              "px-4 py-2 rounded-full text-sm font-semibold transition-colors",
-              isActive
+            className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${
+              isCategorySelected
                 ? "bg-brand text-white"
-                : "bg-gray-100 text-gray-700 hover:bg-gray-200",
-            ].join(" ")}
-            aria-current={isActive ? "page" : undefined}
+                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+            }`}
+            aria-current={isCategorySelected ? "page" : undefined}
           >
             {label}
           </Link>

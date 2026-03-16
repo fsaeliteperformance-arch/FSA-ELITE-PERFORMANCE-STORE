@@ -11,6 +11,10 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useCart } from "@/context/CartContext";
+import {
+  compactPrimaryButtonStyles,
+  primaryButtonStyles,
+} from "@/lib/buttonStyles";
 import type { Product } from "@/types";
 
 interface Props {
@@ -32,7 +36,7 @@ export default function AddToCartButton({ product, compact = false }: Props) {
     };
   }, []);
 
-  const handleAdd = useCallback(() => {
+  const handleAddToCart = useCallback(() => {
     addItem(product);
     setAdded(true);
     // Clear any existing timer before starting a new one so rapid clicks don't
@@ -47,9 +51,9 @@ export default function AddToCartButton({ product, compact = false }: Props) {
   if (compact) {
     return (
       <button
-        onClick={handleAdd}
+        onClick={handleAddToCart}
         aria-label={`Add ${product.name} to cart`}
-        className="p-2 rounded-full bg-brand text-white hover:bg-brand-accent transition-colors"
+        className={compactPrimaryButtonStyles}
       >
         {added ? "✓" : "+"}
       </button>
@@ -58,8 +62,8 @@ export default function AddToCartButton({ product, compact = false }: Props) {
 
   return (
     <button
-      onClick={handleAdd}
-      className="w-full bg-brand text-white font-bold py-3 px-6 rounded-full hover:bg-brand-accent transition-colors disabled:opacity-50"
+      onClick={handleAddToCart}
+      className={primaryButtonStyles}
     >
       {added ? "Added to Cart ✓" : "Add to Cart"}
     </button>
