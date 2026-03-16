@@ -62,7 +62,7 @@ export default function AIChatWidget() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          messages: next.filter((m) => m.role !== "assistant" || next.indexOf(m) > 0),
+          messages: next.filter((m, idx) => m.role !== "assistant" || idx > 0),
         }),
       });
 
@@ -108,7 +108,7 @@ export default function AIChatWidget() {
         {/* Panel header */}
         <div className="flex items-center justify-between bg-brand px-4 py-3 flex-shrink-0">
           <div className="flex items-center gap-2">
-            <span className="text-lg" aria-hidden>
+            <span className="text-lg" aria-hidden={true}>
               🤖
             </span>
             <div>
@@ -189,7 +189,7 @@ export default function AIChatWidget() {
               viewBox="0 0 20 20"
               fill="currentColor"
               className="w-4 h-4 rotate-90"
-              aria-hidden
+              aria-hidden={true}
             >
               <path d="M3.105 2.289a.75.75 0 0 0-.826.95l1.414 4.926A1.5 1.5 0 0 0 5.135 9.25h6.115a.75.75 0 0 1 0 1.5H5.135a1.5 1.5 0 0 0-1.442 1.086l-1.414 4.926a.75.75 0 0 0 .826.95 28.896 28.896 0 0 0 15.293-7.154.75.75 0 0 0 0-1.115A28.897 28.897 0 0 0 3.105 2.289Z" />
             </svg>
@@ -210,7 +210,7 @@ export default function AIChatWidget() {
             viewBox="0 0 20 20"
             fill="currentColor"
             className="w-6 h-6"
-            aria-hidden
+            aria-hidden={true}
           >
             <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
           </svg>
@@ -220,7 +220,7 @@ export default function AIChatWidget() {
             viewBox="0 0 20 20"
             fill="currentColor"
             className="w-6 h-6"
-            aria-hidden
+            aria-hidden={true}
           >
             <path
               fillRule="evenodd"
