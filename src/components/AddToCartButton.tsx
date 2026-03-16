@@ -55,17 +55,17 @@ export default function AddToCartButton({ product, compact = false }: Props) {
         aria-label={`Add ${product.name} to cart`}
         className={compactPrimaryButtonStyles}
       >
-        {wasRecentlyAdded ? "✓" : "+"}
+        {added ? "✓" : "+"}
       </button>
     );
   }
 
   return (
     <button
-      onClick={handleAdd}
+      onClick={handleAddToCart}
       className={primaryButtonStyles}
     >
-      {wasRecentlyAdded ? "Added to Cart ✓" : "Add to Cart"}
+      {added ? "Added to Cart ✓" : "Add to Cart"}
     </button>
   );
 }

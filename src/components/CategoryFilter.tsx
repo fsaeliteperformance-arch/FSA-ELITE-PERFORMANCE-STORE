@@ -32,11 +32,11 @@ export default function CategoryFilter({ activeCategory }: Props) {
             key={value}
             href={href}
             className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${
-              isActive
+              isCategorySelected
                 ? "bg-brand text-white"
                 : "bg-gray-100 text-gray-700 hover:bg-gray-200"
             }`}
-            aria-current={isActive ? "page" : undefined}
+            aria-current={isCategorySelected ? "page" : undefined}
           >
             {label}
           </Link>

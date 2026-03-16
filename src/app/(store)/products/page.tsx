@@ -71,7 +71,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
         </p>
       )}
 
-      <Suspense fallback={<ProductGridSkeleton count={6} />}>
+      <Suspense fallback={<ProductGridSkeleton skeletonCount={6} />}>
         <ProductGrid products={products} />
       </Suspense>
     </div>
