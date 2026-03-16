@@ -74,7 +74,7 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
         {/* Product details */}
         <div className="flex flex-col justify-center gap-6">
           <span className="text-sm font-semibold uppercase tracking-widest text-brand-accent">
-            {product.category}
+            {product.category} • {product.color}
           </span>
           <h1 className="text-3xl font-extrabold text-brand">{product.name}</h1>
           <p className="text-gray-600 leading-relaxed">{product.description}</p>

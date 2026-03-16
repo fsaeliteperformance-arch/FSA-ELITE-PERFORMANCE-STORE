@@ -28,6 +28,7 @@ export const PRODUCTS: Product[] = [
       "Moisture-wicking premium tee branded with the FSA Elite Performance logo. Perfect for meetings, events, and everyday hustle.",
     price: 3499, // $34.99
     category: "apparel",
+    color: "black",
     imageUrl: "https://placehold.co/600x600/1a1a2e/ffffff?text=Elite+Tee",
     inStock: true,
     stripeProductId: "prod_placeholder_001",
@@ -41,6 +42,7 @@ export const PRODUCTS: Product[] = [
       "Heavy-duty pullover hoodie with embroidered FSA Elite logo. Stay sharp on the showroom floor or on the road.",
     price: 6499, // $64.99
     category: "apparel",
+    color: "gray",
     imageUrl: "https://placehold.co/600x600/1a1a2e/ffffff?text=Elite+Hoodie",
     inStock: true,
     stripeProductId: "prod_placeholder_002",
@@ -54,6 +56,7 @@ export const PRODUCTS: Product[] = [
       "Structured snapback cap with flat brim and embroidered FSA Elite Performance logo.",
     price: 2999, // $29.99
     category: "accessories",
+    color: "black",
     imageUrl: "https://placehold.co/600x600/1a1a2e/ffffff?text=Snapback",
     inStock: true,
     stripeProductId: "prod_placeholder_003",
@@ -67,6 +70,7 @@ export const PRODUCTS: Product[] = [
       "A comprehensive digital playbook covering proven objection-handling scripts, follow-up cadences, and closing strategies for the modern salesperson.",
     price: 4999, // $49.99
     category: "digital",
+    color: "white",
     imageUrl: "https://placehold.co/600x600/e94560/ffffff?text=Playbook",
     inStock: true,
     stripeProductId: "prod_placeholder_004",
@@ -80,6 +84,7 @@ export const PRODUCTS: Product[] = [
       "Premium A5 hardcover notebook with dotted pages and FSA Elite branding — track your daily goals and close ratios.",
     price: 1999, // $19.99
     category: "sales-tools",
+    color: "silver",
     imageUrl: "https://placehold.co/600x600/1a1a2e/ffffff?text=Notebook",
     inStock: true,
     stripeProductId: "prod_placeholder_005",
@@ -93,6 +98,7 @@ export const PRODUCTS: Product[] = [
       "20 oz double-wall stainless mug that keeps your coffee hot through the longest prospecting session.",
     price: 2499, // $24.99
     category: "accessories",
+    color: "silver",
     imageUrl: "https://placehold.co/600x600/1a1a2e/ffffff?text=Mug",
     inStock: false,
     stripeProductId: "prod_placeholder_006",
