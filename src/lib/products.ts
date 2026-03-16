@@ -108,17 +108,42 @@ const productBySlug = new Map<string, Product>(
   PRODUCTS.map((product) => [product.slug, product]),
 );
 
+export interface GetProductsOptions {
+  /** Filter to a specific category; omit or pass "all" for all categories. */
+  category?: string;
+  /** Case-insensitive substring search across product name and description. */
+  query?: string;
+}
+
 /**
- * Return all products.
+ * Return all products, optionally filtered by category and/or a text query.
  *
  * In production, replace the array reference with a `fetch()` call to your
  * CMS or database, using `{ next: { revalidate: 3600 } }` to enable ISR.
  */
-export async function getProducts(category?: string): Promise<Product[]> {
-  // Simulate async data source
-  const allProducts = PRODUCTS;
-  if (!category || category === "all") return allProducts;
-  return allProducts.filter((product) => product.category === category);
+export async function getProducts(
+  options: GetProductsOptions | string = {},
+): Promise<Product[]> {
+  // Accept a bare category string for backward-compatibility.
+  const { category, query } =
+    typeof options === "string" ? { category: options, query: undefined } : options;
+
+  let results = PRODUCTS;
+
+  if (category && category !== "all") {
+    results = results.filter((product) => product.category === category);
+  }
+
+  if (query && query.trim() !== "") {
+    const needle = query.trim().toLowerCase();
+    results = results.filter(
+      (product) =>
+        product.name.toLowerCase().includes(needle) ||
+        product.description.toLowerCase().includes(needle),
+    );
+  }
+
+  return results;
 }
 
 /** O(1) slug lookup via pre-built Map. */
