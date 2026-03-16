@@ -8,10 +8,18 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 
 export default function Header() {
   const { count } = useCart();
+  const pathname = usePathname();
+  const navigationLinks = [
+    { href: "/products", label: "Shop" },
+    { href: "/skills", label: "Skills" },
+    { href: "/login", label: "Login" },
+    { href: "/signup", label: "Sign Up" },
+  ];
 
   return (
     <header className="bg-brand text-white sticky top-0 z-50 shadow-md">
@@ -20,10 +28,23 @@ export default function Header() {
           FSA Elite
         </Link>
 
-        <nav className="flex items-center gap-6 text-sm font-medium">
-          <Link href="/products" className="hover:text-brand-accent transition-colors">
-            Shop
-          </Link>
+        <nav aria-label="Primary" className="flex items-center gap-4 text-sm font-medium sm:gap-6">
+          {navigationLinks.map((link) => {
+            const isCurrent = pathname === link.href;
+
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                aria-current={isCurrent ? "page" : undefined}
+                className={`transition-colors hover:text-brand-accent ${
+                  isCurrent ? "text-brand-accent" : ""
+                }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
           <Link
             href="/cart"
             className="relative hover:text-brand-accent transition-colors"
@@ -31,7 +52,10 @@ export default function Header() {
           >
             🛒
             {count > 0 && (
-              <span className="absolute -top-2 -right-3 bg-brand-accent text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
+              <span
+                aria-hidden="true"
+                className="absolute -top-2 -right-3 bg-brand-accent text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold"
+              >
                 {count > 99 ? "99+" : count}
               </span>
             )}
