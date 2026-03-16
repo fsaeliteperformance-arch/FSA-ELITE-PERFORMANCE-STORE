@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { primaryCtaLinkStyles } from "@/lib/buttonStyles";
 
 export const metadata: Metadata = {
   title: "Order Confirmed",
@@ -17,7 +18,7 @@ export default function CheckoutSuccessPage() {
       </p>
       <Link
         href="/products"
-        className="inline-block bg-brand text-white font-semibold px-8 py-3 rounded-full hover:opacity-90 transition-opacity"
+        className={primaryCtaLinkStyles}
       >
         Continue Shopping
       </Link>

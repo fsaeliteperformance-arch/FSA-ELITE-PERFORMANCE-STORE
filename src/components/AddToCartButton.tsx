@@ -11,6 +11,10 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useCart } from "@/context/CartContext";
+import {
+  compactPrimaryButtonStyles,
+  primaryButtonStyles,
+} from "@/lib/buttonStyles";
 import type { Product } from "@/types";
 
 interface Props {
@@ -49,7 +53,7 @@ export default function AddToCartButton({ product, compact = false }: Props) {
       <button
         onClick={handleAdd}
         aria-label={`Add ${product.name} to cart`}
-        className="p-2 rounded-full bg-brand text-white hover:bg-brand-accent transition-colors"
+        className={compactPrimaryButtonStyles}
       >
         {added ? "✓" : "+"}
       </button>
@@ -59,7 +63,7 @@ export default function AddToCartButton({ product, compact = false }: Props) {
   return (
     <button
       onClick={handleAdd}
-      className="w-full bg-brand text-white font-bold py-3 px-6 rounded-full hover:bg-brand-accent transition-colors disabled:opacity-50"
+      className={primaryButtonStyles}
     >
       {added ? "Added to Cart ✓" : "Add to Cart"}
     </button>
