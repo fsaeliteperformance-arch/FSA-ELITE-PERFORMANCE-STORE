@@ -94,7 +94,7 @@ export const PRODUCTS: Product[] = [
     price: 2499, // $24.99
     category: "accessories",
     imageUrl: "https://placehold.co/600x600/1a1a2e/ffffff?text=Mug",
-    inStock: false,
+    inStock: true,
     stripeProductId: "prod_placeholder_006",
     stripePriceId: "price_placeholder_006",
   },
