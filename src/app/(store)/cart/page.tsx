@@ -21,6 +21,7 @@ import { formatPrice } from "@/lib/products";
 export default function CartPage() {
   const { state, total, count, removeItem, dispatch } = useCart();
   const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const [checkoutError, setCheckoutError] = useState<string | null>(null);
 
   // Derive shipping estimate only when total changes — avoids re-running on
   // every unrelated render.
@@ -34,6 +35,7 @@ export default function CartPage() {
 
   const handleCheckout = useCallback(async () => {
     setIsCheckingOut(true);
+    setCheckoutError(null);
     try {
       const checkoutApiResponse = await fetch("/api/checkout", {
         method: "POST",
@@ -45,10 +47,31 @@ export default function CartPage() {
           })),
         }),
       });
-      const checkoutSessionData = await checkoutApiResponse.json();
-      if (checkoutSessionData.url) {
-        window.location.href = checkoutSessionData.url;
+      const checkoutSessionData: unknown = await checkoutApiResponse.json();
+      const sessionUrl =
+        checkoutSessionData !== null &&
+        typeof checkoutSessionData === "object" &&
+        "url" in checkoutSessionData &&
+        typeof (checkoutSessionData as { url: unknown }).url === "string"
+          ? (checkoutSessionData as { url: string }).url
+          : null;
+      if (!checkoutApiResponse.ok || !sessionUrl) {
+        const apiError =
+          checkoutSessionData !== null &&
+          typeof checkoutSessionData === "object" &&
+          "error" in checkoutSessionData &&
+          typeof (checkoutSessionData as { error: unknown }).error === "string"
+            ? (checkoutSessionData as { error: string }).error
+            : "Unable to start checkout. Please try again.";
+        throw new Error(apiError);
       }
+      window.location.href = sessionUrl;
+    } catch (err) {
+      setCheckoutError(
+        err instanceof Error
+          ? err.message
+          : "Unable to start checkout. Please try again.",
+      );
     } finally {
       setIsCheckingOut(false);
     }
@@ -181,6 +204,11 @@ export default function CartPage() {
             >
               {isCheckingOut ? "Redirecting…" : "Checkout with Stripe"}
             </button>
+            {checkoutError && (
+              <p role="alert" className="mt-3 text-sm text-red-600 text-center">
+                {checkoutError}
+              </p>
+            )}
           </div>
         </aside>
       </div>
