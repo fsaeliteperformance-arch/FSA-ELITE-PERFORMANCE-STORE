@@ -31,12 +31,11 @@ export default function CategoryFilter({ activeCategory }: Props) {
           <Link
             key={value}
             href={href}
-            className={[
-              "px-4 py-2 rounded-full text-sm font-semibold transition-colors",
+            className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${
               isActive
                 ? "bg-brand text-white"
-                : "bg-gray-100 text-gray-700 hover:bg-gray-200",
-            ].join(" ")}
+                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+            }`}
             aria-current={isActive ? "page" : undefined}
           >
             {label}
