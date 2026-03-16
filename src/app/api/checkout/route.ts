@@ -8,8 +8,8 @@
  * Security notes
  * --------------
  * • The Stripe secret key is only read from process.env on the server.
- * • We validate that every requested stripePriceId is non-empty before
- *   forwarding to Stripe to prevent crafted payloads.
+ * • We validate that every requested stripePriceId is non-empty and every
+ *   quantity is a positive integer before forwarding to Stripe.
  * • The request body size is implicitly bounded by Next.js defaults (1 MB).
  */
 
@@ -41,25 +41,34 @@ export async function POST(req: NextRequest) {
   // Validate each line item before sending to Stripe.
   const lineItems: CheckoutLineItem[] = [];
   for (const rawLineItem of requestLineItems) {
+    const parsedLineItem =
+      rawLineItem && typeof rawLineItem === "object"
+        ? (rawLineItem as {
+            stripePriceId?: unknown;
+            quantity?: unknown;
+          })
+        : null;
+    const { stripePriceId, quantity } = parsedLineItem ?? {};
+
     if (
-      !rawLineItem ||
-      typeof rawLineItem !== "object" ||
-      typeof (rawLineItem as { stripePriceId?: unknown }).stripePriceId !==
-        "string" ||
-      !(rawLineItem as { stripePriceId: string }).stripePriceId.trim() ||
-      typeof (rawLineItem as { quantity?: unknown }).quantity !== "number" ||
-      (rawLineItem as { quantity: number }).quantity < 1
+      !parsedLineItem ||
+      typeof stripePriceId !== "string" ||
+      !stripePriceId.trim() ||
+      typeof quantity !== "number" ||
+      !Number.isInteger(quantity) ||
+      quantity < 1
     ) {
       return NextResponse.json(
-        { error: "Each item must have a valid stripePriceId and quantity >= 1" },
+        {
+          error:
+            "Each item must have a valid stripePriceId and a positive integer quantity",
+        },
         { status: 400 },
       );
     }
     lineItems.push({
-      stripePriceId: (
-        rawLineItem as { stripePriceId: string }
-      ).stripePriceId.trim(),
-      quantity: Math.floor((rawLineItem as { quantity: number }).quantity),
+      stripePriceId: stripePriceId.trim(),
+      quantity,
     });
   }
 
@@ -68,10 +77,9 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const origin =
-      req.headers.get("origin") ??
-      process.env.NEXT_PUBLIC_SITE_URL ??
-      "http://localhost:3000";
+    const configuredSiteUrl =
+      process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+    const origin = new URL(configuredSiteUrl).origin;
 
     const session = await createCheckoutSession(lineItems, origin);
     return NextResponse.json({ url: session.url });
