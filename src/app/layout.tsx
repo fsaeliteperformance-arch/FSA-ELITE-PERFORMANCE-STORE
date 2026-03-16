@@ -21,8 +21,9 @@ export const metadata: Metadata = {
     default: "FSA Elite Performance Store",
   },
   description:
-    "Official merchandise and branding store for the FSA Elite sales community. " +
-    "Branded apparel, sales tools, and professional gear for salespeople.",
+    "FSA Elite Performance is previewing the upcoming store while the supplier " +
+    "network is finalized. The digital sales playbook is available now for " +
+    "people ready to sharpen communication, community, and closing skills.",
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL ?? "https://store.fsaeliteperformance.com",
   ),
