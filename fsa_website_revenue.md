@@ -58,7 +58,7 @@ SimpliTrain's model demonstrates that structured training offerings are a high-m
 ### 3.3 Subscription / Membership
 
 - Introduce a monthly membership ($29/month) that unlocks a library of training videos, downloadable programs, and member-only discounts on store products.
-- Annual pre-pay option ($249/year) offers ~30 % savings and improves cash flow predictability.
+- Annual pre-pay option ($249/year) offers ~30% savings and improves cash flow predictability.
 
 ---
 
@@ -105,7 +105,7 @@ Regardless of traffic volume, revenue is determined by: **Revenue = Traffic × C
 
 - Target a Largest Contentful Paint (LCP) < 2.5 s and Cumulative Layout Shift (CLS) < 0.1 (Core Web Vitals).
 - Use a CDN for static assets; lazy-load images below the fold.
-- A 1-second improvement in load time can increase conversions by up to 7 % (industry benchmark).
+- A 1-second improvement in load time can increase conversions by up to 7% (industry benchmark).
 
 ---
 
@@ -139,12 +139,12 @@ You cannot improve what you do not measure.
 | Metric | Tool | Target |
 |--------|------|--------|
 | Sessions and traffic source | Google Analytics 4 | — |
-| Conversion rate (store) | GA4 + Stripe dashboard | ≥ 2 % |
-| Course enrollment rate | LMS analytics | ≥ 5 % of page visitors |
+| Conversion rate (store) | GA4 + Stripe dashboard | ≥ 2% |
+| Course enrollment rate | LMS analytics | ≥ 5% of page visitors |
 | Average order value (AOV) | Stripe | Increase MoM |
-| Email open rate | Email platform | ≥ 25 % |
+| Email open rate | Email platform | ≥ 25% |
 | Customer lifetime value (LTV) | CRM / spreadsheet | Track quarterly |
-| Chargeback rate | Stripe | < 0.5 % |
+| Chargeback rate | Stripe | < 0.5% |
 
 Set up weekly revenue reviews and a monthly funnel audit to identify and fix conversion leaks.
 
@@ -156,7 +156,7 @@ Once organic and retention channels are healthy, invest in paid acquisition to s
 
 - **Meta Ads (Facebook/Instagram):** Retarget site visitors with dynamic product ads; use Lookalike Audiences based on existing purchasers.
 - **Google Ads:** Run Search campaigns for high-intent queries ("buy online speed training program"); use Performance Max for Shopping.
-- **Affiliate / referral program:** Offer coaches and athletes a 10–20 % commission for referring new customers. This aligns incentives and scales word-of-mouth.
+- **Affiliate / referral program:** Offer coaches and athletes a 10–20% commission for referring new customers. This aligns incentives and scales word-of-mouth.
 
 **FTC reminder:** All paid placements and affiliate links must be clearly disclosed as advertising.
 
