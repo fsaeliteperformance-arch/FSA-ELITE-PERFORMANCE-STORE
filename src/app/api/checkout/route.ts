@@ -90,7 +90,6 @@ export async function POST(req: NextRequest) {
     if (stripeError instanceof Stripe.errors.StripeError) {
       const isTemporaryFailure =
         stripeError instanceof Stripe.errors.StripeConnectionError ||
-        stripeError instanceof Stripe.errors.StripeAPIError ||
         stripeError instanceof Stripe.errors.StripeRateLimitError;
 
       return NextResponse.json(

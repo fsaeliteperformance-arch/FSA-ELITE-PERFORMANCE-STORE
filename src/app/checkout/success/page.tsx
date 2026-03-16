@@ -26,8 +26,7 @@ export default async function CheckoutSuccessPage({
   if (sessionId) {
     try {
       const session = await getCheckoutSession(sessionId);
-      const isConfirmed =
-        session.payment_status === "paid" || session.status === "complete";
+      const isConfirmed = session.payment_status === "paid";
 
       if (isConfirmed) {
         confirmationHeading = "Order Confirmed!";
@@ -38,7 +37,13 @@ export default async function CheckoutSuccessPage({
           "Stripe has your checkout session, but payment is still processing. Please wait for the confirmation email before placing another order.";
       }
     } catch (checkoutSessionError) {
-      console.error("Stripe checkout confirmation error:", checkoutSessionError);
+      console.error("Stripe checkout confirmation error:", {
+        message:
+          checkoutSessionError instanceof Error
+            ? checkoutSessionError.message
+            : String(checkoutSessionError),
+        error: checkoutSessionError,
+      });
       confirmationMessage =
         "We couldn’t verify Stripe’s final payment status yet. If you don’t receive a confirmation email soon, check your Stripe receipt before trying again.";
     }
