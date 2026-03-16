@@ -7,6 +7,20 @@ interface AccessFormProps {
   mode: "login" | "signup";
 }
 
+function getDisplayName(formData: FormData) {
+  const rawName = String(
+    formData.get("fullName") || formData.get("email") || "Elite member",
+  ).trim();
+  const firstWord = rawName.includes("@")
+    ? rawName.split("@")[0]
+    : rawName.split(" ")[0];
+  const cleanedName = firstWord.replace(/[._-]+/g, " ").trim().split(" ")[0];
+  const normalizedName =
+    cleanedName.charAt(0).toUpperCase() + cleanedName.slice(1).toLowerCase();
+
+  return normalizedName || "Elite member";
+}
+
 export default function AccessForm({ mode }: AccessFormProps) {
   const hintId = useId();
   const [submittedName, setSubmittedName] = useState("");
@@ -20,17 +34,7 @@ export default function AccessForm({ mode }: AccessFormProps) {
     if (!form.reportValidity()) return;
 
     const formData = new FormData(form);
-    const rawName = String(
-      formData.get("fullName") || formData.get("email") || "Elite member",
-    ).trim();
-    const firstWord = rawName.includes("@")
-      ? rawName.split("@")[0]
-      : rawName.split(" ")[0];
-    const cleanedName = firstWord.replace(/[._-]+/g, " ").trim().split(" ")[0];
-    const displayName =
-      cleanedName.charAt(0).toUpperCase() + cleanedName.slice(1).toLowerCase();
-
-    setSubmittedName(displayName || "Elite member");
+    setSubmittedName(getDisplayName(formData));
     form.reset();
   };
 
