@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   description:
     "Official merchandise, brand inputs, and sales gear for the FSA Elite community by Fontenot's Sales Association LLC.",
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://store.fsaeliteperformance.com",
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://fsaeliteperformance.store",
   ),
   openGraph: {
     siteName: "FSA Elite Performance Store",

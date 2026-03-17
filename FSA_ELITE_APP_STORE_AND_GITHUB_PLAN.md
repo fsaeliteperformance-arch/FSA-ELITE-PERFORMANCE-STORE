@@ -73,7 +73,7 @@ In the **training app UI**:
 - Add a primary or secondary action:
   - "Get FSA Elite Gear"
 - Link target:
-  - `https://<your-store-domain>` (e.g. `https://store.fsaeliteperformance.org`)
+  - `https://fsaeliteperformance.store`
 
 Suggested placements:
 
@@ -88,7 +88,7 @@ In the **store**:
 - Top-level CTA:
   - "Start FSA Elite Sales Training"
 - Link target:
-  - `https://<your-training-domain>` (e.g. `https://app.fsaelite.org`)
+  - `https://fsaeliteperformance.com`
 
 Suggested placements:
 
@@ -148,6 +148,15 @@ jobs:
 
 ---
 
+### 4.2 Domain Mapping
+
+```text
+Training app domain: https://fsaeliteperformance.com
+Store domain:        https://fsaeliteperformance.store
+```
+
+---
+
 ## 5. How to use this
 
 1. Save that whole block as a file in your repos, e.g.
@@ -162,8 +171,8 @@ jobs:
 
 - Keep the user experience feeling like one connected FSA Elite system even if the code lives in separate repositories.
 - Standardize domain naming before launch:
-  - store: `store.fsaeliteperformance.org`
-  - training: `app.fsaelite.org`
+  - store: `https://fsaeliteperformance.store`
+  - training: `https://fsaeliteperformance.com`
 - Reuse the same deploy workflow shape across repos, then swap in the actual IONOS deployment command when ready.
 
 ---
