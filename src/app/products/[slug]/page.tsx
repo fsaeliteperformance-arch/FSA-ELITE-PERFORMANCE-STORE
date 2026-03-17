@@ -82,7 +82,7 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
           <div className="rounded-2xl border border-brand/15 bg-brand/5 p-4 text-sm text-gray-700">
             <p>
               <span className="font-semibold text-brand">
-                Start FSA Elite Sales Training:
+                Start FSA Elite Training:
               </span>{" "}
               Use this with the FSA Elite training system to sharpen control,
               depth, and conversion.
