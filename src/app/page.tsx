@@ -11,6 +11,41 @@ import { getProducts } from "@/lib/products";
 import ProductGrid from "@/components/ProductGrid";
 import ProductGridSkeleton from "@/components/ProductGridSkeleton";
 
+const BRAND_INPUT_SECTIONS = [
+  {
+    title: "Positioning Lines",
+    items: [
+      "Train under pressure. Sell with control.",
+      "Elite sales performance, built not bought.",
+      "Simulated pressure. Measured growth. Real deals.",
+    ],
+  },
+  {
+    title: "Hero Copy",
+    items: [
+      "Built for salespeople who want more confidence, more skill, and more production.",
+      "Pressure-tested gear and messaging for serious closers in the FSA Elite community.",
+      "Wear the standard. Represent the work. Stay sharp before the first conversation starts.",
+    ],
+  },
+  {
+    title: "CTA Language",
+    items: [
+      "Shop the gear",
+      "Train the brand",
+      "Step into the next rep with control",
+    ],
+  },
+  {
+    title: "Store Messaging",
+    items: [
+      "Gear for salespeople who treat performance like a profession.",
+      "Branded apparel, sales tools, and daily-carry essentials for the FSA Elite standard.",
+      "Built for the community behind Fontenot's Sales Association LLC.",
+    ],
+  },
+] as const;
+
 // Revalidate this page at most once every hour (ISR).
 // Set to 0 to opt into dynamic rendering, or `false` to never revalidate.
 export const revalidate = 3600;
@@ -26,8 +61,8 @@ export default async function HomePage() {
           FSA Elite Performance Store
         </h1>
         <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-          Premium branded gear for the elite salesperson. Build your personal
-          brand and close more deals.
+          Train under pressure. Sell with control. Premium gear, sales tools,
+          and brand messaging for closers building the FSA Elite standard.
         </p>
         <div className="mt-6 mx-auto max-w-2xl rounded-lg border border-brand/15 bg-brand/5 px-4 py-3 text-left text-sm text-gray-700">
           <p className="font-semibold text-brand">Need access through Ionis?</p>
@@ -39,6 +74,45 @@ export default async function HomePage() {
             into Ionis when requesting access to the FSA Elite Performance
             Store.
           </p>
+        </div>
+      </section>
+
+      <section
+        aria-labelledby="brand-inputs-heading"
+        className="mb-16 rounded-3xl border border-brand/10 bg-brand/5 p-6 sm:p-8"
+      >
+        <div className="max-w-3xl">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-accent">
+            Brand inputs
+          </p>
+          <h2
+            id="brand-inputs-heading"
+            className="mt-3 text-3xl font-extrabold tracking-tight text-brand"
+          >
+            Messaging built for FSA Elite sales performance
+          </h2>
+          <p className="mt-4 text-base text-gray-700">
+            A focused set of positioning lines, hero copy, and CTA options for
+            the FSA Elite brand and the community behind Fontenot&apos;s Sales
+            Association LLC.
+          </p>
+        </div>
+        <div className="mt-8 grid gap-4 md:grid-cols-2">
+          {BRAND_INPUT_SECTIONS.map((section) => (
+            <article
+              key={section.title}
+              className="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-brand/10"
+            >
+              <h3 className="text-lg font-bold text-brand">{section.title}</h3>
+              <ul className="mt-4 space-y-3 text-sm leading-6 text-gray-700">
+                {section.items.map((item) => (
+                  <li key={item} className="rounded-xl bg-brand/5 px-3 py-2">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
         </div>
       </section>
 
