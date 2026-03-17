@@ -114,15 +114,15 @@ export default async function HomePage() {
         </div>
 
         <div className="mt-8 grid gap-6 lg:grid-cols-2">
-          {BRAND_INPUT_SECTIONS.map((section) => (
+          {BRAND_INPUT_SECTIONS.map((section, sectionIndex) => (
             <article
               key={section.title}
               className="rounded-2xl border border-brand/10 bg-white p-6 shadow-sm"
             >
               <h3 className="text-lg font-semibold text-brand">{section.title}</h3>
               <ul className="mt-4 space-y-3 text-sm leading-6 text-gray-700">
-                {section.items.map((item) => (
-                  <li key={`${section.title}-${item}`} className="flex gap-3">
+                {section.items.map((item, itemIndex) => (
+                  <li key={`${sectionIndex}-${itemIndex}`} className="flex gap-3">
                     <span className="mt-1 text-brand-accent">•</span>
                     <span>{item}</span>
                   </li>
