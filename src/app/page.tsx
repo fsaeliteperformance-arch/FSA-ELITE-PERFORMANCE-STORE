@@ -106,7 +106,10 @@ export default async function HomePage() {
               <h3 className="text-lg font-bold text-brand">{section.title}</h3>
               <ul className="mt-4 space-y-3 text-sm leading-6 text-gray-700">
                 {section.items.map((item) => (
-                  <li key={item} className="rounded-xl bg-brand/5 px-3 py-2">
+                  <li
+                    key={`${section.title}-${item}`}
+                    className="rounded-xl bg-brand/5 px-3 py-2"
+                  >
                     {item}
                   </li>
                 ))}
