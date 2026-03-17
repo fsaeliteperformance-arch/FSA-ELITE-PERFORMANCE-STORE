@@ -10,6 +10,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
+import { TRAINING_APP_URL } from "@/lib/fsa";
 
 export default function Header() {
   const { count } = useCart();
@@ -29,6 +30,12 @@ export default function Header() {
         </Link>
 
         <nav className="flex items-center gap-6 text-sm font-medium">
+          <a
+            href={TRAINING_APP_URL}
+            className="hidden rounded-full border border-brand px-4 py-2 text-brand transition-colors hover:bg-brand hover:text-white sm:inline-block"
+          >
+            Start Training
+          </a>
           <Link href="/products" className="hover:text-brand-accent transition-colors">
             Shop
           </Link>

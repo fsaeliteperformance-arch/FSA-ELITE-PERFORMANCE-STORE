@@ -7,9 +7,11 @@
  */
 
 import { Suspense } from "react";
+import Link from "next/link";
 import { getProducts } from "@/lib/products";
 import ProductGrid from "@/components/ProductGrid";
 import ProductGridSkeleton from "@/components/ProductGridSkeleton";
+import { TRAINING_APP_URL } from "@/lib/fsa";
 
 const BRAND_INPUT_SECTIONS = [
   {
@@ -65,6 +67,20 @@ export default async function HomePage() {
           Built for salespeople who want more confidence, more skill, more
           production, and a personal brand that looks as sharp as they sell.
         </p>
+        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <Link
+            href="/products"
+            className="inline-block rounded-full bg-brand px-8 py-3 font-semibold text-white transition-opacity hover:opacity-90"
+          >
+            Shop the Gear
+          </Link>
+          <a
+            href={TRAINING_APP_URL}
+            className="inline-block rounded-full border border-brand px-8 py-3 font-semibold text-brand transition-colors hover:bg-brand/5"
+          >
+            Start FSA Elite Sales Training
+          </a>
+        </div>
         <div className="mt-6 mx-auto max-w-2xl rounded-lg border border-brand/15 bg-brand/5 px-4 py-3 text-left text-sm text-gray-700">
           <p className="font-semibold text-brand">Need access through Ionis?</p>
           <p className="mt-1">
