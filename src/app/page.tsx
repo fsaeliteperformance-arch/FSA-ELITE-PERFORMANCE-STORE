@@ -26,9 +26,21 @@ export default async function HomePage() {
           FSA Elite Performance Store
         </h1>
         <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-          Premium branded gear for the elite salesperson. Build your personal
-          brand and close more deals.
+          Top-tier sales training and premium branded gear for the elite
+          salesperson. The FSA store still stands for what it has always been
+          about—only better.
         </p>
+        <div className="mt-6 mx-auto max-w-3xl rounded-lg border border-brand/10 bg-white px-5 py-4 text-left shadow-sm">
+          <h2 className="text-lg font-semibold text-brand">
+            How the training supports each user
+          </h2>
+          <p className="mt-2 text-sm leading-7 text-gray-700">
+            FSA Elite sales training is top tier because it is built around the
+            user while staying true to the foundation the brand was built on.
+            The plan shifts with each person’s pace, goals, and progress, so
+            the experience keeps getting better without becoming repetitive.
+          </p>
+        </div>
         <div className="mt-6 mx-auto max-w-2xl rounded-lg border border-brand/15 bg-brand/5 px-4 py-3 text-left text-sm text-gray-700">
           <p className="font-semibold text-brand">Need access through Ionis?</p>
           <p className="mt-1">
