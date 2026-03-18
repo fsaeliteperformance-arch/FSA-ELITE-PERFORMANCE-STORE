@@ -44,7 +44,7 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
 
       <div className="p-4">
         <span className="text-xs uppercase tracking-widest text-gray-400 font-semibold">
-          {product.category}
+          {product.category} • {product.color}
         </span>
         <h3 className="font-bold text-brand mt-1 mb-2 leading-tight">
           <Link href={`/products/${product.slug}`} className="hover:underline">

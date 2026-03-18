@@ -6,6 +6,7 @@ export interface Product {
   description: string;
   price: number; // in cents to avoid floating-point rounding errors
   category: Category;
+  color: ProductColor;
   imageUrl: string;
   inStock: boolean;
   stripeProductId?: string;
@@ -17,6 +18,8 @@ export type Category =
   | "accessories"
   | "sales-tools"
   | "digital";
+
+export type ProductColor = "white" | "black" | "silver" | "gray";
 
 /** A single item held in the shopping cart. */
 export interface CartItem {
