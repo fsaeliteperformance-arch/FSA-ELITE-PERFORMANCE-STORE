@@ -21,10 +21,9 @@ export const metadata: Metadata = {
     default: "FSA Elite Performance Store",
   },
   description:
-    "Official merchandise and branding store for the FSA Elite sales community. " +
-    "Branded apparel, sales tools, and professional gear for salespeople.",
+    "Official merchandise, brand inputs, and sales gear for the FSA Elite community by Fontenot's Sales Association LLC.",
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://store.fsaeliteperformance.com",
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://fsaeliteperformance.store",
   ),
   openGraph: {
     siteName: "FSA Elite Performance Store",
@@ -49,7 +48,8 @@ export default function RootLayout({
           <Header />
           <main className="flex-1">{children}</main>
           <footer className="bg-brand text-white text-center py-6 text-sm mt-12">
-            © {CURRENT_YEAR} FSA Elite Performance. All rights reserved.
+            © {CURRENT_YEAR} FSA Elite Performance by Fontenot&apos;s Sales
+            Association LLC. All rights reserved.
           </footer>
         </CartProvider>
       </body>

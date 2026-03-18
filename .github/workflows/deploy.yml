@@ -1,0 +1,37 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build app
+        run: npm run build
+
+      # TODO: Replace this with your real IONOS deploy command or script.
+      - name: Deploy to hosting
+        env:
+          IONOS_API_KEY: ${{ secrets.IONOS_API_KEY }}
+          IONOS_API_SECRET: ${{ secrets.IONOS_API_SECRET }}
+        run: |
+          echo "Deploying to IONOS..."
+          # e.g., call your deploy script:
+          # npm run deploy

@@ -16,6 +16,7 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import { getAllProductSlugs, getProductBySlug, formatPrice } from "@/lib/products";
 import AddToCartButton from "@/components/AddToCartButton";
+import { TRAINING_APP_URL } from "@/lib/fsa";
 
 // ISR — regenerate the page at most once per hour after the first visit post-build.
 export const revalidate = 3600;
@@ -78,6 +79,21 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
           </span>
           <h1 className="text-3xl font-extrabold text-brand">{product.name}</h1>
           <p className="text-gray-600 leading-relaxed">{product.description}</p>
+          <div className="rounded-2xl border border-brand/15 bg-brand/5 p-4 text-sm text-gray-700">
+            <p>
+              <span className="font-semibold text-brand">
+                Start FSA Elite Training:
+              </span>{" "}
+              Use this with the FSA Elite training system to sharpen control,
+              depth, and conversion.
+            </p>
+            <a
+              href={TRAINING_APP_URL}
+              className="mt-3 inline-block font-semibold text-brand hover:underline"
+            >
+              Explore the training app →
+            </a>
+          </div>
 
           <p className="text-3xl font-bold text-brand">
             {formatPrice(product.price)}
