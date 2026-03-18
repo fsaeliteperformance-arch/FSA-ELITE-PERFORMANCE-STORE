@@ -21,8 +21,8 @@ export const metadata: Metadata = {
     default: "FSA Elite Performance Store",
   },
   description:
-    "Official merchandise and branding store for the FSA Elite sales community. " +
-    "Branded apparel, sales tools, and professional gear for salespeople.",
+    "Official merchandise, sales skills, and clean access flows for the FSA Elite sales community. " +
+    "Branded apparel, practical learning, and Olive-led coaching for salespeople.",
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL ?? "https://store.fsaeliteperformance.com",
   ),
@@ -46,8 +46,16 @@ export default function RootLayout({
       <body className="bg-white text-gray-900 min-h-screen flex flex-col font-sans">
         {/* CartProvider wraps everything so any component can read cart state */}
         <CartProvider>
+          <a
+            href="#main-content"
+            className="skip-link"
+          >
+            Skip to main content
+          </a>
           <Header />
-          <main className="flex-1">{children}</main>
+          <main id="main-content" className="flex-1" tabIndex={-1}>
+            {children}
+          </main>
           <footer className="bg-brand text-white text-center py-6 text-sm mt-12">
             © {CURRENT_YEAR} FSA Elite Performance. All rights reserved.
           </footer>

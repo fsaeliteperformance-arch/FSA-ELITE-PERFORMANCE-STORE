@@ -46,22 +46,36 @@ export default function AddToCartButton({ product, compact = false }: Props) {
 
   if (compact) {
     return (
-      <button
-        onClick={handleAdd}
-        aria-label={`Add ${product.name} to cart`}
-        className="p-2 rounded-full bg-brand text-white hover:bg-brand-accent transition-colors"
-      >
-        {added ? "✓" : "+"}
-      </button>
+      <>
+        <button
+          onClick={handleAdd}
+          aria-label={
+            added
+              ? `${product.name} added to cart`
+              : `Add ${product.name} to cart`
+          }
+          className="p-2 rounded-full bg-brand text-white hover:bg-brand-accent transition-colors"
+        >
+          <span aria-hidden="true">{added ? "✓" : "+"}</span>
+        </button>
+        <span className="sr-only" role="status" aria-live="polite">
+          {added ? `${product.name} added to cart` : ""}
+        </span>
+      </>
     );
   }
 
   return (
-    <button
-      onClick={handleAdd}
-      className="w-full bg-brand text-white font-bold py-3 px-6 rounded-full hover:bg-brand-accent transition-colors disabled:opacity-50"
-    >
-      {added ? "Added to Cart ✓" : "Add to Cart"}
-    </button>
+    <>
+      <button
+        onClick={handleAdd}
+        className="w-full bg-brand text-white font-bold py-3 px-6 rounded-full hover:bg-brand-accent transition-colors disabled:opacity-50"
+      >
+        {added ? "Added to Cart ✓" : "Add to Cart"}
+      </button>
+      <span className="sr-only" role="status" aria-live="polite">
+        {added ? `${product.name} added to cart` : ""}
+      </span>
+    </>
   );
 }
