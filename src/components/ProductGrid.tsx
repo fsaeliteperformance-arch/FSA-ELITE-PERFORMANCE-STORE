@@ -23,12 +23,17 @@ export default function ProductGrid({ products }: ProductGridProps) {
     );
   }
 
+  const sortedProducts = [...products].sort((left, right) => {
+    if (left.inStock === right.inStock) return 0;
+    return left.inStock ? -1 : 1;
+  });
+
   return (
     <ul
       className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
       role="list"
     >
-      {products.map((product, index) => (
+      {sortedProducts.map((product, index) => (
         <li key={product.id}>
           {/* Prioritise first 3 images for LCP (above the fold on most screens) */}
           <ProductCard product={product} priority={index < 3} />

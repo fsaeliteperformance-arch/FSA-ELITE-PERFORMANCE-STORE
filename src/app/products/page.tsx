@@ -15,7 +15,8 @@ import type { Category } from "@/types";
 
 export const metadata: Metadata = {
   title: "All Products",
-  description: "Browse all FSA Elite Performance merchandise.",
+  description:
+    "Preview the upcoming FSA Elite Performance store. The digital sales playbook is available now while merch remains in coming-soon mode.",
 };
 
 // ISR: revalidate every hour
@@ -43,7 +44,17 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <h1 className="text-3xl font-bold text-brand mb-8">All Products</h1>
+      <div className="mb-8 rounded-2xl border border-brand/15 bg-brand/5 p-6">
+        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-accent">
+          Store preview
+        </p>
+        <h1 className="mt-2 text-3xl font-bold text-brand">All Products</h1>
+        <p className="mt-3 max-w-3xl text-sm leading-6 text-gray-700">
+          The full store is still coming soon while supplier relationships are
+          finalized. You can purchase the digital FSA Elite Sales Playbook now,
+          and preview the rest of the collection ahead of launch.
+        </p>
+      </div>
 
       <CategoryFilter activeCategory={category} />
 

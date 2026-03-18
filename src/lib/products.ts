@@ -29,7 +29,7 @@ export const PRODUCTS: Product[] = [
     price: 3499, // $34.99
     category: "apparel",
     imageUrl: "https://placehold.co/600x600/1a1a2e/ffffff?text=Elite+Tee",
-    inStock: true,
+    inStock: false,
     stripeProductId: "prod_placeholder_001",
     stripePriceId: "price_placeholder_001",
   },
@@ -42,7 +42,7 @@ export const PRODUCTS: Product[] = [
     price: 6499, // $64.99
     category: "apparel",
     imageUrl: "https://placehold.co/600x600/1a1a2e/ffffff?text=Elite+Hoodie",
-    inStock: true,
+    inStock: false,
     stripeProductId: "prod_placeholder_002",
     stripePriceId: "price_placeholder_002",
   },
@@ -55,7 +55,7 @@ export const PRODUCTS: Product[] = [
     price: 2999, // $29.99
     category: "accessories",
     imageUrl: "https://placehold.co/600x600/1a1a2e/ffffff?text=Snapback",
-    inStock: true,
+    inStock: false,
     stripeProductId: "prod_placeholder_003",
     stripePriceId: "price_placeholder_003",
   },
@@ -64,7 +64,7 @@ export const PRODUCTS: Product[] = [
     slug: "fsa-elite-sales-playbook",
     name: "FSA Elite Sales Playbook (Digital)",
     description:
-      "A comprehensive digital playbook covering proven objection-handling scripts, follow-up cadences, and closing strategies for the modern salesperson.",
+      "A comprehensive digital playbook covering proven objection-handling scripts, follow-up cadences, and closing strategies for the modern salesperson. This is the live offer available now while the physical store collection is in preview mode.",
     price: 4999, // $49.99
     category: "digital",
     imageUrl: "https://placehold.co/600x600/e94560/ffffff?text=Playbook",
@@ -81,7 +81,7 @@ export const PRODUCTS: Product[] = [
     price: 1999, // $19.99
     category: "sales-tools",
     imageUrl: "https://placehold.co/600x600/1a1a2e/ffffff?text=Notebook",
-    inStock: true,
+    inStock: false,
     stripeProductId: "prod_placeholder_005",
     stripePriceId: "price_placeholder_005",
   },
