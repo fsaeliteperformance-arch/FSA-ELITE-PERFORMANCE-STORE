@@ -30,7 +30,9 @@ export default async function HomePage() {
           brand and close more deals.
         </p>
         <div className="mt-6 mx-auto max-w-2xl rounded-lg border border-brand/15 bg-brand/5 px-4 py-3 text-left text-sm text-gray-700">
-          <p className="font-semibold text-brand">Need access through Ionis?</p>
+          <p className="font-semibold text-brand">
+            Need access through Ionis or Click and Build?
+          </p>
           <p className="mt-1">
             Paste{" "}
             <span className="font-mono text-xs sm:text-sm">
@@ -38,6 +40,14 @@ export default async function HomePage() {
             </span>{" "}
             into Ionis when requesting access to the FSA Elite Performance
             Store.
+          </p>
+          <p className="mt-2">
+            In Click and Build, select{" "}
+            <span className="font-semibold">A</span> for{" "}
+            <span className="font-mono text-xs sm:text-sm">@</span> and point it
+            to{" "}
+            <span className="font-mono text-xs sm:text-sm">74.208.236.147</span>
+            .
           </p>
         </div>
       </section>
