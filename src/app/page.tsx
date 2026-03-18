@@ -7,6 +7,7 @@
  */
 
 import { Suspense } from "react";
+import Link from "next/link";
 import { getProducts } from "@/lib/products";
 import ProductGrid from "@/components/ProductGrid";
 import ProductGridSkeleton from "@/components/ProductGridSkeleton";
@@ -29,6 +30,23 @@ export default async function HomePage() {
           Premium branded gear for the elite salesperson. Build your personal
           brand and close more deals.
         </p>
+        <p className="mt-4 inline-flex items-center rounded-full bg-brand px-4 py-2 text-sm font-semibold text-white">
+          Now Live on FSAElitePerformance.com: Your elite sales app storefront
+        </p>
+        <div className="mt-6 flex flex-wrap justify-center gap-3">
+          <Link
+            href="/products"
+            className="rounded-md bg-brand px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand/90"
+          >
+            Shop Top Sellers
+          </Link>
+          <Link
+            href="/cart"
+            className="rounded-md border border-brand px-5 py-3 text-sm font-semibold text-brand transition hover:bg-brand/5"
+          >
+            Open Cart
+          </Link>
+        </div>
         <div className="mt-6 mx-auto max-w-2xl rounded-lg border border-brand/15 bg-brand/5 px-4 py-3 text-left text-sm text-gray-700">
           <p className="font-semibold text-brand">Need access through Ionis?</p>
           <p className="mt-1">
