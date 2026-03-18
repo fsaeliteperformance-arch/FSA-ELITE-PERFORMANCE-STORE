@@ -14,6 +14,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
 import Header from "@/components/Header";
+import AIChatWidget from "@/components/AIChatWidget";
 
 export const metadata: Metadata = {
   title: {
@@ -51,6 +52,7 @@ export default function RootLayout({
           <footer className="bg-brand text-white text-center py-6 text-sm mt-12">
             © {CURRENT_YEAR} FSA Elite Performance. All rights reserved.
           </footer>
+          <AIChatWidget />
         </CartProvider>
       </body>
     </html>
