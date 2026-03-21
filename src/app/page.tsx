@@ -87,7 +87,7 @@ export default async function HomePage() {
           className="mt-6 mx-auto max-w-3xl rounded-2xl border border-brand/15 bg-brand/5 p-5 text-left text-sm text-gray-700"
         >
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-accent">
-            Domain update
+            Domain status
           </p>
           <h2
             id="domain-status-heading"
