@@ -71,6 +71,16 @@ when requesting access to the FSA Elite Performance Store.
 
 ---
 
+## Dependabot PR Commands
+
+Use these commands on Dependabot pull requests:
+
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+- `@dependabot show <dependency name> ignore conditions` will show all of the ignore conditions of the specified dependency
+
+---
+
 ## Local Development
 
 ```bash
