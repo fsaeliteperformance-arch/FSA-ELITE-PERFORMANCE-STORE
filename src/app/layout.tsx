@@ -11,6 +11,7 @@
  */
 
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
 import Header from "@/components/Header";
@@ -60,6 +61,7 @@ export default function RootLayout({
             © {CURRENT_YEAR} FSA Elite Performance by Fontenot&apos;s Sales
             Association LLC. All rights reserved.
           </footer>
+          <Analytics />
         </CartProvider>
       </body>
     </html>
