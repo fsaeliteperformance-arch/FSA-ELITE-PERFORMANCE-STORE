@@ -85,6 +85,20 @@ cp .env.example .env.local
 npm run dev
 ```
 
+### Sales Training Integration Branch Setup
+
+Use the following commands when creating the integration branch in the sales training repository:
+
+```bash
+git clone https://github.com/fsaeliteperformance-arch/FSA-ELITE-SALES-TRAINING.git
+cd FSA-ELITE-SALES-TRAINING
+git fetch origin
+git checkout FSA-SALES-APP
+git pull origin FSA-SALES-APP
+git checkout -b integration/launch-unified-app
+git push -u origin integration/launch-unified-app
+```
+
 ---
 
 ## Environment Variables
