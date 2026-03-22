@@ -53,6 +53,37 @@ The Stripe secret key and checkout session creation happen exclusively in a Rout
 
 ---
 
+
+## Stripe Connect Sample Integration
+
+A complete demo integration is available at **`/connect/dashboard`**. It includes:
+
+- Connected account creation with the V2 API (`stripeClient.v2.core.accounts.create`)
+- Account onboarding links with status fetched directly from Stripe
+- Product creation and product listing on connected accounts via `stripeAccount` request options
+- Connected-account storefront at `/connect/storefront/[accountId]` (demo only; use a stable merchant identifier in production)
+- Hosted Checkout direct charges with an application fee
+- Hosted subscription checkout (`customer_account`) and billing portal session creation
+- Webhook handlers for:
+  - Thin V2 account events: `/api/webhooks/stripe-thin`
+  - Standard billing events: `/api/webhooks/stripe-billing`
+
+### Connect-specific environment variables
+
+In addition to Stripe API keys, configure:
+
+- `PRICE_ID` (recurring price for subscription checkout)
+- `STRIPE_CONNECT_THIN_WEBHOOK_SECRET`
+- `STRIPE_BILLING_WEBHOOK_SECRET`
+
+If these values are missing, the sample returns explicit runtime errors with setup instructions.
+
+### Stripe CLI (thin event forwarding)
+
+```bash
+stripe listen --thin-events 'v2.core.account[requirements].updated,v2.core.account[.recipient].capability_status_updated,v2.core.account[configuration.merchant].capability_status_updated,v2.core.account[configuration.customer].capability_status_updated' --forward-thin-to http://localhost:3000/api/webhooks/stripe-thin
+```
+
 ## Stripe Statement Descriptor
 
 Use `FSA ELITE PERFORMANCE` as the Stripe account statement descriptor for this store.

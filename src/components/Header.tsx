@@ -33,6 +33,12 @@ export default function Header() {
             Shop
           </Link>
           <Link
+            href="/connect/dashboard"
+            className="hover:text-brand-accent transition-colors"
+          >
+            Connect Demo
+          </Link>
+          <Link
             href="/cart"
             className="relative hover:text-brand-accent transition-colors"
             aria-label={`Cart (${count} items)`}
