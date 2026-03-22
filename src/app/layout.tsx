@@ -11,6 +11,7 @@
  */
 
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
 import Header from "@/components/Header";
@@ -61,6 +62,7 @@ export default function RootLayout({
             Association LLC. All rights reserved.
           </footer>
         </CartProvider>
+        <Analytics />
       </body>
     </html>
   );
