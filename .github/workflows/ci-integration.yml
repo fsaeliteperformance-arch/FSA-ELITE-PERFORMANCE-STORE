@@ -30,7 +30,14 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Ensure Stripe secret is configured
+        run: |
+          if [ -z "${{ secrets.STRIPE_SECRET_KEY }}" ]; then
+            echo "STRIPE_SECRET_KEY repository secret is required for integration full checks."
+            exit 1
+          fi
+
       - name: Build
         env:
-          STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY || 'sk_test_placeholder' }}
+          STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
         run: npm run build
