@@ -64,8 +64,8 @@ export default function RootLayout({
             © {CURRENT_YEAR} FSA Elite Performance by Fontenot&apos;s Sales
             Association LLC. All rights reserved.
           </footer>
-          <Analytics />
         </CartProvider>
+        <Analytics />
       </body>
     </html>
   );

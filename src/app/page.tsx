@@ -47,6 +47,12 @@ const BRAND_INPUT_SECTIONS = [
   },
 ] as const;
 
+const FINAL_LAUNCH_OFFERS = [
+  { name: "Full Access Plan & Academy", value: "$19.99" },
+  { name: "Elite Sales App Website", value: "$4.99/month" },
+  { name: "Self-branding/self-promoting store", value: "Coming Soon" },
+] as const;
+
 // Revalidate this page at most once every hour (ISR).
 // Set to 0 to opt into dynamic rendering, or `false` to never revalidate.
 export const revalidate = 3600;
@@ -67,27 +73,15 @@ export default async function HomePage() {
         </p>
         <div className="mt-6 mx-auto max-w-3xl rounded-xl border border-brand/15 bg-brand/5 px-4 py-4 text-left">
           <h2 className="text-sm font-semibold uppercase tracking-[0.15em] text-brand">
-            Final launch offers
+            Final Launch Offers
           </h2>
           <ul className="mt-3 space-y-2 text-sm text-gray-700">
-            <li>
-              <span className="font-semibold text-brand">
-                Full Access Plan &amp; Academy
-              </span>{" "}
-              = $19.99
-            </li>
-            <li>
-              <span className="font-semibold text-brand">
-                Elite Sales App Website
-              </span>{" "}
-              = $4.99/month
-            </li>
-            <li>
-              <span className="font-semibold text-brand">
-                Self-branding/self-promoting store
-              </span>{" "}
-              = Coming Soon
-            </li>
+            {FINAL_LAUNCH_OFFERS.map((offer) => (
+              <li key={offer.name}>
+                <span className="font-semibold text-brand">{offer.name}</span> ={" "}
+                {offer.value}
+              </li>
+            ))}
           </ul>
         </div>
         <p className="mt-4 inline-flex items-center rounded-full bg-brand px-4 py-2 text-sm font-semibold text-white">

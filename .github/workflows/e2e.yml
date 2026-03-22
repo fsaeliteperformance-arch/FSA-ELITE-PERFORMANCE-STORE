@@ -21,7 +21,7 @@ jobs:
       github.event.deployment_status.state == 'success'
     runs-on: ubuntu-latest
     concurrency:
-      group: e2e-smoke-${{ github.event_name }}-${{ github.event.deployment_status.id || github.run_id }}
+      group: e2e-smoke-${{ github.event_name }}-${{ github.event.inputs.deployment_url || github.sha || github.ref || github.run_id }}
       cancel-in-progress: false
     env:
       TARGET_URL: ${{ github.event.deployment_status.environment_url || github.event.inputs.deployment_url || 'https://fsaeliteperformance.com' }}
