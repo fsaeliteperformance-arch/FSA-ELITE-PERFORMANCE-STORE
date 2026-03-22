@@ -65,6 +65,31 @@ export default async function HomePage() {
           Train under pressure. Sell with control. Premium gear, sales tools,
           and brand messaging for closers building the FSA Elite standard.
         </p>
+        <div className="mt-6 mx-auto max-w-3xl rounded-xl border border-brand/15 bg-brand/5 px-4 py-4 text-left">
+          <h2 className="text-sm font-semibold uppercase tracking-[0.15em] text-brand">
+            Final launch offers
+          </h2>
+          <ul className="mt-3 space-y-2 text-sm text-gray-700">
+            <li>
+              <span className="font-semibold text-brand">
+                Full Access Plan &amp; Academy
+              </span>{" "}
+              = $19.99
+            </li>
+            <li>
+              <span className="font-semibold text-brand">
+                Elite Sales App Website
+              </span>{" "}
+              = $4.99/month
+            </li>
+            <li>
+              <span className="font-semibold text-brand">
+                Self-branding/self-promoting store
+              </span>{" "}
+              = Coming Soon
+            </li>
+          </ul>
+        </div>
         <p className="mt-4 inline-flex items-center rounded-full bg-brand px-4 py-2 text-sm font-semibold text-white">
           Now Live on FSAElitePerformance.com: Your elite sales app storefront
         </p>
@@ -87,7 +112,7 @@ export default async function HomePage() {
           <p className="mt-1">
             Paste{" "}
             <span className="font-mono text-xs sm:text-sm">
-              https://store.fsaeliteperformance.com
+              https://fsaeliteperformance.com
             </span>{" "}
             into Ionis when requesting access to the FSA Elite Performance
             Store.

@@ -1,0 +1,48 @@
+name: E2E Smoke
+
+on:
+  deployment_status:
+  workflow_dispatch:
+    inputs:
+      deployment_url:
+        description: "Override deployment URL for a manual smoke run"
+        required: false
+  pull_request:
+    branches:
+      - FSA-SALES-APP
+
+permissions:
+  contents: read
+
+jobs:
+  e2e-smoke:
+    if: >
+      github.event_name != 'deployment_status' ||
+      github.event.deployment_status.state == 'success'
+    runs-on: ubuntu-latest
+    concurrency:
+      group: e2e-smoke-${{ github.event_name }}-${{ github.event.deployment_status.id || github.run_id }}
+      cancel-in-progress: false
+    env:
+      TARGET_URL: ${{ github.event.deployment_status.environment_url || github.event.inputs.deployment_url || 'https://fsaeliteperformance.com' }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Smoke-check deployment URL
+        run: |
+          echo "Checking ${TARGET_URL}"
+          curl --fail --silent --show-error --location "${TARGET_URL}" > /dev/null
