@@ -6,6 +6,9 @@ on:
     types:
       - vercel.deployment.success
 
+permissions:
+  contents: read
+
 jobs:
   run-e2es:
     if: |
@@ -22,6 +25,11 @@ jobs:
         run: npm ci && npx playwright install --with-deps
 
       - name: Run tests
-        run: npx playwright test
+        run: |
+          if [ -z "$BASE_URL" ]; then
+            echo "Error: BASE_URL is not set"
+            exit 1
+          fi
+          npx playwright test
         env:
           BASE_URL: ${{ github.event.client_payload.url || github.event.deployment_status.environment_url }}
