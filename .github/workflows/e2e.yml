@@ -12,8 +12,8 @@ permissions:
 jobs:
   run-e2es:
     if: |
-      (github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success') ||
-      (github.event_name == 'repository_dispatch' && github.event.client_payload.url != '')
+      (github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success' && github.event.deployment_status.environment_url) ||
+      (github.event_name == 'repository_dispatch' && github.event.client_payload.url)
     runs-on: ubuntu-latest
 
     steps:
