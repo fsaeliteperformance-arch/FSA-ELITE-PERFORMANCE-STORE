@@ -77,9 +77,8 @@ when requesting access to the FSA Elite Performance Store.
 # 1. Install dependencies
 npm install
 
-# 2. Set environment variables
-cp .env.example .env.local
-# Fill in STRIPE_SECRET_KEY, NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY, NEXT_PUBLIC_SITE_URL
+# 2. Pull the latest environment variables from Vercel
+vercel env pull .env.local
 
 # 3. Start the dev server
 npm run dev
