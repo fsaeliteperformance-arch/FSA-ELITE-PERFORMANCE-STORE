@@ -73,6 +73,7 @@ A complete demo integration is available at **`/connect/dashboard`**. It include
 In addition to Stripe API keys, configure:
 
 - `PRICE_ID` (recurring price for subscription checkout)
+- `CONNECT_APPLICATION_FEE_AMOUNT_IN_CENTS` (optional direct-charge application fee, default `123`)
 - `STRIPE_CONNECT_THIN_WEBHOOK_SECRET`
 - `STRIPE_BILLING_WEBHOOK_SECRET`
 

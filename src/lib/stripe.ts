@@ -13,19 +13,10 @@
  */
 
 import Stripe from "stripe";
-
-function getRequiredEnvVar(envVarName: string, placeholderHint: string) {
-  const value = process.env[envVarName]?.trim();
-  if (!value) {
-    throw new Error(
-      `Missing ${envVarName} environment variable. ${placeholderHint}`,
-    );
-  }
-  return value;
-}
+import { getRequiredEnvVar } from "@/lib/env";
 
 // Module-level singleton — created once per server process / warm Lambda.
-// IMPORTANT: Use this Stripe Client for all Stripe API requests in this app.
+// IMPORTANT: Use this stripeClient for all Stripe API requests in this app.
 export const stripeClient = new Stripe(
   getRequiredEnvVar(
     "STRIPE_SECRET_KEY",

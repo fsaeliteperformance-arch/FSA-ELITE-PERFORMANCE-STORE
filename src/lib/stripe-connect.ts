@@ -1,14 +1,7 @@
 import Stripe from "stripe";
 import { stripeClient } from "@/lib/stripe";
 import { getUserConnectedAccount, setUserConnectedAccount } from "@/lib/connect-demo-store";
-
-function getRequiredEnvVar(envVarName: string, placeholderHint: string) {
-  const value = process.env[envVarName]?.trim();
-  if (!value) {
-    throw new Error(`Missing ${envVarName} environment variable. ${placeholderHint}`);
-  }
-  return value;
-}
+import { getRequiredEnvVar } from "@/lib/env";
 
 function getBaseUrl() {
   return getRequiredEnvVar(
@@ -144,6 +137,13 @@ export async function createConnectedAccountCheckoutSession(params: {
 }) {
   const baseUrl = getBaseUrl();
   const boundedQuantity = Math.min(Math.max(params.quantity, 1), 10);
+  const applicationFeeAmount = Number(
+    process.env.CONNECT_APPLICATION_FEE_AMOUNT_IN_CENTS ?? "123",
+  );
+  const safeApplicationFeeAmount =
+    Number.isInteger(applicationFeeAmount) && applicationFeeAmount >= 0
+      ? applicationFeeAmount
+      : 123;
 
   const product = await stripeClient.products.retrieve(
     params.productId,
@@ -182,7 +182,8 @@ export async function createConnectedAccountCheckoutSession(params: {
       ],
       payment_intent_data: {
         // Sample platform fee so the platform can monetize direct charges.
-        application_fee_amount: 123,
+        // TODO: Set CONNECT_APPLICATION_FEE_AMOUNT_IN_CENTS in .env.local to configure this.
+        application_fee_amount: safeApplicationFeeAmount,
       },
       mode: "payment",
       success_url: `${baseUrl}/connect/success?session_id={CHECKOUT_SESSION_ID}&accountId=${encodeURIComponent(
