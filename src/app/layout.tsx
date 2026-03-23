@@ -63,6 +63,7 @@ export default function RootLayout({
           </footer>
           <Analytics />
         </CartProvider>
+        <Analytics />
       </body>
     </html>
   );
