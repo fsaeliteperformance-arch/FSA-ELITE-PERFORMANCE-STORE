@@ -82,17 +82,84 @@ export default async function HomePage() {
             Open Cart
           </Link>
         </div>
-        <div className="mt-6 mx-auto max-w-2xl rounded-lg border border-brand/15 bg-brand/5 px-4 py-3 text-left text-sm text-gray-700">
-          <p className="font-semibold text-brand">Need access through Ionis?</p>
-          <p className="mt-1">
-            Paste{" "}
-            <span className="font-mono text-xs sm:text-sm">
-              https://store.fsaeliteperformance.com
-            </span>{" "}
-            into Ionis when requesting access to the FSA Elite Performance
-            Store.
+        <section
+          aria-labelledby="domain-status-heading"
+          className="mt-6 mx-auto max-w-3xl rounded-2xl border border-brand/15 bg-brand/5 p-5 text-left text-sm text-gray-700"
+        >
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-accent">
+            Domain status
           </p>
-        </div>
+          <h2
+            id="domain-status-heading"
+            className="mt-2 text-xl font-bold text-brand"
+          >
+            Domain Status Report for fsaeliteperformance.store
+          </h2>
+          <div className="mt-4 space-y-4">
+            <div>
+              <h3 className="font-semibold text-brand">Current Status Overview</h3>
+              <ul className="mt-2 space-y-2">
+                <li>
+                  <span className="font-medium text-gray-900">
+                    Domain forwarding:
+                  </span>{" "}
+                  Enabled and may still be propagating
+                </li>
+                <li>
+                  <span className="font-medium text-gray-900">
+                    Domain Guard:
+                  </span>{" "}
+                  Active, preventing certain edits
+                </li>
+                <li className="rounded-xl bg-white/80 px-3 py-2 ring-1 ring-brand/10">
+                  <span className="font-medium text-gray-900">
+                    Background note:
+                  </span>{" "}
+                  Domain Guard is an IONOS security feature that locks domain
+                  settings to protect against unauthorized changes. It can be
+                  temporarily disabled if you need to make edits.
+                </li>
+                <li>
+                  <span className="font-medium text-gray-900">
+                    Status timestamp:
+                  </span>{" "}
+                  07:13 PM EDT
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold text-brand">Available Actions</h3>
+              <ol className="mt-2 list-inside list-decimal space-y-2">
+                <li>Connect to IONOS webspace</li>
+                <li>Forward the domain to a specific URL</li>
+                <li>Connect to an external page/provider</li>
+                <li>Reset domain settings to default</li>
+                <li>Edit DNS records directly</li>
+              </ol>
+            </div>
+            <div>
+              <h3 className="font-semibold text-brand">Next Steps</h3>
+              <ol className="mt-2 list-inside list-decimal space-y-2">
+                <li>
+                  Confirm the exact target you want to use for the forwarding or
+                  connection—this could be a destination URL such as{" "}
+                  <span className="font-mono text-xs sm:text-sm">
+                    https://example.com
+                  </span>{" "}
+                  or an external platform or hosting provider.
+                </li>
+                <li>
+                  Share a screenshot of the IONOS control panel view under{" "}
+                  <span className="font-medium text-gray-900">
+                    Domains &amp; SSL &gt; fsaeliteperformance.store (Overview
+                    tab)
+                  </span>{" "}
+                  so we can guide the precise next clicks.
+                </li>
+              </ol>
+            </div>
+          </div>
+        </section>
       </section>
 
       <section
