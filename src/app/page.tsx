@@ -204,6 +204,27 @@ export default async function HomePage() {
         </div>
       </section>
 
+      <section
+        aria-label="Product and go-to-market strategy"
+        className="mb-16 rounded-xl border border-gray-200 bg-gray-50 p-6"
+      >
+        <h2 className="text-2xl font-bold text-brand">
+          FSA Elite Performance — Product & Go-to-Market Strategy (summary)
+        </h2>
+        <p className="mt-3 text-gray-700">
+          Olive + FSA is building the go-to sales training and execution stack
+          with a flexible core platform, industry-specific packs, expert
+          services, and enterprise offerings.
+        </p>
+        <p className="mt-3 text-gray-700">
+          <span className="font-semibold">
+            Can Olive help all salespeople in all industries?
+          </span>{" "}
+          Yes — the core stays consistent across roles while industry packs and
+          services tailor workflows, coaching, and execution to each market.
+        </p>
+      </section>
+
       {/* Product catalogue */}
       <section aria-label="Products">
         <h2 className="text-2xl font-bold text-brand mb-8">Shop All</h2>
