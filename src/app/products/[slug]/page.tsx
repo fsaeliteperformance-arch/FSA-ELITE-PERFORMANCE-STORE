@@ -16,6 +16,7 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import { getAllProductSlugs, getProductBySlug, formatPrice } from "@/lib/products";
 import AddToCartButton from "@/components/AddToCartButton";
+import Container from "@/components/Container";
 
 // ISR — regenerate the page at most once per hour after the first visit post-build.
 export const revalidate = 3600;
@@ -57,7 +58,7 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
   if (!product) notFound();
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <Container maxWidth="5xl">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
         {/* Product image */}
         <div className="relative aspect-square rounded-2xl overflow-hidden bg-gray-100">
@@ -90,6 +91,6 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
           )}
         </div>
       </div>
-    </div>
+    </Container>
   );
 }
