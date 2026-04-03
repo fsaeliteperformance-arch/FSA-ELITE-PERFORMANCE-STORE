@@ -108,17 +108,60 @@ const productBySlug = new Map<string, Product>(
   PRODUCTS.map((product) => [product.slug, product]),
 );
 
+export type SortOrder = "name-asc" | "name-desc" | "price-asc" | "price-desc";
+
+export interface GetProductsOptions {
+  category?: string;
+  query?: string;
+  sort?: SortOrder;
+}
+
 /**
- * Return all products.
+ * Return all products, optionally filtered by category / search query and
+ * sorted by name or price.
  *
  * In production, replace the array reference with a `fetch()` call to your
  * CMS or database, using `{ next: { revalidate: 3600 } }` to enable ISR.
  */
-export async function getProducts(category?: string): Promise<Product[]> {
+export async function getProducts({
+  category,
+  query,
+  sort,
+}: GetProductsOptions = {}): Promise<Product[]> {
   // Simulate async data source
-  const allProducts = PRODUCTS;
-  if (!category || category === "all") return allProducts;
-  return allProducts.filter((product) => product.category === category);
+  let results = PRODUCTS as Product[];
+
+  if (category && category !== "all") {
+    results = results.filter((p) => p.category === category);
+  }
+
+  if (query) {
+    const q = query.toLowerCase();
+    results = results.filter(
+      (p) =>
+        p.name.toLowerCase().includes(q) ||
+        p.description.toLowerCase().includes(q),
+    );
+  }
+
+  if (sort) {
+    results = [...results].sort((a, b) => {
+      switch (sort) {
+        case "name-asc":
+          return a.name.localeCompare(b.name);
+        case "name-desc":
+          return b.name.localeCompare(a.name);
+        case "price-asc":
+          return a.price - b.price;
+        case "price-desc":
+          return b.price - a.price;
+        default:
+          return 0;
+      }
+    });
+  }
+
+  return results;
 }
 
 /** O(1) slug lookup via pre-built Map. */
