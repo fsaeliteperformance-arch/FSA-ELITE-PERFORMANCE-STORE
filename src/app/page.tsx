@@ -64,6 +64,241 @@ export default async function HomePage() {
             Store.
           </p>
         </div>
+        <div className="mt-6 flex flex-wrap justify-center gap-3 text-sm">
+          <a
+            href="https://fsaeliteperformance.com"
+            className="rounded-md bg-brand px-4 py-2 font-semibold text-white transition hover:bg-brand/90"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Open Production Site
+          </a>
+          <a
+            href="https://store.fsaeliteperformance.com"
+            className="rounded-md border border-brand px-4 py-2 font-semibold text-brand transition hover:bg-brand/5"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Open Store
+          </a>
+          <a
+            href="https://store.fsaeliteperformance.com/checkout"
+            className="rounded-md border border-brand/40 px-4 py-2 font-semibold text-brand/70 transition hover:bg-brand/5"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Open Checkout Preview
+          </a>
+        </div>
+      </section>
+
+      {/* Domain Routing Reference */}
+      <section
+        aria-labelledby="domain-routing-heading"
+        className="mb-16 rounded-3xl border border-brand/10 bg-brand/5 p-6 sm:p-8"
+      >
+        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-accent">
+          Domain routing
+        </p>
+        <h2
+          id="domain-routing-heading"
+          className="mt-3 text-3xl font-extrabold tracking-tight text-brand"
+        >
+          Domain forwarding vs DNS setup: use the right one for the job
+        </h2>
+        <p className="mt-4 text-base leading-7 text-gray-700">
+          Forwarding is a redirect shortcut. DNS setup is authoritative routing.
+          If you need a fast redirect from one domain to another, use forwarding.
+          If you want full control, SSL, and app-level records, use DNS.
+        </p>
+
+        <div className="mt-8 grid gap-6 sm:grid-cols-2">
+          {/* Option A */}
+          <div className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-brand/10">
+            <p className="text-xs font-semibold uppercase tracking-[0.15em] text-brand-accent">
+              Option A · Domain Forwarding
+            </p>
+            <p className="mt-1 text-[0.65rem] font-bold uppercase tracking-widest text-gray-400">
+              Best for simple redirects
+            </p>
+            <ul className="mt-4 space-y-2 text-sm leading-6 text-gray-700">
+              <li>Quickest setup when one domain should always send visitors to another.</li>
+              <li>Minimal DNS knowledge required.</li>
+              <li>Common use: send www to apex or old domain to new domain.</li>
+            </ul>
+          </div>
+          {/* Option B */}
+          <div className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-brand/10">
+            <p className="text-xs font-semibold uppercase tracking-[0.15em] text-brand-accent">
+              Option B · DNS Records
+            </p>
+            <p className="mt-1 text-[0.65rem] font-bold uppercase tracking-widest text-gray-400">
+              Best for production control
+            </p>
+            <ul className="mt-4 space-y-2 text-sm leading-6 text-gray-700">
+              <li>Use A, AAAA, CNAME, TXT records for app hosting and verification.</li>
+              <li>Required when configuring custom hostnames with providers like Vercel.</li>
+              <li>Gives precise control over subdomains and email records.</li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Decision table */}
+        <div className="mt-8 overflow-x-auto rounded-2xl ring-1 ring-brand/10">
+          <table className="w-full text-sm">
+            <thead className="bg-brand text-white">
+              <tr>
+                <th className="px-4 py-3 text-left font-semibold">Decision area</th>
+                <th className="px-4 py-3 text-left font-semibold">Forwarding</th>
+                <th className="px-4 py-3 text-left font-semibold">DNS setup</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-brand/10 bg-white">
+              <tr>
+                <td className="px-4 py-3 font-medium text-gray-900">Primary outcome</td>
+                <td className="px-4 py-3 text-gray-700">Redirect traffic to another URL</td>
+                <td className="px-4 py-3 text-gray-700">Serve your app directly from a host</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-medium text-gray-900">Control level</td>
+                <td className="px-4 py-3 text-gray-700">Low</td>
+                <td className="px-4 py-3 text-gray-700">High</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-medium text-gray-900">Best use case</td>
+                <td className="px-4 py-3 text-gray-700">Temporary migration or canonical redirect</td>
+                <td className="px-4 py-3 text-gray-700">Long-term production architecture</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-medium text-gray-900">Typical records</td>
+                <td className="px-4 py-3 text-gray-700">Registrar forwarding settings</td>
+                <td className="px-4 py-3 font-mono text-gray-700">A, AAAA, CNAME, TXT</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        {/* Fast execution checklist */}
+        <div className="mt-8 rounded-2xl bg-white p-6 shadow-sm ring-1 ring-brand/10">
+          <h3 className="font-bold text-brand">Fast execution checklist</h3>
+          <ol className="mt-4 space-y-2 text-sm leading-6 text-gray-700 list-decimal list-outside pl-5">
+            <li>Choose one canonical domain for production traffic.</li>
+            <li>Forward every alternate domain to the canonical host.</li>
+            <li>Configure DNS records at the canonical host only.</li>
+            <li>Verify SSL and redirect behavior for apex and www variants.</li>
+            <li>Document final values so future changes are safe and repeatable.</li>
+          </ol>
+        </div>
+
+        {/* IONOS DNS records */}
+        <div className="mt-8 grid gap-6 sm:grid-cols-2">
+          <div className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-brand/10">
+            <h3 className="font-bold text-brand">
+              <span className="font-mono text-sm">fsaeliteperformance.com</span> → Vercel
+            </h3>
+            <table className="mt-4 w-full text-xs">
+              <thead className="text-left text-gray-500">
+                <tr>
+                  <th className="pb-2 pr-2 font-semibold">Type</th>
+                  <th className="pb-2 pr-2 font-semibold">Host</th>
+                  <th className="pb-2 pr-2 font-semibold">Value</th>
+                  <th className="pb-2 font-semibold">TTL</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100 font-mono text-gray-700">
+                <tr>
+                  <td className="py-1.5 pr-2">A</td>
+                  <td className="py-1.5 pr-2">@</td>
+                  <td className="py-1.5 pr-2">76.76.21.21</td>
+                  <td className="py-1.5">3600</td>
+                </tr>
+                <tr>
+                  <td className="py-1.5 pr-2">CNAME</td>
+                  <td className="py-1.5 pr-2">www</td>
+                  <td className="py-1.5 pr-2">cname.vercel-dns.com</td>
+                  <td className="py-1.5">3600</td>
+                </tr>
+              </tbody>
+            </table>
+            <p className="mt-3 text-xs text-gray-500">
+              Add any TXT verification record shown in Vercel Project Settings → Domains when attaching the domain.
+            </p>
+          </div>
+          <div className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-brand/10">
+            <h3 className="font-bold text-brand">
+              <span className="font-mono text-sm">fsaelite.org</span> → GitHub Pages
+            </h3>
+            <table className="mt-4 w-full text-xs">
+              <thead className="text-left text-gray-500">
+                <tr>
+                  <th className="pb-2 pr-2 font-semibold">Type</th>
+                  <th className="pb-2 pr-2 font-semibold">Host</th>
+                  <th className="pb-2 pr-2 font-semibold">Value</th>
+                  <th className="pb-2 font-semibold">TTL</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100 font-mono text-gray-700">
+                <tr>
+                  <td className="py-1.5 pr-2">A</td>
+                  <td className="py-1.5 pr-2">@</td>
+                  <td className="py-1.5 pr-2">185.199.108.153</td>
+                  <td className="py-1.5">3600</td>
+                </tr>
+                <tr>
+                  <td className="py-1.5 pr-2">A</td>
+                  <td className="py-1.5 pr-2">@</td>
+                  <td className="py-1.5 pr-2">185.199.109.153</td>
+                  <td className="py-1.5">3600</td>
+                </tr>
+                <tr>
+                  <td className="py-1.5 pr-2">A</td>
+                  <td className="py-1.5 pr-2">@</td>
+                  <td className="py-1.5 pr-2">185.199.110.153</td>
+                  <td className="py-1.5">3600</td>
+                </tr>
+                <tr>
+                  <td className="py-1.5 pr-2">A</td>
+                  <td className="py-1.5 pr-2">@</td>
+                  <td className="py-1.5 pr-2">185.199.111.153</td>
+                  <td className="py-1.5">3600</td>
+                </tr>
+                <tr>
+                  <td className="py-1.5 pr-2">AAAA</td>
+                  <td className="py-1.5 pr-2">@</td>
+                  <td className="py-1.5 pr-2">2606:50c0:8000::153</td>
+                  <td className="py-1.5">3600</td>
+                </tr>
+                <tr>
+                  <td className="py-1.5 pr-2">AAAA</td>
+                  <td className="py-1.5 pr-2">@</td>
+                  <td className="py-1.5 pr-2">2606:50c0:8001::153</td>
+                  <td className="py-1.5">3600</td>
+                </tr>
+                <tr>
+                  <td className="py-1.5 pr-2">AAAA</td>
+                  <td className="py-1.5 pr-2">@</td>
+                  <td className="py-1.5 pr-2">2606:50c0:8002::153</td>
+                  <td className="py-1.5">3600</td>
+                </tr>
+                <tr>
+                  <td className="py-1.5 pr-2">AAAA</td>
+                  <td className="py-1.5 pr-2">@</td>
+                  <td className="py-1.5 pr-2">2606:50c0:8003::153</td>
+                  <td className="py-1.5">3600</td>
+                </tr>
+                <tr>
+                  <td className="py-1.5 pr-2">CNAME</td>
+                  <td className="py-1.5 pr-2">www</td>
+                  <td className="py-1.5 pr-2">fsaeliteperformance-arch.github.io</td>
+                  <td className="py-1.5">3600</td>
+                </tr>
+              </tbody>
+            </table>
+            <p className="mt-3 text-xs text-gray-500">
+              After DNS propagates, set the custom domain in GitHub repository → Settings → Pages and enable Enforce HTTPS.
+            </p>
+          </div>
+        </div>
       </section>
 
       <section aria-labelledby="access-hub-heading" className="mb-16">
