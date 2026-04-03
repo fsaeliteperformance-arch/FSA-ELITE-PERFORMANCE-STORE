@@ -13,25 +13,25 @@
  */
 
 import Stripe from "stripe";
-
-if (!process.env.STRIPE_SECRET_KEY) {
-  throw new Error(
-    "Missing STRIPE_SECRET_KEY environment variable. " +
-      "Add it to .env.local for local development.",
-  );
-}
+import { getRequiredEnvVar } from "@/lib/env";
 
 // Module-level singleton — created once per server process / warm Lambda.
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: "2024-06-20",
+// IMPORTANT: Use this stripeClient for all Stripe API requests in this app.
+export const stripeClient = new Stripe(
+  getRequiredEnvVar(
+    "STRIPE_SECRET_KEY",
+    "Set STRIPE_SECRET_KEY in .env.local, for example: STRIPE_SECRET_KEY=sk_test_***",
+  ),
+  {
   // Tell Stripe which app is making this call so they can surface usage data.
-  appInfo: {
-    name: "FSA Elite Performance Store",
-    version: "0.1.0",
+    appInfo: {
+      name: "FSA Elite Performance Store",
+      version: "0.1.0",
+    },
   },
-});
+);
 
-export default stripe;
+export default stripeClient;
 
 // ---------------------------------------------------------------------------
 // Checkout session factory
@@ -54,7 +54,7 @@ export async function createCheckoutSession(
   lineItems: CheckoutLineItem[],
   origin: string,
 ) {
-  return stripe.checkout.sessions.create({
+  return stripeClient.checkout.sessions.create({
     mode: "payment",
     line_items: lineItems.map(({ stripePriceId, quantity }) => ({
       price: stripePriceId,
