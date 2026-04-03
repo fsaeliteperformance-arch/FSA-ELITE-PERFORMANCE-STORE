@@ -13,6 +13,7 @@ import type { Category } from "@/types";
 
 const CATEGORIES: { label: string; value: Category | "all" }[] = [
   { label: "All", value: "all" },
+  { label: "Core Subscriptions", value: "subscriptions" },
   { label: "Apparel", value: "apparel" },
   { label: "Accessories", value: "accessories" },
   { label: "Sales Tools", value: "sales-tools" },
