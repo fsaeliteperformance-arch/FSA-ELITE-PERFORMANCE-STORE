@@ -1,0 +1,13 @@
+Week,Date,MRR ($),One-Time Revenue ($),Total Revenue ($),New Customers,Active Subscribers,Subscriber Churn (#),Landing Page Visitors,Email Open Rate (%),Email CTR (%),Cart Abandonment Rate (%),CAC ($),ROAS (x),Notes
+1,2025-01-06,0,0,0,0,0,0,0,0,0,0,0,Pre-launch week — build and setup only
+2,2025-01-13,0,2100,2100,12,0,0,350,42,6.2,68,0,Launch day (Monday). Early-bird code FSA20 active. 10 course sales + 2 bundles.
+3,2025-01-20,490,850,1340,8,10,0,280,38,4.8,72,0,10 subscribers signed up. Organic LinkedIn driving traffic. No paid ads yet.
+4,2025-01-27,490,420,910,4,10,1,210,35,3.9,70,0,Cart abandon sequence recovering ~12% of abandons. One subscriber cancelled.
+5,2025-02-03,980,650,1630,7,20,1,320,37,4.5,65,0,Launched $10/day Facebook retargeting. 10 new subscribers.
+6,2025-02-10,980,310,1290,3,20,2,400,33,3.2,67,32,Retargeting ROAS 3.2x. Increased budget to $20/day for ad variant A.
+7,2025-02-17,1470,580,2050,6,30,1,450,36,4.1,63,28,30 active subscribers. First affiliate referral converted (1 course sale).
+8,2025-02-24,1470,720,2190,7,30,2,390,34,3.8,64,25,LinkedIn ad variant B outperforming A by 40%. Reallocating budget.
+9,2025-03-03,1960,490,2450,5,40,1,510,38,4.3,61,22,40 subscribers. NPS survey sent — score: 52. Testimonials collected.
+10,2025-03-10,1960,830,2790,8,40,3,480,36,4.0,62,19,Corporate outreach started. 3 companies in pipeline.
+11,2025-03-17,2450,960,3410,9,50,2,560,39,4.7,60,17,50 subscribers milestone. First corporate deal closed ($1200/year).
+12,2025-03-24,2450,1100,3550,10,50,2,620,40,5.1,58,15,Month 3 review: MRR $2450 | One-time $4640 | Total $7090 month.
