@@ -14,7 +14,7 @@
  *   generation of many pages.
  */
 
-import type { Product } from "@/types";
+import type { Category, Product } from "@/types";
 
 // ---------------------------------------------------------------------------
 // Catalogue (in production this would be fetched from a CMS / database)
@@ -108,17 +108,35 @@ const productBySlug = new Map<string, Product>(
   PRODUCTS.map((product) => [product.slug, product]),
 );
 
+const productSlugs = PRODUCTS.map((product) => product.slug);
+
+const productsByCategory = PRODUCTS.reduce((categoryMap, product) => {
+  const productsInCategory = categoryMap.get(product.category);
+  if (productsInCategory) {
+    productsInCategory.push(product);
+  } else {
+    categoryMap.set(product.category, [product]);
+  }
+  return categoryMap;
+}, new Map<Category, Product[]>());
+
+const priceFormatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+});
+
 /**
  * Return all products.
  *
  * In production, replace the array reference with a `fetch()` call to your
  * CMS or database, using `{ next: { revalidate: 3600 } }` to enable ISR.
  */
-export async function getProducts(category?: string): Promise<Product[]> {
+export async function getProducts(
+  category?: Category | "all",
+): Promise<Product[]> {
   // Simulate async data source
-  const allProducts = PRODUCTS;
-  if (!category || category === "all") return allProducts;
-  return allProducts.filter((product) => product.category === category);
+  if (!category || category === "all") return PRODUCTS;
+  return productsByCategory.get(category) ?? [];
 }
 
 /** O(1) slug lookup via pre-built Map. */
@@ -130,7 +148,7 @@ export async function getProductBySlug(
 
 /** Returns every slug so Next.js can statically generate all product pages. */
 export async function getAllProductSlugs(): Promise<string[]> {
-  return PRODUCTS.map((product) => product.slug);
+  return productSlugs;
 }
 
 // Module-level singleton: creating an Intl.NumberFormat instance is expensive
