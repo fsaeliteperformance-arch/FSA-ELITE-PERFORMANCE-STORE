@@ -35,7 +35,7 @@ export default function CartPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           items: state.items.map(({ product, quantity }) => ({
-            stripePriceId: product.stripePriceId,
+            productId: product.id,
             quantity,
           })),
         }),

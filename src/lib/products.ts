@@ -107,6 +107,9 @@ export const PRODUCTS: Product[] = [
 const productBySlug = new Map<string, Product>(
   PRODUCTS.map((product) => [product.slug, product]),
 );
+const productById = new Map<string, Product>(
+  PRODUCTS.map((product) => [product.id, product]),
+);
 
 /**
  * Return all products.
@@ -126,6 +129,11 @@ export async function getProductBySlug(
   slug: string,
 ): Promise<Product | undefined> {
   return productBySlug.get(slug);
+}
+
+/** O(1) id lookup via pre-built Map for server-side cart/checkout validation. */
+export async function getProductById(id: string): Promise<Product | undefined> {
+  return productById.get(id);
 }
 
 /** Returns every slug so Next.js can statically generate all product pages. */

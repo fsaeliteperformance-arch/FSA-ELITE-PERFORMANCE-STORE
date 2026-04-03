@@ -38,14 +38,17 @@ export default stripe;
 // ---------------------------------------------------------------------------
 
 export interface CheckoutLineItem {
-  stripePriceId: string;
+  name: string;
+  description?: string;
+  imageUrl?: string;
+  unitAmountCents: number;
   quantity: number;
 }
 
 /**
  * Create a Stripe Checkout Session for the provided line items.
  *
- * @param lineItems  Array of Stripe price IDs + quantities from the cart.
+ * @param lineItems  Array of server-validated checkout line items.
  * @param origin     The configured site origin (e.g. https://store.example.com)
  *                   used to build the success/cancel redirect URLs.
  * @returns          The full Stripe Checkout Session object.
@@ -56,10 +59,21 @@ export async function createCheckoutSession(
 ) {
   return stripe.checkout.sessions.create({
     mode: "payment",
-    line_items: lineItems.map(({ stripePriceId, quantity }) => ({
-      price: stripePriceId,
-      quantity,
-    })),
+    customer_creation: "always",
+    line_items: lineItems.map(
+      ({ name, description, imageUrl, unitAmountCents, quantity }) => ({
+        price_data: {
+          currency: "usd",
+          product_data: {
+            name,
+            description,
+            images: imageUrl ? [imageUrl] : undefined,
+          },
+          unit_amount: unitAmountCents,
+        },
+        quantity,
+      }),
+    ),
     success_url: `${origin}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${origin}/cart`,
     // Collect a billing address to satisfy card-network requirements.
@@ -68,5 +82,11 @@ export async function createCheckoutSession(
     payment_intent_data: {
       statement_descriptor: "FSA ELITE PERFORMANCE",
     },
+  });
+}
+
+export async function retrieveCheckoutSession(sessionId: string) {
+  return stripe.checkout.sessions.retrieve(sessionId, {
+    expand: ["customer"],
   });
 }
