@@ -87,11 +87,17 @@ For the apex domain `fsaelite.org`, configure the following SPF TXT record in IO
 # 1. Install dependencies
 npm install
 
-# 2. Set environment variables
+# 2. Install the GitHub Copilot CLI (optional, for local Copilot workflows)
+# Review the install script before running it in your environment.
+# Prefer the manual and OS-specific instructions at:
+# https://docs.github.com/copilot/how-tos/set-up/install-copilot-cli
+curl -fsSL https://gh.io/copilot-install | bash
+
+# 3. Set environment variables
 cp .env.example .env.local
 # Fill in STRIPE_SECRET_KEY, NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY, NEXT_PUBLIC_SITE_URL
 
-# 3. Start the dev server
+# 4. Start the dev server
 npm run dev
 ```
 
