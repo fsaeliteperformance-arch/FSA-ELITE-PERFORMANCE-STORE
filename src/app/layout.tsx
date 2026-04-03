@@ -53,7 +53,7 @@ export default function RootLayout({
         {/* CartProvider wraps everything so any component can read cart state */}
         <CartProvider>
           <Header />
-          <main id="main-content" className="flex-1">
+          <main id="main-content" className="flex-1" tabIndex={-1}>
             {children}
           </main>
           <footer className="bg-brand text-white text-center py-6 text-sm mt-12">
