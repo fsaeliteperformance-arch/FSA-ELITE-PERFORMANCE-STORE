@@ -14,6 +14,7 @@
  */
 
 import { NextRequest, NextResponse } from "next/server";
+import Stripe from "stripe";
 import { createCheckoutSession } from "@/lib/stripe";
 import type { CheckoutLineItem } from "@/lib/stripe";
 
@@ -85,8 +86,27 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ url: session.url });
   } catch (stripeError) {
     console.error("Stripe checkout error:", stripeError);
+
+    if (stripeError instanceof Stripe.errors.StripeError) {
+      const isTemporaryFailure =
+        stripeError instanceof Stripe.errors.StripeConnectionError ||
+        stripeError instanceof Stripe.errors.StripeRateLimitError;
+
+      return NextResponse.json(
+        {
+          error: isTemporaryFailure
+            ? "Stripe is temporarily unavailable. No charge was created. Please try checkout again in a few seconds."
+            : "Stripe could not start checkout for this cart. Please review your items and try again.",
+        },
+        { status: isTemporaryFailure ? 503 : 500 },
+      );
+    }
+
     return NextResponse.json(
-      { error: "Failed to create checkout session" },
+      {
+        error:
+          "Checkout is unavailable right now. No charge was created. Please try again.",
+      },
       { status: 500 },
     );
   }

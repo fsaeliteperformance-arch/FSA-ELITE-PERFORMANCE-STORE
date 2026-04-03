@@ -24,6 +24,7 @@ if (!process.env.STRIPE_SECRET_KEY) {
 // Module-level singleton — created once per server process / warm Lambda.
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2024-06-20",
+  maxNetworkRetries: 2,
   // Tell Stripe which app is making this call so they can surface usage data.
   appInfo: {
     name: "FSA Elite Performance Store",
@@ -69,4 +70,8 @@ export async function createCheckoutSession(
       statement_descriptor: "FSA ELITE PERFORMANCE",
     },
   });
+}
+
+export async function getCheckoutSession(sessionId: string) {
+  return stripe.checkout.sessions.retrieve(sessionId);
 }
