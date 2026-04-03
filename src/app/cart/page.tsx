@@ -131,12 +131,18 @@ export default function CartPage() {
               <span>Total</span>
               <span>{formatPrice(total)}</span>
             </div>
+            <p className="mb-4 text-sm text-gray-500">
+              Secure checkout is currently completed on Stripe&apos;s hosted
+              payment page.
+            </p>
             <button
               onClick={handleCheckout}
               disabled={isCheckingOut}
               className="w-full bg-brand-accent text-white font-bold py-3 rounded-full hover:opacity-90 transition-opacity disabled:opacity-50"
             >
-              {isCheckingOut ? "Redirecting…" : "Checkout with Stripe"}
+              {isCheckingOut
+                ? "Redirecting to Stripe…"
+                : "Continue to secure checkout"}
             </button>
           </div>
         </aside>
