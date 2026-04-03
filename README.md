@@ -95,6 +95,12 @@ cp .env.example .env.local
 npm run dev
 ```
 
+## Production Deployment
+
+To deploy to production, push to `main`, or run `vercel --prod` using the Vercel command-line interface (CLI).
+
+---
+
 ### Sales Training Integration Branch Setup
 
 Use the following commands when creating the integration branch in the sales training repository:
