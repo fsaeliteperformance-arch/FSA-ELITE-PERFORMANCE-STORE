@@ -1,0 +1,34 @@
+# FSA Elite Performance Store
+
+> Official merchandise and branding store for the FSA Elite sales community. Premium branded apparel, sales tools, and professional gear for salespeople building their personal brand in the automotive, insurance, and broader sales industries.
+
+The store is built with Next.js and accepts payments via Stripe. Products are available across four categories: apparel, accessories, sales-tools, and digital downloads.
+
+## Key Pages
+
+- [Home](https://store.fsaeliteperformance.com/): Hero section and featured product catalogue.
+- [All Products](https://store.fsaeliteperformance.com/products): Full product listing with optional category filter (`?category=apparel|accessories|sales-tools|digital`).
+- [Product Detail](https://store.fsaeliteperformance.com/products/{slug}): Individual product page with name, description, price, availability, and Add-to-Cart button.
+- [Cart](https://store.fsaeliteperformance.com/cart): Shopping cart with quantity controls and Stripe Checkout button.
+- [Order Confirmation](https://store.fsaeliteperformance.com/checkout/success): Shown after a successful Stripe payment.
+
+## Products
+
+- [FSA Elite Performance Tee](https://store.fsaeliteperformance.com/products/fsa-elite-performance-tee): Moisture-wicking premium tee. $34.99. Apparel. In stock.
+- [FSA Elite Hoodie](https://store.fsaeliteperformance.com/products/fsa-elite-hoodie): Heavy-duty pullover hoodie with embroidered logo. $64.99. Apparel. In stock.
+- [FSA Elite Snapback](https://store.fsaeliteperformance.com/products/fsa-elite-snapback): Structured snapback cap with embroidered logo. $29.99. Accessories. In stock.
+- [FSA Elite Sales Playbook (Digital)](https://store.fsaeliteperformance.com/products/fsa-elite-sales-playbook): Comprehensive digital playbook with objection-handling scripts and closing strategies. $49.99. Digital. In stock.
+- [FSA Elite Hardcover Notebook](https://store.fsaeliteperformance.com/products/fsa-elite-notebook): Premium A5 hardcover notebook with FSA Elite branding. $19.99. Sales Tools. In stock.
+- [FSA Elite Insulated Mug](https://store.fsaeliteperformance.com/products/fsa-elite-mug): 20 oz double-wall stainless mug. $24.99. Accessories. Out of stock.
+
+## Checkout Flow
+
+1. Browse products at `/products` or visit a product detail page at `/products/{slug}`.
+2. Click **Add to Cart** on any in-stock product.
+3. Open the cart via the bag icon in the header or navigate to `/cart`.
+4. Click **Checkout with Stripe** to initiate a Stripe-hosted payment session.
+5. After successful payment you are redirected to `/checkout/success`.
+
+## Optional Filters
+
+Append `?category=<value>` to `/products` to filter by category. Valid values: `apparel`, `accessories`, `sales-tools`, `digital`.
