@@ -95,6 +95,23 @@ cp .env.example .env.local
 npm run dev
 ```
 
+### Migrating from Replit to GitHub
+
+If you are moving this project out of Replit and into a fresh GitHub repository, run the following commands from the project root:
+
+```bash
+git init
+git remote add origin https://github.com/YOUR-USERNAME/REPO-NAME.git
+git add .
+git commit -m "Initial commit from Replit"
+git branch -M main
+git push -u origin main
+```
+
+Replace `YOUR-USERNAME` and `REPO-NAME` with your actual GitHub username and repository name.
+
+---
+
 ### Sales Training Integration Branch Setup
 
 Use the following commands when creating the integration branch in the sales training repository:
