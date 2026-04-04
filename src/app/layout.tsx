@@ -11,6 +11,7 @@
  */
 
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
 import Header from "@/components/Header";
@@ -21,8 +22,8 @@ export const metadata: Metadata = {
     default: "FSA Elite Performance Store",
   },
   description:
-    "Official merchandise and branding store for the FSA Elite sales community. " +
-    "Branded apparel, sales tools, and professional gear for salespeople.",
+    "Official merchandise and brand-input store for the FSA Elite sales community by " +
+    "Fontenot's Sales Association LLC. Pressure-tested gear, messaging, and tools for serious salespeople.",
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL ?? "https://store.fsaeliteperformance.com",
   ),
@@ -57,8 +58,10 @@ export default function RootLayout({
             {children}
           </main>
           <footer className="bg-brand text-white text-center py-6 text-sm mt-12">
-            © {CURRENT_YEAR} FSA Elite Performance. All rights reserved.
+            © {CURRENT_YEAR} FSA Elite Performance by Fontenot&apos;s Sales
+            Association LLC. All rights reserved.
           </footer>
+          <Analytics />
         </CartProvider>
       </body>
     </html>

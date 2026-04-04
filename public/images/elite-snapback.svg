@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
+  <rect width="600" height="600" fill="#1a1a2e"/>
+  <!-- Cap crown - flat-brim snapback style -->
+  <path d="M160 310 Q160 200 300 190 Q440 200 440 310 Z" fill="#2a2a4e" stroke="#e94560" stroke-width="4"/>
+  <!-- Cap front band -->
+  <rect x="160" y="305" width="280" height="50" rx="4" fill="#1a1a2e" stroke="#e94560" stroke-width="3"/>
+  <!-- Flat brim -->
+  <rect x="100" y="352" width="400" height="28" rx="4" fill="#e94560"/>
+  <!-- Underside of brim -->
+  <rect x="105" y="366" width="390" height="14" rx="3" fill="#c73248"/>
+  <!-- Front panel center seam -->
+  <line x1="300" y1="196" x2="300" y2="355" stroke="#e94560" stroke-width="2" stroke-dasharray="8,5"/>
+  <!-- Button on top -->
+  <circle cx="300" cy="193" r="10" fill="#e94560"/>
+  <!-- Logo text on front panel -->
+  <text x="300" y="268" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#ffffff" text-anchor="middle">FSA</text>
+  <text x="300" y="305" font-family="Arial, sans-serif" font-size="14" fill="#e94560" text-anchor="middle">ELITE</text>
+  <!-- Snapback adjustment strap -->
+  <rect x="218" y="382" width="164" height="22" rx="5" fill="#0d0d1a" stroke="#e94560" stroke-width="2"/>
+  <rect x="264" y="386" width="72" height="14" rx="2" fill="#2a2a4e"/>
+  <!-- Strap holes -->
+  <rect x="232" y="389" width="24" height="8" rx="2" fill="#1a1a2e" stroke="#e94560" stroke-width="1"/>
+  <rect x="344" y="389" width="24" height="8" rx="2" fill="#1a1a2e" stroke="#e94560" stroke-width="1"/>
+  <!-- Label at bottom -->
+  <rect x="0" y="530" width="600" height="70" fill="#0d0d1a"/>
+  <text x="300" y="572" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#ffffff" text-anchor="middle">Elite Snapback</text>
+</svg>

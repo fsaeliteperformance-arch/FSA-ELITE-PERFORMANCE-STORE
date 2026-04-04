@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
+  <rect width="600" height="600" fill="#1a1a2e"/>
+  <!-- Hoodie shape -->
+  <path d="M160 170 L100 240 L170 260 L160 450 L440 450 L430 260 L500 240 L440 170 L380 140 Q350 200 300 210 Q250 200 220 140 Z" fill="#2a2a4e" stroke="#e94560" stroke-width="4"/>
+  <!-- Hood -->
+  <path d="M220 140 Q300 90 380 140 Q350 200 300 210 Q250 200 220 140 Z" fill="#1a1a2e" stroke="#e94560" stroke-width="4"/>
+  <!-- Pocket -->
+  <rect x="220" y="330" width="160" height="80" rx="8" fill="#1a1a2e" stroke="#e94560" stroke-width="2"/>
+  <!-- Logo text -->
+  <text x="300" y="295" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#ffffff" text-anchor="middle">FSA ELITE</text>
+  <text x="300" y="325" font-family="Arial, sans-serif" font-size="14" fill="#e94560" text-anchor="middle">PERFORMANCE</text>
+  <!-- Label at bottom -->
+  <rect x="0" y="530" width="600" height="70" fill="#0d0d1a"/>
+  <text x="300" y="572" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#ffffff" text-anchor="middle">Elite Hoodie</text>
+</svg>

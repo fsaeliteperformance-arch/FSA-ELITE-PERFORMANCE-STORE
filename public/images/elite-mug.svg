@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
+  <rect width="600" height="600" fill="#1a1a2e"/>
+  <!-- Mug body -->
+  <path d="M180 180 L180 420 Q180 450 210 450 L390 450 Q420 450 420 420 L420 180 Z" fill="#2a2a4e" stroke="#e94560" stroke-width="4"/>
+  <!-- Mug top opening ellipse -->
+  <ellipse cx="300" cy="180" rx="120" ry="25" fill="#1a1a2e" stroke="#e94560" stroke-width="4"/>
+  <!-- Mug bottom ellipse -->
+  <ellipse cx="300" cy="450" rx="100" ry="18" fill="#0d0d1a" stroke="#e94560" stroke-width="3"/>
+  <!-- Handle -->
+  <path d="M420 240 Q500 240 500 320 Q500 390 420 380" fill="none" stroke="#e94560" stroke-width="12" stroke-linecap="round"/>
+  <!-- Logo -->
+  <text x="300" y="300" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#ffffff" text-anchor="middle">FSA</text>
+  <text x="300" y="335" font-family="Arial, sans-serif" font-size="14" fill="#e94560" text-anchor="middle">ELITE</text>
+  <!-- Steam wisps -->
+  <path d="M240 150 Q250 120 240 90" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+  <path d="M300 140 Q310 110 300 80" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+  <path d="M360 150 Q370 120 360 90" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+  <!-- Label at bottom -->
+  <rect x="0" y="530" width="600" height="70" fill="#0d0d1a"/>
+  <text x="300" y="572" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#ffffff" text-anchor="middle">Insulated Mug</text>
+</svg>
