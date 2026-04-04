@@ -118,3 +118,29 @@ git push -u origin integration/launch-unified-app
 | `STRIPE_SECRET_KEY` | ✅ | Stripe secret key (server-only) |
 | `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | ✅ | Stripe publishable key (client-safe) |
 | `NEXT_PUBLIC_SITE_URL` | ✅ | Full origin URL, e.g. `https://store.fsaeliteperformance.com` |
+| `NEXT_PUBLIC_TRAINING_URL` | ☑️ | URL of the FSA Elite Sales Training platform, e.g. `https://training.fsaeliteperformance.com`. Used for cross-app navigation links in the Header and homepage. Falls back to `https://training.fsaeliteperformance.com` if not set. |
+
+---
+
+## FSA Ecosystem Integration
+
+The store is part of a broader FSA Elite Performance platform. The following repositories make up the ecosystem:
+
+| Repository | Role |
+|---|---|
+| **FSA-ELITE-PERFORMANCE-STORE** (this repo) | Merchandise store — branded apparel, sales tools, and gear |
+| **FSA-ELITE-SALES-TRAINING** | Automotive/sales training platform with coaching and drill modules |
+
+### Cross-App Navigation
+
+The Header includes a **Training** link that opens the FSA Elite Sales Training platform. Set `NEXT_PUBLIC_TRAINING_URL` in your environment to point to your deployed training app.
+
+### Homepage Cross-Promotion
+
+The home page includes a **Train + Shop** section that surfaces both apps side-by-side, letting visitors move seamlessly between purchasing store gear and accessing training content.
+
+### Future Integration Opportunities
+
+- **Shared authentication** — a single sign-on layer so users log in once and access both the store and the training platform.
+- **Purchase-gated training** — buying a product (e.g. the Sales Playbook) automatically unlocks a matching training module.
+- **Unified CI/CD** — a shared GitHub Actions workflow that runs lint, type-check, and preview deployments across both repositories on every pull request.
