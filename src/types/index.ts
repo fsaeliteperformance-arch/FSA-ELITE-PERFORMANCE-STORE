@@ -16,7 +16,8 @@ export type Category =
   | "apparel"
   | "accessories"
   | "sales-tools"
-  | "digital";
+  | "digital"
+  | "training";
 
 /** A single item held in the shopping cart. */
 export interface CartItem {

@@ -33,6 +33,12 @@ export default function Header() {
             Shop
           </Link>
           <Link
+            href={process.env.NEXT_PUBLIC_TRAINING_URL ?? "https://training.fsaeliteperformance.com"}
+            className="hover:text-brand-accent transition-colors"
+          >
+            Training
+          </Link>
+          <Link
             href="/cart"
             className="relative hover:text-brand-accent transition-colors"
             aria-label={`Cart (${count} items)`}
