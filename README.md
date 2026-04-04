@@ -151,6 +151,7 @@ Use this checklist when moving the store into the shared FSA monorepo with the a
 #### 4. Standardize dependencies and CI/CD
 
 - Align all apps on the same Next.js, React, TypeScript, Tailwind CSS, and Stripe versions before merging each migrated app into the monorepo's main branch.
+- If version conflicts appear, document the incompatibilities and schedule a staged migration so each app can be updated safely before final consolidation.
 - Add root-level scripts for workspace linting, building, and deployment.
 - Update GitHub Actions and Vercel settings so each app can build independently while still sharing the same repository, secrets, and release flow.
 
