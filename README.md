@@ -109,6 +109,57 @@ git checkout -b integration/launch-unified-app
 git push -u origin integration/launch-unified-app
 ```
 
+### Unified Monorepo Migration Checklist
+
+Use this checklist when moving the store into the shared FSA monorepo with the academy, training, chatbot, API, and starter repositories.
+
+#### 1. Prepare the target repository
+
+- Create a new repository such as `fsa-elite-performance-monorepo`.
+- Convert the GitHub account to an organization before creating teams, because GitHub teams are only available for organizations.
+- Choose a monorepo manager (`Turborepo` or `Nx`) and create the base structure:
+
+```text
+/apps/academy
+/apps/store
+/apps/training
+/apps/chatbot
+/apps/api
+/packages/shared
+/packages/ui
+/tools
+```
+
+#### 2. Migrate this store repository into `/apps/store`
+
+- Copy this repository into `/apps/store` and preserve the current `src`, `public`, `next.config.ts`, `tailwind.config.ts`, and Stripe checkout flow.
+- Keep the existing environment variables available to the store app:
+  - `STRIPE_SECRET_KEY`
+  - `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`
+  - `NEXT_PUBLIC_SITE_URL`
+- Recreate the current validation flow in the monorepo so the store can still run `npm run lint` and `npm run build`.
+
+#### 3. Extract shared code and integrations
+
+- Move shared branding, layout primitives, and reusable components into `/packages/ui`.
+- Move shared authentication, session, and user-access code into `/packages/shared`.
+- Consolidate cross-app APIs in `/apps/api` so store purchases can unlock training access and the chatbot can consume shared platform data.
+- Replace repo-relative imports with shared workspace aliases such as `@shared/*` and `@ui/*`.
+
+#### 4. Standardize dependencies and CI/CD
+
+- Align all apps on the same Next.js, React, TypeScript, Tailwind CSS, and Stripe versions before merging.
+- Add root-level scripts for workspace linting, building, and deployment.
+- Update GitHub Actions and Vercel settings so each app can build independently while still sharing the same repository, secrets, and release flow.
+- Add monorepo issue tracking so any open issues or pull requests from the legacy repositories can be recreated in one place before archiving them.
+
+#### 5. Cut over and archive the legacy repositories
+
+- Verify academy, store, training, chatbot, and API routes all work from the monorepo before switching production traffic.
+- Add a short redirect notice in each legacy repository README that points contributors to the new monorepo.
+- Close or migrate open issues and pull requests.
+- Archive the old repositories once the monorepo is the source of truth.
+
 ---
 
 ## Environment Variables
