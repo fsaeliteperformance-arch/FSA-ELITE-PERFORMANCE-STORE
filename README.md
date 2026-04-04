@@ -50,7 +50,12 @@ Organize all products and shared code in one monorepo, for example:
   /api
 
 /packages
+  /ui
+  /shared-utils
+  /types
 ```
+
+Use `/packages` for shared libraries used across apps (design system, utilities, types, SDK wrappers, etc.).
 
 ---
 
