@@ -115,7 +115,7 @@ Use this checklist when moving the store into the shared FSA monorepo with the a
 
 #### 1. Prepare the target repository
 
-- Create a new repository such as `fsa-elite-performance-monorepo`.
+- Create a new repository such as `fsa-monorepo`.
 - If the destination still lives under a personal account, convert it to a GitHub organization before creating teams, because GitHub teams are only available for organizations.
 - Choose a monorepo manager (`Turborepo` or `Nx`) and create the base structure:
 
@@ -151,11 +151,11 @@ Use this checklist when moving the store into the shared FSA monorepo with the a
 - Align all apps on the same Next.js, React, TypeScript, Tailwind CSS, and Stripe versions before merging.
 - Add root-level scripts for workspace linting, building, and deployment.
 - Update GitHub Actions and Vercel settings so each app can build independently while still sharing the same repository, secrets, and release flow.
-- Create a GitHub Project or issue migration checklist in the monorepo so any open issues or pull requests from the legacy repositories can be recreated in one place before archiving them.
 
 #### 5. Cut over and archive the legacy repositories
 
 - Verify academy, store, training, chatbot, and API routes all work from the monorepo before switching production traffic.
+- Create a GitHub Project or issue migration checklist in the monorepo so any open issues or pull requests from the legacy repositories can be recreated in one place before archiving them.
 - Add a short redirect notice in each legacy repository README that points contributors to the new monorepo.
 - Close or migrate open issues and pull requests.
 - Archive the old repositories once the monorepo is the source of truth.
