@@ -4,6 +4,56 @@ FSA Elite Performance is the official merchandise and branding store for the FSA
 
 ---
 
+## GitHub Organization + Main Repository + Monorepo Plan
+
+To support cleaner ownership and future scaling, use a GitHub organization (not a personal account) and consolidate products into one main monorepo.
+
+### 1) Organization
+
+Suggested organization names:
+- `fsaeliteperformance`
+- `fsaelite`
+- `fsa-elite-performance`
+- `fsaelite-org`
+
+Why organization ownership:
+- Teams
+- Better permissions
+- Cleaner ownership
+- Easier collaboration
+- Future scaling
+- Clearer business structure
+
+### 2) Main repository
+
+Suggested repository names:
+- `platform`
+- `fsa-platform`
+- `fsa-monorepo`
+- `elite-performance-platform`
+
+Recommended target:
+- `fsaeliteperformance/platform`
+- or `fsaeliteperformance/fsa-monorepo`
+
+### 3) Monorepo structure
+
+Organize all products and shared code in one monorepo, for example:
+
+```text
+/apps
+  /web
+  /store
+  /training
+  /academy
+  /chatbot
+  /api
+
+/packages
+```
+
+---
+
 ## Tech Stack
 
 | Layer | Choice | Reason |
