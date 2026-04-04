@@ -118,3 +118,70 @@ git push -u origin integration/launch-unified-app
 | `STRIPE_SECRET_KEY` | ✅ | Stripe secret key (server-only) |
 | `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | ✅ | Stripe publishable key (client-safe) |
 | `NEXT_PUBLIC_SITE_URL` | ✅ | Full origin URL, e.g. `https://store.fsaeliteperformance.com` |
+
+---
+
+## GitHub Copilot AI Model Access Docs Package
+
+### Plain-English Summary
+
+Access to AI models in GitHub Copilot depends on:
+- your Copilot plan
+- the client you are using (for example GitHub.com, VS Code, or JetBrains)
+- organization or enterprise policies that may restrict models
+
+For individual Copilot Free, Pro, and Pro+ users, GitHub indicates model access is generally available without separate model policy setup, though model availability can vary by plan.
+
+For organizations and enterprises, owners/admins can manage model access via Copilot policies, and those policies can affect auto model selection and available models.
+
+Organizations and enterprises can also add custom models using supported LLM provider API keys.
+
+Reference: [Configuring access to AI models in GitHub Copilot](https://docs.github.com/en/copilot/how-tos/use-ai-models/configure-access-to-ai-models)
+
+### Exact Click Paths in GitHub Settings
+
+#### Individual user
+
+Model access itself generally does not require a separate toggle for Copilot Free/Pro/Pro+ users. Other personal Copilot settings are available at:
+
+- Profile picture → **Copilot settings**
+
+Configurable settings may include suggestions matching public code, cloud agent, third-party coding agents, Copilot access to Bing, and personal data training preferences.
+
+Reference: [Managing GitHub Copilot policies as an individual subscriber](https://docs.github.com/en/copilot/managing-copilot/managing-github-copilot-policies-as-an-individual-subscriber)
+
+#### Organization owner
+
+- Profile picture
+- **Organizations**
+- Next to the organization: **Settings**
+- Left sidebar (**Code, planning, and automation**): **Copilot**
+- Open **Policies** (privacy/feature controls) and **Models** (additional model availability/cost controls)
+- Use policy dropdowns to choose enforcement options
+
+Reference: [Managing policies and features for GitHub Copilot in your organization](https://docs.github.com/en/copilot/managing-copilot/managing-policies-and-features-for-github-copilot-in-your-organization)
+
+Note: Enterprise-level Copilot policy can override organization settings.
+
+#### Enterprise owner/admin
+
+Enterprise owners/admins manage model access and custom model availability at enterprise scope through Copilot policies; enterprise settings may override organization-level settings.
+
+### Suggested Docs Feedback / Report
+
+**Subject:** Outdated / moved GitHub Docs link for configuring access to AI models
+
+The outdated link appears to be:
+
+`https://docs.github.com/en/copilot/how-tos/use-ai-models/configure-access-to-ai-models.md`
+
+The current canonical page appears to be:
+
+`https://docs.github.com/en/copilot/how-tos/use-ai-models/configure-access-to-ai-models`
+
+Suggested fixes:
+- add a redirect from the old `.md` path to the canonical page
+- update internal references still using the old URL
+- clarify that individual Free/Pro/Pro+ users usually do not configure model access separately
+- clarify that org/enterprise admins manage model access via Copilot policies and models
+- clarify that model availability may vary by plan, client, and admin restrictions
