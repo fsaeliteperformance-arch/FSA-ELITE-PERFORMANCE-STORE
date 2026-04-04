@@ -115,7 +115,7 @@ Use this checklist when moving the store into the shared FSA monorepo with the a
 
 #### 1. Prepare the target repository
 
-- Create a new repository such as `fsa-monorepo`.
+- Create a new repository for the unified platform (for example, `<your-monorepo-name>`).
 - If the destination still lives under a personal account, convert it to a GitHub organization before creating teams, because GitHub teams are only available for organizations.
 - Choose a monorepo manager (Turborepo or Nx) and create the base structure:
 
@@ -132,7 +132,7 @@ Use this checklist when moving the store into the shared FSA monorepo with the a
 
 #### 2. Migrate this store repository into `/apps/store`
 
-- Copy this repository into `/apps/store` and preserve the current `src`, `public`, `next.config.ts`, `tailwind.config.ts`, and Stripe checkout flow.
+- Move this repository into `/apps/store`, using a history-preserving approach such as `git subtree` or `git filter-repo` when commit history must be retained, and preserve the current `src`, `public`, `next.config.ts`, `tailwind.config.ts`, and Stripe checkout flow.
 - Keep the existing environment variables available to the store app:
   - `STRIPE_SECRET_KEY`
   - `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`
@@ -148,7 +148,7 @@ Use this checklist when moving the store into the shared FSA monorepo with the a
 
 #### 4. Standardize dependencies and CI/CD
 
-- Align all apps on the same Next.js, React, TypeScript, Tailwind CSS, and Stripe versions before merging.
+- Align all apps on the same Next.js, React, TypeScript, Tailwind CSS, and Stripe versions before merging each migrated app into the monorepo's main branch.
 - Add root-level scripts for workspace linting, building, and deployment.
 - Update GitHub Actions and Vercel settings so each app can build independently while still sharing the same repository, secrets, and release flow.
 
