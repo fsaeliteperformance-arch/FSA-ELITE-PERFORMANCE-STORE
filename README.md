@@ -109,6 +109,19 @@ git checkout -b integration/launch-unified-app
 git push -u origin integration/launch-unified-app
 ```
 
+### Moving from Replit
+
+Run these commands from the project root of a folder that is not already a Git repository (you can check with `git status`).
+
+```bash
+git init
+git remote add origin https://github.com/YOUR-USERNAME/REPO-NAME.git
+git branch -M main
+git add .
+git commit -m "Moving from Replit"
+git push -u origin main
+```
+
 ---
 
 ## Environment Variables
