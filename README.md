@@ -117,7 +117,7 @@ Use this checklist when moving the store into the shared FSA monorepo with the a
 
 - Create a new repository such as `fsa-monorepo`.
 - If the destination still lives under a personal account, convert it to a GitHub organization before creating teams, because GitHub teams are only available for organizations.
-- Choose a monorepo manager (`Turborepo` or `Nx`) and create the base structure:
+- Choose a monorepo manager (Turborepo or Nx) and create the base structure:
 
 ```text
 /apps/academy
@@ -154,8 +154,8 @@ Use this checklist when moving the store into the shared FSA monorepo with the a
 
 #### 5. Cut over and archive the legacy repositories
 
-- Verify academy, store, training, chatbot, and API routes all work from the monorepo before switching production traffic.
 - Create a GitHub Project or issue migration checklist in the monorepo so any open issues or pull requests from the legacy repositories can be recreated in one place before archiving them.
+- Verify academy, store, training, chatbot, and API routes all work from the monorepo before switching production traffic.
 - Add a short redirect notice in each legacy repository README that points contributors to the new monorepo.
 - Close or migrate open issues and pull requests.
 - Archive the old repositories once the monorepo is the source of truth.
