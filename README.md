@@ -95,6 +95,20 @@ cp .env.example .env.local
 npm run dev
 ```
 
+### Push to GitHub from Replit
+
+If you are working in Replit and need to push this project to GitHub, run the following commands in the Replit shell:
+
+```bash
+cd /path/to/your/project
+git init
+git remote add origin https://github.com/fsaeliteperformance-arch/FSA-ELITE-PERFORMANCE-STORE.git
+git add .
+git commit -m "Initial commit from Replit"
+git branch -M main
+git push -u origin main
+```
+
 ### Sales Training Integration Branch Setup
 
 Use the following commands when creating the integration branch in the sales training repository:
