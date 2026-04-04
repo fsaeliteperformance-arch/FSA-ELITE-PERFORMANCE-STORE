@@ -4,12 +4,16 @@
  * Uses useCart to read the live item count from the CartContext.
  * The count badge only re-renders when the count value changes because
  * CartContext memoises it with useMemo.
+ *
+ * The "Training" link points to the FSA Elite Sales Training platform.
+ * Set NEXT_PUBLIC_TRAINING_URL in your environment to override the default.
  */
 "use client";
 
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
+import { TRAINING_URL } from "@/config/constants";
 
 export default function Header() {
   const { count } = useCart();
@@ -32,6 +36,14 @@ export default function Header() {
           <Link href="/products" className="hover:text-brand-accent transition-colors">
             Shop
           </Link>
+          <a
+            href={TRAINING_URL}
+            className="hover:text-brand-accent transition-colors"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Training
+          </a>
           <Link
             href="/cart"
             className="relative hover:text-brand-accent transition-colors"

@@ -11,6 +11,7 @@ import Link from "next/link";
 import { getProducts } from "@/lib/products";
 import ProductGrid from "@/components/ProductGrid";
 import ProductGridSkeleton from "@/components/ProductGridSkeleton";
+import { TRAINING_URL } from "@/config/constants";
 
 const BRAND_INPUT_SECTIONS = [
   {
@@ -223,6 +224,59 @@ export default async function HomePage() {
           Yes — the core stays consistent across roles while industry packs and
           services tailor workflows, coaching, and execution to each market.
         </p>
+      </section>
+
+      {/* Train + Shop cross-promotion */}
+      <section
+        aria-labelledby="train-shop-heading"
+        className="mb-16 rounded-3xl border border-brand/10 bg-brand p-6 sm:p-10 text-white"
+      >
+        <div className="max-w-3xl">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-accent">
+            The full FSA Elite ecosystem
+          </p>
+          <h2
+            id="train-shop-heading"
+            className="mt-3 text-3xl font-extrabold tracking-tight"
+          >
+            Train the skill. Shop the brand.
+          </h2>
+          <p className="mt-4 text-base text-white/80">
+            The store and the training platform work together. Build your skills
+            on the FSA Elite Sales Training app, then represent the standard
+            with gear from this store.
+          </p>
+        </div>
+        <div className="mt-8 grid gap-4 sm:grid-cols-2">
+          <div className="rounded-2xl bg-white/10 p-5 ring-1 ring-white/20">
+            <h3 className="text-lg font-bold">🛍️ FSA Elite Store</h3>
+            <p className="mt-2 text-sm text-white/70">
+              Premium branded apparel, sales tools, and daily-carry essentials
+              for the FSA Elite standard.
+            </p>
+            <Link
+              href="/products"
+              className="mt-4 inline-block rounded-md bg-brand-accent px-4 py-2 text-sm font-semibold text-white transition hover:bg-brand-accent/90"
+            >
+              Shop Now
+            </Link>
+          </div>
+          <div className="rounded-2xl bg-white/10 p-5 ring-1 ring-white/20">
+            <h3 className="text-lg font-bold">🎓 FSA Elite Training</h3>
+            <p className="mt-2 text-sm text-white/70">
+              Simulated pressure. Measured growth. Real-deal coaching and
+              objection-handling for automotive and beyond.
+            </p>
+            <a
+              href={TRAINING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-block rounded-md bg-white px-4 py-2 text-sm font-semibold text-brand transition hover:bg-white/90"
+            >
+              Start Training
+            </a>
+          </div>
+        </div>
       </section>
 
       {/* Product catalogue */}
