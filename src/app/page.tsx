@@ -12,37 +12,37 @@ import { getProducts } from "@/lib/products";
 import ProductGrid from "@/components/ProductGrid";
 import ProductGridSkeleton from "@/components/ProductGridSkeleton";
 
-const BRAND_INPUT_SECTIONS = [
+const HASH_TABLE_SECTIONS = [
   {
-    title: "Positioning Lines",
+    title: "Hash Function",
     items: [
-      "Train under pressure. Sell with control.",
-      "Elite sales performance, built not bought.",
-      "Simulated pressure. Measured growth. Real deals.",
+      "Converts keys such as strings or numbers into indices.",
+      "A good hash function spreads keys evenly across the table.",
+      "Better distribution helps minimize collisions.",
     ],
   },
   {
-    title: "Hero Copy",
+    title: "Collisions",
     items: [
-      "Built for salespeople who want more confidence, more skill, and more production.",
-      "Pressure-tested gear and messaging for serious closers in the FSA Elite community.",
-      "Wear the standard. Represent the work. Stay sharp before the first conversation starts.",
+      "Collisions happen when different keys map to the same index.",
+      "Chaining stores multiple entries in the same bucket, often with a linked list.",
+      "Open addressing resolves collisions by probing for another empty slot.",
     ],
   },
   {
-    title: "CTA Language",
+    title: "Pros",
     items: [
-      "Shop the gear",
-      "Train the brand",
-      "Step into the next rep with control",
+      "Fast average-case lookups, inserts, and deletes.",
+      "Flexible support for many key types.",
+      "Widely used in application code, configuration management, and data processing.",
     ],
   },
   {
-    title: "Store Messaging",
+    title: "Cons",
     items: [
-      "Gear for salespeople who treat performance like a profession.",
-      "Branded apparel, sales tools, and daily-carry essentials for the FSA Elite standard.",
-      "Built for the community behind Fontenot's Sales Association LLC.",
+      "Worst-case performance can degrade to O(n) when many collisions occur.",
+      "Hash tables do not maintain a natural ordering of entries.",
+      "Performance depends heavily on the quality of the hash function and table sizing.",
     ],
   },
 ] as const;
@@ -83,78 +83,77 @@ export default async function HomePage() {
           </Link>
         </div>
         <section
-          aria-labelledby="domain-status-heading"
+          aria-labelledby="hash-table-overview-heading"
           className="mt-6 mx-auto max-w-3xl rounded-2xl border border-brand/15 bg-brand/5 p-5 text-left text-sm text-gray-700"
         >
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-accent">
-            Domain status
+            Data structure overview
           </p>
           <h2
-            id="domain-status-heading"
+            id="hash-table-overview-heading"
             className="mt-2 text-xl font-bold text-brand"
           >
-            Domain Status Report for fsaeliteperformance.store
+            Hash Tables — Core Concepts
           </h2>
           <div className="mt-4 space-y-4">
             <div>
-              <h3 className="font-semibold text-brand">Current Status Overview</h3>
+              <h3 className="font-semibold text-brand">What a hash table does</h3>
               <ul className="mt-2 space-y-2">
                 <li>
                   <span className="font-medium text-gray-900">
-                    Domain forwarding:
+                    Key idea:
                   </span>{" "}
-                  Enabled and may still be propagating
+                  A hash table stores key-value pairs by converting each key
+                  into an index.
                 </li>
                 <li>
                   <span className="font-medium text-gray-900">
-                    Domain Guard:
+                    Why the hash function matters:
                   </span>{" "}
-                  Active, preventing certain edits
+                  A good hash function helps distribute entries evenly so
+                  operations stay fast.
                 </li>
                 <li className="rounded-xl bg-white/80 px-3 py-2 ring-1 ring-brand/10">
                   <span className="font-medium text-gray-900">
                     Background note:
                   </span>{" "}
-                  Domain Guard is an IONOS security feature that locks domain
-                  settings to protect against unauthorized changes. It can be
-                  temporarily disabled if you need to make edits.
+                  When multiple keys land on the same index, the table must use
+                  a collision-resolution strategy to keep storing and finding
+                  values correctly.
                 </li>
                 <li>
                   <span className="font-medium text-gray-900">
-                    Status timestamp:
+                    Common use:
                   </span>{" "}
-                  07:13 PM EDT
+                  Hash tables are a go-to choice when fast average-case lookups
+                  are more important than keeping items ordered.
                 </li>
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold text-brand">Available Actions</h3>
+              <h3 className="font-semibold text-brand">Collision handling</h3>
               <ol className="mt-2 list-inside list-decimal space-y-2">
-                <li>Connect to IONOS webspace</li>
-                <li>Forward the domain to a specific URL</li>
-                <li>Connect to an external page/provider</li>
-                <li>Reset domain settings to default</li>
-                <li>Edit DNS records directly</li>
+                <li>Chaining keeps multiple entries in the same bucket.</li>
+                <li>
+                  Open addressing probes for another available slot in the
+                  table.
+                </li>
+                <li>
+                  Heavy collision rates can push performance toward O(n) in the
+                  worst case.
+                </li>
               </ol>
             </div>
             <div>
-              <h3 className="font-semibold text-brand">Next Steps</h3>
+              <h3 className="font-semibold text-brand">Why developers use them</h3>
               <ol className="mt-2 list-inside list-decimal space-y-2">
                 <li>
-                  Confirm the exact target you want to use for the forwarding or
-                  connection—this could be a destination URL such as{" "}
-                  <span className="font-mono text-xs sm:text-sm">
-                    https://example.com
-                  </span>{" "}
-                  or an external platform or hosting provider.
+                  Hash tables offer fast average-case operations for insert,
+                  lookup, and delete workloads.
                 </li>
                 <li>
-                  Share a screenshot of the IONOS control panel view under{" "}
-                  <span className="font-medium text-gray-900">
-                    Domains &amp; SSL &gt; fsaeliteperformance.store (Overview
-                    tab)
-                  </span>{" "}
-                  so we can guide the precise next clicks.
+                  They support flexible key types, but they do not preserve a
+                  natural order.
                 </li>
               </ol>
             </div>
@@ -163,27 +162,26 @@ export default async function HomePage() {
       </section>
 
       <section
-        aria-labelledby="brand-inputs-heading"
+        aria-labelledby="hash-table-details-heading"
         className="mb-16 rounded-3xl border border-brand/10 bg-brand/5 p-6 sm:p-8"
       >
         <div className="max-w-3xl">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-accent">
-            Brand inputs
+            Quick reference
           </p>
           <h2
-            id="brand-inputs-heading"
+            id="hash-table-details-heading"
             className="mt-3 text-3xl font-extrabold tracking-tight text-brand"
           >
-            Messaging built for FSA Elite sales performance
+            Hash table fundamentals at a glance
           </h2>
           <p className="mt-4 text-base text-gray-700">
-            A focused set of positioning lines, hero copy, and CTA options for
-            the FSA Elite brand and the community behind Fontenot&apos;s Sales
-            Association LLC.
+            These core ideas explain how hash tables manage speed, collisions,
+            and trade-offs in day-to-day programming.
           </p>
         </div>
         <div className="mt-8 grid gap-4 md:grid-cols-2">
-          {BRAND_INPUT_SECTIONS.map((section) => (
+          {HASH_TABLE_SECTIONS.map((section) => (
             <article
               key={section.title}
               className="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-brand/10"
@@ -205,23 +203,24 @@ export default async function HomePage() {
       </section>
 
       <section
-        aria-label="Product and go-to-market strategy"
+        aria-label="Programming examples"
         className="mb-16 rounded-xl border border-gray-200 bg-gray-50 p-6"
       >
         <h2 className="text-2xl font-bold text-brand">
-          FSA Elite Performance — Product & Go-to-Market Strategy (summary)
+          Hash tables in programming languages
         </h2>
         <p className="mt-3 text-gray-700">
-          Olive + FSA is building the go-to sales training and execution stack
-          with a flexible core platform, industry-specific packs, expert
-          services, and enterprise offerings.
+          In practice, hash tables power built-in collections such as Python
+          <span className="font-semibold"> dict</span>, Java
+          <span className="font-semibold"> HashMap</span>, and C++
+          <span className="font-semibold"> unordered_map</span>.
         </p>
         <p className="mt-3 text-gray-700">
           <span className="font-semibold">
-            Can Olive help all salespeople in all industries?
+            Where might you encounter them in a GitHub repository?
           </span>{" "}
-          Yes — the core stays consistent across roles while industry packs and
-          services tailor workflows, coaching, and execution to each market.
+          They often appear in code that manages configuration, caches data, or
+          processes records efficiently by key.
         </p>
       </section>
 
