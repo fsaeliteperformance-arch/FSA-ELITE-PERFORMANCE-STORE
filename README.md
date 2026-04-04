@@ -111,7 +111,7 @@ git push -u origin integration/launch-unified-app
 
 ### Unified Monorepo Migration Checklist
 
-Use this checklist when moving the store into the shared FSA monorepo with the academy, training, chatbot, API, and starter repositories.
+Use this checklist when moving the store into the shared FSA monorepo with the academy, training, chatbot, and API repositories.
 
 #### 1. Prepare the target repository
 
