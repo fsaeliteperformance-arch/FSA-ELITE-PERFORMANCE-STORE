@@ -118,3 +118,35 @@ git push -u origin integration/launch-unified-app
 | `STRIPE_SECRET_KEY` | ✅ | Stripe secret key (server-only) |
 | `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | ✅ | Stripe publishable key (client-safe) |
 | `NEXT_PUBLIC_SITE_URL` | ✅ | Full origin URL, e.g. `https://store.fsaeliteperformance.com` |
+| `NEXT_PUBLIC_TRAINING_URL` | ☑️ | URL of the FSA Elite Sales Training app (defaults to `https://training.fsaeliteperformance.com`) |
+| `TRAINING_API_SECRET` | ☑️ | Shared secret used by the training platform to call `/api/training` for purchase verification |
+
+---
+
+## FSA Ecosystem Integration
+
+The store is designed to work as part of the broader FSA Elite Performance platform alongside:
+
+- **FSA-ELITE-SALES-TRAINING** — automotive and general sales training curricula
+- **v0-elite-performance-academy** — structured courses and certifications
+
+### API/Microservice Connection
+
+`GET /api/training?customerId=<stripe_id>` (or `?email=<email>`)
+
+The training platform calls this endpoint with the buyer's Stripe customer ID (or email) to check whether they have purchased a training product in the store. It returns:
+
+```json
+{
+  "hasAccess": true,
+  "grantedProducts": ["FSA Elite Sales Training — Full Access"]
+}
+```
+
+Callers must include the shared secret in the `Authorization: Bearer <TRAINING_API_SECRET>` header.
+
+### Adding New Training Products
+
+1. Add a new entry to `PRODUCTS` in `src/lib/products.ts` with `category: "training"`.
+2. Add the new `stripePriceId` to the `TRAINING_PRICE_IDS` set in `src/app/api/training/route.ts`.
+3. Create the matching product in the Stripe Dashboard and replace the placeholder IDs.

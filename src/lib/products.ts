@@ -98,6 +98,32 @@ export const PRODUCTS: Product[] = [
     stripeProductId: "prod_placeholder_006",
     stripePriceId: "price_placeholder_006",
   },
+  {
+    id: "prod_007",
+    slug: "fsa-elite-sales-training-access",
+    name: "FSA Elite Sales Training — Full Access",
+    description:
+      "Unlock the complete FSA Elite Sales Training curriculum: live call simulations, objection-handling drills, video breakdowns, and a private leaderboard to track your progress against other closers.",
+    price: 9999, // $99.99
+    category: "training",
+    imageUrl: "/images/sales-training.svg",
+    inStock: true,
+    stripeProductId: "prod_placeholder_007",
+    stripePriceId: "price_placeholder_007",
+  },
+  {
+    id: "prod_008",
+    slug: "fsa-elite-automotive-sales-pack",
+    name: "FSA Elite Automotive Sales Pack",
+    description:
+      "Industry-specific training pack for automotive dealership salespeople: F&I scripts, floor-up cadences, and closing frameworks built for the car business.",
+    price: 4999, // $49.99
+    category: "training",
+    imageUrl: "/images/automotive-pack.svg",
+    inStock: true,
+    stripeProductId: "prod_placeholder_008",
+    stripePriceId: "price_placeholder_008",
+  },
 ];
 
 // ---------------------------------------------------------------------------

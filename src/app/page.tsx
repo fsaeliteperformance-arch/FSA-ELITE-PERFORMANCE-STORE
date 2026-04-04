@@ -83,82 +83,51 @@ export default async function HomePage() {
           </Link>
         </div>
         <section
-          aria-labelledby="domain-status-heading"
+          aria-labelledby="ecosystem-heading"
           className="mt-6 mx-auto max-w-3xl rounded-2xl border border-brand/15 bg-brand/5 p-5 text-left text-sm text-gray-700"
         >
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-accent">
-            Domain status
+            FSA Ecosystem
           </p>
           <h2
-            id="domain-status-heading"
+            id="ecosystem-heading"
             className="mt-2 text-xl font-bold text-brand"
           >
-            Domain Status Report for fsaeliteperformance.store
+            More than a store — the full FSA Elite Performance platform
           </h2>
-          <div className="mt-4 space-y-4">
-            <div>
-              <h3 className="font-semibold text-brand">Current Status Overview</h3>
-              <ul className="mt-2 space-y-2">
-                <li>
-                  <span className="font-medium text-gray-900">
-                    Domain forwarding:
-                  </span>{" "}
-                  Enabled and may still be propagating
-                </li>
-                <li>
-                  <span className="font-medium text-gray-900">
-                    Domain Guard:
-                  </span>{" "}
-                  Active, preventing certain edits
-                </li>
-                <li className="rounded-xl bg-white/80 px-3 py-2 ring-1 ring-brand/10">
-                  <span className="font-medium text-gray-900">
-                    Background note:
-                  </span>{" "}
-                  Domain Guard is an IONOS security feature that locks domain
-                  settings to protect against unauthorized changes. It can be
-                  temporarily disabled if you need to make edits.
-                </li>
-                <li>
-                  <span className="font-medium text-gray-900">
-                    Status timestamp:
-                  </span>{" "}
-                  07:13 PM EDT
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-semibold text-brand">Available Actions</h3>
-              <ol className="mt-2 list-inside list-decimal space-y-2">
-                <li>Connect to IONOS webspace</li>
-                <li>Forward the domain to a specific URL</li>
-                <li>Connect to an external page/provider</li>
-                <li>Reset domain settings to default</li>
-                <li>Edit DNS records directly</li>
-              </ol>
-            </div>
-            <div>
-              <h3 className="font-semibold text-brand">Next Steps</h3>
-              <ol className="mt-2 list-inside list-decimal space-y-2">
-                <li>
-                  Confirm the exact target you want to use for the forwarding or
-                  connection—this could be a destination URL such as{" "}
-                  <span className="font-mono text-xs sm:text-sm">
-                    https://example.com
-                  </span>{" "}
-                  or an external platform or hosting provider.
-                </li>
-                <li>
-                  Share a screenshot of the IONOS control panel view under{" "}
-                  <span className="font-medium text-gray-900">
-                    Domains &amp; SSL &gt; fsaeliteperformance.store (Overview
-                    tab)
-                  </span>{" "}
-                  so we can guide the precise next clicks.
-                </li>
-              </ol>
-            </div>
-          </div>
+          <ul className="mt-4 space-y-3">
+            <li className="flex items-start gap-3 rounded-xl bg-white/80 px-3 py-2 ring-1 ring-brand/10">
+              <span className="mt-0.5 text-brand-accent">🛍️</span>
+              <div>
+                <span className="font-semibold text-gray-900">Store</span>
+                {" "}—{" "}
+                Branded apparel, accessories, and digital tools for serious salespeople.
+              </div>
+            </li>
+            <li className="flex items-start gap-3 rounded-xl bg-white/80 px-3 py-2 ring-1 ring-brand/10">
+              <span className="mt-0.5 text-brand-accent">🎓</span>
+              <div>
+                <span className="font-semibold text-gray-900">
+                  <Link
+                    href={process.env.NEXT_PUBLIC_TRAINING_URL ?? "https://training.fsaeliteperformance.com"}
+                    className="underline hover:text-brand-accent"
+                  >
+                    Sales Training
+                  </Link>
+                </span>
+                {" "}—{" "}
+                Live simulations, objection-handling drills, and industry-specific coaching packs.
+              </div>
+            </li>
+            <li className="flex items-start gap-3 rounded-xl bg-white/80 px-3 py-2 ring-1 ring-brand/10">
+              <span className="mt-0.5 text-brand-accent">🏛️</span>
+              <div>
+                <span className="font-semibold text-gray-900">Academy</span>
+                {" "}—{" "}
+                Structured courses and certifications for the full FSA Elite curriculum.
+              </div>
+            </li>
+          </ul>
         </section>
       </section>
 
