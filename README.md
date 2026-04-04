@@ -115,7 +115,7 @@ Use this checklist when moving the store into the shared FSA monorepo with the a
 
 #### 1. Prepare the target repository
 
-- Create a new repository for the unified platform (for example, `<your-monorepo-name>`).
+- Create a new repository for the unified platform (for example, `fsa-platform`).
 - If the destination still lives under a personal account, convert it to a GitHub organization before creating teams, because GitHub teams are only available for organizations.
 - Choose a monorepo manager (Turborepo or Nx) and create the base structure:
 
@@ -132,7 +132,9 @@ Use this checklist when moving the store into the shared FSA monorepo with the a
 
 #### 2. Migrate this store repository into `/apps/store`
 
-- Move this repository into `/apps/store`, using a history-preserving approach such as `git subtree` or `git filter-repo` when commit history must be retained, and preserve the current `src`, `public`, `next.config.ts`, `tailwind.config.ts`, and Stripe checkout flow.
+- Move this repository into `/apps/store`.
+- Use a history-preserving approach such as `git subtree` or `git filter-repo` when commit history must be retained.
+- Preserve the current `src`, `public`, `next.config.ts`, `tailwind.config.ts`, and Stripe checkout flow during the move.
 - Keep the existing environment variables available to the store app:
   - `STRIPE_SECRET_KEY`
   - `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`
@@ -154,7 +156,7 @@ Use this checklist when moving the store into the shared FSA monorepo with the a
 
 #### 5. Cut over and archive the legacy repositories
 
-- Create a GitHub Project or issue migration checklist in the monorepo so any open issues or pull requests from the legacy repositories can be recreated in one place before archiving them.
+- Create a GitHub Project or issue checklist to track migration of open issues and pull requests from legacy repositories before archiving.
 - Verify academy, store, training, chatbot, and API routes all work from the monorepo before switching production traffic.
 - Add a short redirect notice in each legacy repository README that points contributors to the new monorepo.
 - Close or migrate open issues and pull requests.
